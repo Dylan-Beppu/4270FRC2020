@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter;
-import frc.robot.Constants;
+//import frc.robot.Constants;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -26,7 +26,11 @@ public class Flywheel extends Subsystem {
   CANEncoder encoder;
   CANPIDController controllerboi;
 
-  Constants constants = Constants.getConstants();
+  //Constants constants = Constants.getConstants();
+  public double shooterP = 0.0011;
+  public double shooterI = 0;
+  public double shooterD = 4;
+  public double shooterF = 0.00017;
   
   double setpoint = 0;
 
@@ -50,10 +54,10 @@ public class Flywheel extends Subsystem {
 
   public void updateConstants() {
     controllerboi.setOutputRange(-1, 0);
-    controllerboi.setP(constants.shooterP);
-    controllerboi.setI(constants.shooterI);
-    controllerboi.setD(constants.shooterD);
-    controllerboi.setFF(constants.shooterF);
+    controllerboi.setP(shooterP);
+    controllerboi.setI(shooterI);
+    controllerboi.setD(shooterD);
+    controllerboi.setFF(shooterF);
   }
 
   public void stop(){
