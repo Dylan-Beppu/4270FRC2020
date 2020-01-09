@@ -6,8 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import edu.wpi.first.wpilibj.Talon;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
+//import edu.wpi.first.wpilibj.Spark;
+import com.revrobotics.*;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.*;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -16,12 +24,24 @@ import edu.wpi.first.wpilibj.Talon;
  * floating around.
  */
 public class RobotMap {
-  public static Talon left1 = new Talon (1);
-  public static Talon left2 = new Talon (2);
-  public static Talon right1 = new Talon (3);
-  public static Talon right2 = new Talon (4);
-  
-  
+  //public static Compressor aircomp = new Compressor(0);
+
+  //Right drive
+  public static TalonSRX rightdrive1 = new TalonSRX(1);
+  public static TalonSRX rightdrive2 = new TalonSRX(2);
+
+  //Left drive
+  public static TalonSRX leftdrive1 = new TalonSRX(3);
+  public static TalonSRX leftdrive2 = new TalonSRX(4);
+
+  //Flywheel
+  public static CANSparkMax Flyboy = new CANSparkMax(5, MotorType.kBrushless);
+  public static CANSparkMax Flap = new CANSparkMax(6, MotorType.kBrushless);
+
+  //spinner
+  public static CANSparkMax R2D2 = new CANSparkMax(7, MotorType.kBrushless);
+
+
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
@@ -31,10 +51,4 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-  public static void init(){
-    //resets sensors and sets motor orentation
-    //motor.setInverted(false);
-    //motor.setInverted(true);
-    //motor.setInverted(true);
-  }
 }
