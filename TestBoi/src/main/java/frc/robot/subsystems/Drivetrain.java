@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.networktables.*;
 import java.math.*;
+//import 
 
 
 /**
@@ -90,13 +91,9 @@ public class Drivetrain extends Subsystem {
     left1.set(ControlMode.PercentOutput, -speed);
     right1.set(ControlMode.PercentOutput, -speed);     
   }
-  public void LD(double speed){
-    left1.set(ControlMode.PercentOutput, -speed);
+  public void Path1(){
+    //Waypoint = 
   }
-  public void RD(double speed){
-    right1.set(ControlMode.PercentOutput, -speed);
-  }
-
   public void justdrive(double duration){
     starttime = Timer.getFPGATimestamp();
     double desiredTime = starttime + duration;
