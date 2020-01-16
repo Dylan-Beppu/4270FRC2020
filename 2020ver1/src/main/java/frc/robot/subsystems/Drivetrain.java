@@ -7,9 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.net.NetworkInterface;
-import java.util.Set;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -21,14 +18,12 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableValue;
 
-import com.revrobotics.CANSparkMax;
-import frc.robot.OI;
-
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 import frc.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;

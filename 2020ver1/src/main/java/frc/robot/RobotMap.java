@@ -8,13 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
+/*import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
-//import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Spark;/*/
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.*;
+//import com.ctre.phoenix.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
@@ -40,6 +40,9 @@ public class RobotMap {
 
   //spinner
   public static CANSparkMax R2D2 = new CANSparkMax(7, MotorType.kBrushless);
+
+  //compressor
+  public static Compressor CompresBoy;
 
 
   // For example to map the left and right motors, you could define the

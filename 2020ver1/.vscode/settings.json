@@ -7,9 +7,9 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "bin/": true,
-    ".classpath": true,
-    ".project": true
-  },
-  "telemetry.enableTelemetry": false,
-  "workbench.tree.horizontalScrolling": true
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  }
 }

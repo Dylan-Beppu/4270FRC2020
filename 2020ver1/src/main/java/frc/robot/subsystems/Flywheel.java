@@ -3,12 +3,12 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableValue;
-//import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.command.Subsystem;
+//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter;
-//import frc.robot.Constants;
+import frc.robot.Constants;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -16,7 +16,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-//import edu.wpi.first.networktables.NetworkTable;;
+import edu.wpi.first.networktables.NetworkTable;;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
