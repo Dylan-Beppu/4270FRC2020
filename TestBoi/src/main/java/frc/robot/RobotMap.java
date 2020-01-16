@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Spark;/*/
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.*;
+//import ;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
@@ -29,7 +30,7 @@ public class RobotMap {
   //Right drive
   public static TalonSRX rightdrive1 = new TalonSRX(1);
   //Left drive
-  public static TalonSRX leftdrive1 = new TalonSRX(2);
+  public static TalonSRX leftdrive1 = new TalonSRX(3);
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
