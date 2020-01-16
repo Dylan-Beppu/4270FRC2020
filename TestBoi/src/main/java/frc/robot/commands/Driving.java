@@ -7,8 +7,7 @@
 
 package frc.robot.commands;
 
-//import edu.wpi.first.wpilibj.CommandBase;
-//import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.networktables.NetworkTable;
@@ -41,7 +40,7 @@ public class Driving extends Command {
 
   public Driving() {
     // Use requires() here to declare subsystem dependencies
-    getRequires(Robot.kDrivetrain);
+    requires(Robot.kDrivetrain);
   }
 
   // Called just before this Command runs the first time

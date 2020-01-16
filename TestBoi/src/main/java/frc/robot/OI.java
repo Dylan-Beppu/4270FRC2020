@@ -10,11 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.subsystems.Spinner;
-import edu.wpi.first.wpilibj.*;
-import frc.robot.commands.Spinning;
-import frc.robot.subsystems.*;
-//import Robot.OI.limeli
 
 
 /**
@@ -26,8 +21,6 @@ public class OI {
   public Joystick primaryController = new Joystick(0);
   public Joystick secondaryController = new Joystick(1);
 
-  public JoystickButton SpinRight;
-  public JoystickButton SpinLeft;
   //public JoystickButton HighG;
 
   /*// CREATING BUTTONS
@@ -58,12 +51,6 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
   public OI() {
-
-    SpinLeft = new JoystickButton(secondaryController, 5);
-    SpinLeft.whenPressed(new Spinning());
-    SpinRight = new JoystickButton(secondaryController, 6);
-    SpinRight.whenPressed(new Spinning());
-    
     
     //HighG = new JoystickButton(primaryController, 5);
     //HighG.whenPressed(new );

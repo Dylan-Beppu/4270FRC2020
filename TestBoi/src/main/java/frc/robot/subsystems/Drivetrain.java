@@ -7,9 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.net.NetworkInterface;
-import java.util.Set;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -21,14 +18,12 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableValue;
 
-import com.revrobotics.CANSparkMax;
-import frc.robot.OI;
-
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 import frc.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -47,11 +42,9 @@ public class Drivetrain extends Subsystem {
   // here. Call these from Commands.
    //Right drive
   private final TalonSRX right1 = RobotMap.rightdrive1;
-  private final TalonSRX right2 = RobotMap.rightdrive2;
  
   //Left drive
   private final TalonSRX left1 = RobotMap.leftdrive1;
-  private final TalonSRX left2 = RobotMap.leftdrive2;
 
   public double starttime;
 
@@ -80,37 +73,27 @@ public class Drivetrain extends Subsystem {
 
     if(Math.abs(primaryJoystick.getRawAxis(1)) > deadzoneleft){
       left1.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(1));
-      left2.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(1));
     }
     else{
       left1.set(ControlMode.PercentOutput, 0);
-      left2.set(ControlMode.PercentOutput, 0);
     }
 
     if(Math.abs(primaryJoystick.getRawAxis(5)) > deadzoneright){
       right1.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(5));
-      right2.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(5));
-
     }
     else{
       right1.set(ControlMode.PercentOutput,0);
-      right2.set(ControlMode.PercentOutput,0);
     }
   }
   public void driveStraight(double speed){
     left1.set(ControlMode.PercentOutput, -speed);
-    left2.set(ControlMode.PercentOutput, -speed);
-    right1.set(ControlMode.PercentOutput, -speed);
-    right2.set(ControlMode.PercentOutput, -speed);
-     
+    right1.set(ControlMode.PercentOutput, -speed);     
   }
   public void LD(double speed){
     left1.set(ControlMode.PercentOutput, -speed);
-    left2.set(ControlMode.PercentOutput, -speed);
   }
   public void RD(double speed){
     right1.set(ControlMode.PercentOutput, -speed);
-    right2.set(ControlMode.PercentOutput, -speed);
   }
 
   public void justdrive(double duration){
