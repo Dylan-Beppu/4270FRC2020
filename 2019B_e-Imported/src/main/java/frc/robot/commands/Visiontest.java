@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class Visiontest extends Command {
   public Visiontest() {
-    requires(Robot.kProbe);
+    requires(Robot.kVision);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

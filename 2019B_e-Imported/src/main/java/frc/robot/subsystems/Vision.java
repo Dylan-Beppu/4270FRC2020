@@ -55,15 +55,15 @@ public class Vision extends Subsystem {
   }
   public void track(){
 
-    if(NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(1)){
-        //twist.set();
-        twist.set(ControlMode.PercentOutput, 0.05);
+    if(NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3)){
+      //twist.set();
+      twist.set(ControlMode.PercentOutput, 0.05);
     }
-    else if((NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1){
-
+    else if((NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3))){
+      twist.set(ControlMode.PercentOutput, 0.05);
     }
     else{
-
+      twist.set(ControlMode.PercentOutput, 0);
     }
   }
 }
