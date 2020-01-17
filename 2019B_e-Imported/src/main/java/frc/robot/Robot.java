@@ -19,6 +19,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.testsub;
 import frc.robot.subsystems.*;
+import frc.robot.driver.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
   public static pinch kpinch = new pinch();
   public static Ultra kUltra = new Ultra();
   public static roller kroller = new roller();
+  public static Vision kVision = new Vision();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -124,6 +126,7 @@ private UsbCamera camera0;
     SmartDashboard.putNumber("Range", range);
     SmartDashboard.putNumber("Avg Value", RobotMap.ultra.getAverageValue());
   */
+  //SmartDashboard.putNumber("vision angle", SmartDashboard);
   }
 
   /**
