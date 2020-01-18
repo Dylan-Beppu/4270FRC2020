@@ -2,8 +2,8 @@ package frc.robot.drivers;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import frc.common.math.MathUtils;
-import frc.common.math.Vector2;
+import frc.robot.drivers.MathUtils;
+import frc.robot.drivers.Vector2;
 
 public final class Limelight {
     private final NetworkTable table;
@@ -145,4 +145,9 @@ public final class Limelight {
         PIP_MAIN,
         PIP_SECONDARY
     }
+    /*
+    public getXA(){
+        return tx;
+    }
+    */
 }

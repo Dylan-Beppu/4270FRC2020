@@ -1,4 +1,4 @@
-package frc.common.math;
+package frc.robot.drivers;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
