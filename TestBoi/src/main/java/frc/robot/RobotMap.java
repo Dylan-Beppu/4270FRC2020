@@ -29,8 +29,10 @@ public class RobotMap {
 
   //Right drive
   public static TalonSRX rightdrive1 = new TalonSRX(1);
+  public static TalonSRX rightdrive2 = new TalonSRX(2);
   //Left drive
   public static TalonSRX leftdrive1 = new TalonSRX(3);
+  public static TalonSRX leftdrive2 = new TalonSRX(4);
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

@@ -13,8 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableValue;
@@ -39,14 +39,27 @@ import java.math.*;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class Drivetrain extends Subsystem {
+public class Drivetrain extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
    //Right drive
-  private final TalonSRX right1 = RobotMap.rightdrive1;
+  private final TalonSRX rightMaster = RobotMap.rightdrive1;
+  private final TalonSRX rightSub = RobotMap.rightdrive2;
+
  
   //Left drive
-  private final TalonSRX left1 = RobotMap.leftdrive1;
+  private final TalonSRX leftMaster = RobotMap.leftdrive1;
+  private final TalonSRX leftSub = RobotMap.leftdrive1;
+
+  public Drivetrain() {
+    leftSub.follow(leftMaster);
+    rightSub.follow(rightMaster);
+
+    leftMaster.setInverted(false);
+    rightMaster.setInverted(true);
+  }
+
+
 
   public double starttime;
 
@@ -71,42 +84,5 @@ public class Drivetrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void tank(Joystick primaryJoystick){
 
-    if(Math.abs(primaryJoystick.getRawAxis(1)) > deadzoneleft){
-      left1.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(1));
-    }
-    else{
-      left1.set(ControlMode.PercentOutput, 0);
-    }
-
-    if(Math.abs(primaryJoystick.getRawAxis(5)) > deadzoneright){
-      right1.set(ControlMode.PercentOutput, -primaryJoystick.getRawAxis(5));
-    }
-    else{
-      right1.set(ControlMode.PercentOutput,0);
-    }
-  }
-  public void driveStraight(double speed){
-    left1.set(ControlMode.PercentOutput, -speed);
-    right1.set(ControlMode.PercentOutput, -speed);     
-  }
-  public void Path1(){
-    //Waypoint = 
-  }
-  public void justdrive(double duration){
-    starttime = Timer.getFPGATimestamp();
-    double desiredTime = starttime + duration;
-    while(Timer.getFPGATimestamp() < desiredTime)
-    {
-      tank(Robot.m_oi.primaryController);
-    }
-  }
- /* //public final double DTT = (TarHight1-CamHight) / Math.tan(Xtar);
-  public void DistantToTarget(){
-    DTT = (TarHight1-CamHight) / Math.tan(Xtar);
-    
-    
-    
-  }*/
 }
