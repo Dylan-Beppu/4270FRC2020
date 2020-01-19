@@ -1,86 +1,44 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.OI;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.networktables.*;
-import java.math.*;
-
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command that uses an example subsystem.
  */
-public class Driving extends Command {
-  double HaveTarget = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-  double Xtar = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-  double Ytar = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-  double TarArea = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+public class Driving extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final Drivetrain kDrivetrain;
 
-  private double CamHight = 0; //camra hight from grond in CM
-  private double TarHight1 = 1; //target hight in cm
-  private double TarHight2 = 1; //target hight in cm
-  private double DTT; //Distance to target
-
-  public Driving() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.kDrivetrain);
+  /**
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public Driving(Drivetrain subsystem) {
+    kDrivetrain = subsystem;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(subsystem);
   }
 
-  // Called just before this Command runs the first time
+  // Called when the command is initially scheduled.
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  protected void execute() {
-    if(Robot.m_oi.primaryController.getRawButtonPressed(5)){
-      double DTT = (TarHight1-CamHight) / Math.tan(Xtar);
-      //vision if statment, need distance
-     if(DTT >= 15 ){
-       
-     }
-     
-    }
-    else{
-      Robot.kDrivetrain.tank(Robot.m_oi.primaryController);
-    }
+  public void execute() {
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Called once the command ends or is interrupted.
   @Override
-  protected boolean isFinished() {
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
     return false;
   }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.kDrivetrain.driveStraight(0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
-
 }
-
