@@ -1,7 +1,10 @@
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * An example command that uses an example subsystem.
@@ -29,6 +32,7 @@ public class Driving extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    kDrivetrain.tank(Robot.m_oi.primaryController);
   }
 
   // Called once the command ends or is interrupted.

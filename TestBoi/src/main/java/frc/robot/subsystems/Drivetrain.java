@@ -10,10 +10,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.*;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTable;
@@ -23,6 +26,7 @@ import edu.wpi.first.networktables.NetworkTableValue;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
+import frc.robot.OI;
 
 import frc.robot.subsystems.Drivetrain;
 
@@ -71,15 +75,18 @@ public class Drivetrain extends SubsystemBase {
 
   //DifferentialDriveKinematics kinematics2 = new DifferentialDriveKinematics(Units.inchesToMeters(28)); //inches between distance between wheels
   DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(28));
+  
   //DifferentialDriveOdometry odometry2 = new DifferentialDriveOdometry(kinematics2, getHeading());
   DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
 
-  SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06);
+  SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06); 
 
   PIDController leftPIDController = new PIDController(2.95, 0, 0);
   PIDController rightPIDController = new PIDController(2.95, 0, 0);
 
   Pose2d pose = new Pose2d();
+
+  
 
   public Drivetrain() {
     leftSub.follow(leftMaster);
@@ -87,8 +94,26 @@ public class Drivetrain extends SubsystemBase {
 
     leftMaster.setInverted(false);
     rightMaster.setInverted(true);
+    
+    //Gryo.reset(); //scrued up spelling again LOL
+    Gyro.reset();
+  }
 
-    //Gryo.reset();
+  public void tank(Joystick primaryJoystick){
+    if(Math.abs(primaryJoystick.getRawAxis(1)) > deadzoneleft){
+      leftMaster.set(ControlMode.PercentOutput, primaryJoystick.getRawAxis(1));
+    }
+    else{
+      leftMaster.set(ControlMode.PercentOutput, 0);
+    }
+
+    if(Math.abs(primaryJoystick.getRawAxis(5)) > deadzoneright){
+      rightMaster.set(ControlMode.PercentOutput, primaryJoystick.getRawAxis(5));
+
+    }
+    else{
+      rightMaster.set(ControlMode.PercentOutput,0);
+    }
   }
 
   public Rotation2d getHeading() {
@@ -97,7 +122,7 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-        leftMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60, 
+        leftMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,
         rightMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60
     );
   }
@@ -145,6 +170,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     pose = odometry.update(getHeading(), getLvelocity(), getRvelocity());
   }
+
 
 
   
