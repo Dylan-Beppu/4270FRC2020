@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.SPI;
+
 /*import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -17,6 +19,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.*;
 //import ;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.*;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -29,8 +33,12 @@ public class RobotMap {
 
   //Right drive
   public static TalonSRX rightdrive1 = new TalonSRX(1);
+  public static TalonSRX rightdrive2 = new TalonSRX(2);
   //Left drive
   public static TalonSRX leftdrive1 = new TalonSRX(3);
+  public static TalonSRX leftdrive2 = new TalonSRX(4);
+
+  public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

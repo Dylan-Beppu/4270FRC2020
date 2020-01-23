@@ -1,12 +1,12 @@
-package frc.common.math;
+package frc.robot.driver;
 
-import frc.common.util.Interpolable;
+import frc.robot.driver.Interpolable;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import static frc.common.math.MathUtils.epsilonEquals;
+import static frc.robot.driver.MathUtils.epsilonEquals;
 
 /**
  * A vector representing a point in 2d space.

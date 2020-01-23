@@ -1,9 +1,9 @@
-package frc.robot.drivers;
+package frc.robot.driver;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import frc.robot.drivers.MathUtils;
-import frc.robot.drivers.Vector2;
+import frc.robot.driver.MathUtils;
+import frc.robot.driver.Vector2;
 
 public final class Limelight {
     private final NetworkTable table;
