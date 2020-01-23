@@ -28,6 +28,10 @@ import frc.robot.OI;
  * Add your docs here.
  */
 public class Vision extends Subsystem {
+  NetworkTableEntry tx;
+  NetworkTableEntry ty;
+
+  
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   // Example: NetworkTableInstance.getDefault().getTable("limelight").getEntry("<variablename>").getDouble(0);
@@ -54,12 +58,25 @@ public class Vision extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public void track(){
+       //Get the default instance of NetworkTables that was created automatically
+       //when your program starts
+       NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
-    if(NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3)){
+       //Get the table within that instance that contains the data. There can
+       //be as many tables as you like and exist to make it easier to organize
+       //your data. In this case, it's a table called datatable.
+       NetworkTable table = inst.getTable("limelight");
+
+       //Get the entries within that table that correspond to the X and Y values
+       //for some operation in your program.
+       tx = table.getEntry("tx");
+       ty = table.getEntry("ty");
+
+    if(tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3)){
       //twist.set();
       twist.set(ControlMode.PercentOutput, 0.05);
     }
-    else if((NetworkTableInstance.getDefault().getTable("table").getEntry("ty").getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3))){
+    else if((tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3))){
       twist.set(ControlMode.PercentOutput, 0.05);
     }
     else{
