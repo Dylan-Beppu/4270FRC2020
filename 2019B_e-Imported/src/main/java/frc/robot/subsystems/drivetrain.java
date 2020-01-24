@@ -49,7 +49,7 @@ public class drivetrain extends Subsystem {
   public void tank(Joystick stick){
     if(Robot.kShifter.isfast == true){
 
-    if(Math.abs(stick.getRawAxis(1)) > .1){
+    if(Math.abs(stick.getRawAxis(1)) > .17){
       left.set(-stick.getRawAxis(1));
       left1.set(-stick.getRawAxis(1));
       left2.set(-stick.getRawAxis(1));
@@ -60,7 +60,7 @@ public class drivetrain extends Subsystem {
       left1.set(0);
       left2.set(0);
     }
-    if(Math.abs(stick.getRawAxis(5)) > .1){
+    if(Math.abs(stick.getRawAxis(5)) > .17){
       right.set(-stick.getRawAxis(5));
       right1.set(-stick.getRawAxis(5));
       right2.set(-stick.getRawAxis(5));
@@ -73,7 +73,7 @@ public class drivetrain extends Subsystem {
     }
   }
   else{ /// WHEN SLOW
-    if(Math.abs(stick.getRawAxis(1)) > .1){
+    if(Math.abs(stick.getRawAxis(1)) > .17){
       left.set(-stick.getRawAxis(1) * 0.8);
       left1.set(-stick.getRawAxis(1) * 0.8);
       left2.set(-stick.getRawAxis(1) * 0.8);
@@ -84,7 +84,7 @@ public class drivetrain extends Subsystem {
       left1.set(0);
       left2.set(0);
     }
-    if(Math.abs(stick.getRawAxis(5)) > .1){
+    if(Math.abs(stick.getRawAxis(5)) > .17){
       right.set(-stick.getRawAxis(5) * 0.8);
       right1.set(-stick.getRawAxis(5) * 0.8);
       right2.set(-stick.getRawAxis(5) * 0.8);
@@ -127,3 +127,4 @@ public class drivetrain extends Subsystem {
     }
   }
 }
+
