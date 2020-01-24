@@ -1,6 +1,7 @@
 package frc.robot.driver;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.*;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import frc.robot.driver.MathUtils;
 import frc.robot.driver.Vector2;
@@ -25,6 +26,12 @@ public final class Limelight {
     private final NetworkTableEntry snapshot;
 
     public Limelight(NetworkTable table) {
+
+        // Init NetworkTable
+        //NetworkTable.setClientMode();
+        //NetworkTable.setTeam(6325);
+        //NetworkTable.setIPAddress("roborio-6325-frc.local"); // ip of roborio
+        //NetworkTable.initialize();
         this.table = table;
 
         tv = table.getEntry("tv");
