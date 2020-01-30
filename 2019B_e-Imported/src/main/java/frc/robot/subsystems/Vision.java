@@ -107,13 +107,13 @@ public class vision extends Subsystem {
     }
     
     //ty = table.getEntry("ty");
-    if(tx.getValue().getDouble() <= -1 && Robot.m_oi.stick.getRawAxis(2) >= 0.2){
+    if(tx.getValue().getDouble() <= -1 && Robot.m_oi.stick.getRawAxis(2) >= 0.4){
       
       spinL(tx.getValue().getDouble()/-50);
       //in.set(-speed);
       //twist.set(ControlMode.PercentOutput, 0.5);
     }
-    else if(tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawAxis(2) >= 0.2){
+    else if(tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawAxis(2) >= 0.4){
       //in.set(speed);
       spinR(tx.getValue().getDouble()/-50);
       
