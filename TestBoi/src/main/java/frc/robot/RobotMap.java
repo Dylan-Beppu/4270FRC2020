@@ -33,10 +33,10 @@ public class RobotMap {
 
   //Right drive
   public static TalonSRX rightdrive1 = new TalonSRX(1);
-  public static TalonSRX rightdrive2 = new TalonSRX(2);
+  //public static TalonSRX rightdrive2 = new TalonSRX(2);
   //Left drive
   public static TalonSRX leftdrive1 = new TalonSRX(3);
-  public static TalonSRX leftdrive2 = new TalonSRX(4);
+  //public static TalonSRX leftdrive2 = new TalonSRX(4);
 
   public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 

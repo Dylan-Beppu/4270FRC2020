@@ -53,6 +53,7 @@ public class OI {
   public JoystickButton InitProb;
   public JoystickButton PinchBtn;
   public JoystickButton Ybtn;
+  public JoystickButton test;
 
 
   public OI(){
@@ -64,10 +65,12 @@ public class OI {
     Down = new JoystickButton(stick, 6);
     Down.whenPressed(new elevating());
 
+    
     in = new JoystickButton(joy, 9);
     in.whenPressed(new intaker());
     out = new JoystickButton(joy, 10);
     out.whenPressed(new manualRoller());
+    
 
     armup = new JoystickButton(stick, 10);
 
@@ -101,8 +104,11 @@ public class OI {
     PinchBtn = new JoystickButton(joy, 12);
     PinchBtn.whenPressed(new manualRoller());
     
-    Ybtn = new JoystickButton(stick, 4);
-    Ybtn.whenPressed(new climbFunction());
+    //Ybtn = new JoystickButton(stick, 4);
+    //Ybtn.whenPressed(new climbFunction());
+
+    test = new JoystickButton(stick, 3);
+    //test.whenPressed(new Visiontest());
 
   }
 /*

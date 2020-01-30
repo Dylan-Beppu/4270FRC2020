@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.kauailabs.*;
+//import com.kauailabs.*;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -61,12 +61,12 @@ public class Drivetrain extends SubsystemBase {
 
    //Right drive
   private final TalonSRX rightMaster = RobotMap.rightdrive1;
-  private final TalonSRX rightSub = RobotMap.rightdrive2;
+  //private final TalonSRX rightSub = RobotMap.rightdrive2;
 
  
   //Left drive
   private final TalonSRX leftMaster = RobotMap.leftdrive1;
-  private final TalonSRX leftSub = RobotMap.leftdrive1;
+  //private final TalonSRX leftSub = RobotMap.leftdrive1;
 
   private double deadzoneleft = 0.1;
   private double deadzoneright = 0.1;
@@ -83,14 +83,15 @@ public class Drivetrain extends SubsystemBase {
 
   PIDController leftPIDController = new PIDController(2.95, 0, 0);
   PIDController rightPIDController = new PIDController(2.95, 0, 0);
+  
 
   Pose2d pose = new Pose2d();
 
   
 
   public Drivetrain() {
-    leftSub.follow(leftMaster);
-    rightSub.follow(rightMaster);
+    //leftSub.follow(leftMaster);
+    //rightSub.follow(rightMaster);
 
     leftMaster.setInverted(false);
     rightMaster.setInverted(true);
@@ -122,17 +123,18 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-        leftMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,
-        rightMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60
+        leftMaster.getActiveTrajectoryVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60, 
+        rightMaster.getActiveTrajectoryVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60
     );
   }
+  
 
   public double getLvelocity(){
-    return leftMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+    return leftMaster.getActiveTrajectoryVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
   public double getRvelocity(){
-    return rightMaster.getActiveTrajectoryVelocity(0) / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+    return rightMaster.getActiveTrajectoryVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
   public DifferentialDriveKinematics getKinematics() {
