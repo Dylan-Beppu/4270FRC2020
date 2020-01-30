@@ -7,29 +7,35 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.networktables.NetworkTableValue;
+//import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
+//import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+//import frc.robot.commands.Visiontest;
+//import frc.robot.driver.Limelight;
+//import frc.robot.OI;
 import frc.robot.commands.Visiontest;
-import frc.robot.driver.Limelight;
-import frc.robot.OI;
 
 
 /**
  * Add your docs here.
  */
-public class Vision extends Subsystem {
+public class vision extends Subsystem {
   NetworkTableEntry tx;
-  NetworkTableEntry ty;
+  NetworkTableEntry ledmode;
+  
+  //NetworkTableEntry ty;
 
   
   // Put methods for controlling this subsystem
@@ -45,42 +51,79 @@ public class Vision extends Subsystem {
   // tl	The pipeline’s latency contribution (ms) Add at least 11ms for image capture latency.
 
   //talon can id 13
-  private double Xangle;
+  //private double Xangle;
 
-  private final TalonSRX twist = RobotMap.VisionTurn;
+
+  private final CANSparkMax in = RobotMap.visionm;
+
+  //private final TalonSRX twist = RobotMap.VisionTurn;
   //private  Xangle = NetworkTableInstance.getDefault().getTable("table").getEntry("<ty>").getValue();
   //private frc.robot.driver.Limelight.;
 
   @Override
   public void initDefaultCommand() {
-   //setDefaultCommand(new mtwist());
+   setDefaultCommand(new Visiontest());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+  public void LR(double speed){
+    in.set(speed);
+  }
+  public void spinL(double speed){
+    in.set(speed);
+  }
+  public void spinR(double speed){
+    in.set(speed);
+  }
+  public void spinStop(){
+    in.set(0);
+  }
+  public void blindMe(){
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("limelight");
+    ledmode = table.getEntry("ledMode");
+    ledmode.setDouble(3);
+  }
+  public void unblindMe(){
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("limelight");
+    ledmode = table.getEntry("ledMode");
+    ledmode.setDouble(1);
+  }
   public void track(){
-       //Get the default instance of NetworkTables that was created automatically
-       //when your program starts
-       NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("limelight");
+    
 
-       //Get the table within that instance that contains the data. There can
-       //be as many tables as you like and exist to make it easier to organize
-       //your data. In this case, it's a table called datatable.
-       NetworkTable table = inst.getTable("limelight");
 
-       //Get the entries within that table that correspond to the X and Y values
-       //for some operation in your program.
-       tx = table.getEntry("tx");
-       ty = table.getEntry("ty");
-
-    if(tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3)){
-      //twist.set();
-      twist.set(ControlMode.PercentOutput, 0.05);
-    }
-    else if((tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawButtonPressed(3))){
-      twist.set(ControlMode.PercentOutput, 0.05);
+    tx = table.getEntry("tx");
+    if(Robot.m_oi.stick.getRawAxis(2) != 0){
+    
+    blindMe();
+    
     }
     else{
-      twist.set(ControlMode.PercentOutput, 0);
+      unblindMe();
+    }
+    
+    //ty = table.getEntry("ty");
+    if(tx.getValue().getDouble() <= -1 && Robot.m_oi.stick.getRawAxis(2) >= 0.2){
+      
+      spinL(tx.getValue().getDouble()/-50);
+      //in.set(-speed);
+      //twist.set(ControlMode.PercentOutput, 0.5);
+    }
+    else if(tx.getValue().getDouble() >= 1 && Robot.m_oi.stick.getRawAxis(2) >= 0.2){
+      //in.set(speed);
+      spinR(tx.getValue().getDouble()/-50);
+      
+      //twist.set(ControlMode.PercentOutput, -0.5);
+    }
+    else{
+      spinStop();
+      
+      //in.set(0);
+      //twist.set(ControlMode.PercentOutput, 0);
     }
   }
 }

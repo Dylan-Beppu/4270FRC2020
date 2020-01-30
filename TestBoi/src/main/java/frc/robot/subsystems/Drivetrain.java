@@ -16,6 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 //import com.kauailabs.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -77,6 +78,7 @@ public class Drivetrain extends SubsystemBase {
   private final CANSparkMax leftMaster = RobotMap.leftdrive1;
   //private final CANEncoder leftCanEncoder = RobotMap.Leftencoder
 
+
   private double deadzoneleft = 0.1;
   private double deadzoneright = 0.1;
   
@@ -92,6 +94,7 @@ public class Drivetrain extends SubsystemBase {
 
   PIDController leftPIDController = new PIDController(2.95, 0, 0);
   PIDController rightPIDController = new PIDController(2.95, 0, 0);
+  
 
   //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();  
   //TalonSRXPIDSetConfiguration rightPIDController = new TalonSRXPIDSetConfiguration();
@@ -142,14 +145,17 @@ public class Drivetrain extends SubsystemBase {
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
+
       leftMaster.getEncoder().getVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,
         rightMaster.getEncoder().getVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60
       //leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,
       //rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60
       );
   }
+  
 
   public double getLvelocity(){
+
     return leftMaster.getEncoder().getVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
     //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
@@ -157,6 +163,7 @@ public class Drivetrain extends SubsystemBase {
   public double getRvelocity(){
     return rightMaster.getEncoder().getVelocity() / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
     //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+
   }
 
   public DifferentialDriveKinematics getKinematics() {

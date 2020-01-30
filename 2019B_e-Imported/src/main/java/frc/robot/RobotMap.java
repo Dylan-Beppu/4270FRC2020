@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //import edu.wpi.first.wpilibj.Spark;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -66,7 +66,9 @@ public static CANSparkMax wristmotor = new CANSparkMax(10, MotorType.kBrushless)
 
 public static CANSparkMax wristmotor2 = new CANSparkMax(11, MotorType.kBrushless/**/);
 
-public static TalonSRX VisionTurn = new TalonSRX(13);
+public static CANSparkMax visionm = new CANSparkMax(23, MotorType.kBrushless);
+
+//public static TalonSRX VisionTurn = new TalonSRX(13);
 
 
 

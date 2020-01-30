@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class Visiontest extends Command {
   public Visiontest() {
-    requires(Robot.kVision);
+    requires(Robot.kvision);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,20 +25,25 @@ public class Visiontest extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
     //Robot.kProbe.probingfunction();
+    
+    Robot.kvision.track();
    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     //Robot.kProbe.switchExtension();
+    Robot.kvision.spinStop();
+    Robot.kvision.unblindMe();
   }
 
   // Called when another command which requires one or more of the same

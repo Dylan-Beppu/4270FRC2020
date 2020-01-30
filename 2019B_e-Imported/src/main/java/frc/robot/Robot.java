@@ -19,7 +19,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.testsub;
 import frc.robot.subsystems.*;
-import frc.robot.driver.Limelight;
+//import frc.robot.driver.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,13 +41,13 @@ public class Robot extends TimedRobot {
   public static pinch kpinch = new pinch();
   public static Ultra kUltra = new Ultra();
   public static roller kroller = new roller();
-  public static Vision kVision = new Vision();
+  public static vision kvision = new vision();
   public static OI m_oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-private UsbCamera camera1;
-private UsbCamera camera0;
+  private UsbCamera camera1;
+  private UsbCamera camera0;
 
   /**
    * This function is run when the robot is first started up and should be

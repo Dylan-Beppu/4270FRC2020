@@ -38,7 +38,7 @@ public class RobotContainer {
               new Pose2d(2.3, 1.2, Rotation2d.fromDegrees(90.0))),
           config
       );
-  
+      
       RamseteCommand command = new RamseteCommand(
           trajectory,
           drive::getPose,
@@ -48,8 +48,8 @@ public class RobotContainer {
           drive::getSpeeds,
           drive.getLeftPIDController(),
           drive.getRightPIDController(),
-          drive::setOutputVolts,
-          drive
+          drive::setOutputVolts
+          
       );
   
       return command.andThen(() -> drive.setOutputVolts(0, 0));
