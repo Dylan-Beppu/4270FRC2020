@@ -32,19 +32,22 @@ public class RobotMap {
   //public static Compressor aircomp = new Compressor(0);
 
   //Right drive
-  public static TalonSRX rightdrive1 = new TalonSRX(1);
+  //public static TalonSRX rightdrive1 = new TalonSRX(1);
   //public static TalonSRX rightdrive2 = new TalonSRX(2);
+  public static CANSparkMax rightdrive1 = new CANSparkMax(5,CANSparkMaxLowLevel.MotorType.kBrushless);
+  
   //Left drive
-  public static TalonSRX leftdrive1 = new TalonSRX(3);
+  //public static TalonSRX leftdrive1 = new TalonSRX(3);
   //public static TalonSRX leftdrive2 = new TalonSRX(4);
+  public static CANSparkMax leftdrive1 = new CANSparkMax(6,CANSparkMaxLowLevel.MotorType.kBrushless);
+  //public static CANEncoder leftCanEncoder = new CANEncoder(leftdrive1);
+
 
   public static AHRS gyro = new AHRS(SPI.Port.kMXP);
-
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
-
+  public static void init(){
+    rightdrive1.setInverted(false);
+    leftdrive1.setInverted(false);
+  }
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;

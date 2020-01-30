@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     container = new RobotContainer();
+    RobotMap.init();
     //kDrivetrain = new Drivetrain();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
