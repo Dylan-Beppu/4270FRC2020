@@ -18,13 +18,13 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
+//import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
 import edu.wpi.first.wpilibj.command.Command;
 //import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
+//import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 //import frc.robot.commands.Visiontest;
@@ -119,7 +119,7 @@ public class vision extends Subsystem {
       else if(in.getEncoder().getPosition() < -1){
         in.set(0.5);
       }
-      else if(in.getEncoder().getPosition() < -0.05 && in.getEncoder().getPosition() > 1){
+      else if(in.getEncoder().getPosition() < -0.05 && in.getEncoder().getPosition() > -1){
         in.set(0.01);
       }
       else{
