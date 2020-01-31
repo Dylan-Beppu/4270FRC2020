@@ -7,6 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.CAN;
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import edu.wpi.first.wpilibj.Encoder;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
@@ -24,18 +29,19 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
   // The motors on the left side of the drive.
   private final SpeedControllerGroup m_leftMotors =
-      new SpeedControllerGroup(new PWMVictorSPX(DriveConstants.kLeftMotor1Port),
-                               new PWMVictorSPX(DriveConstants.kLeftMotor2Port));
+      new SpeedControllerGroup(new CANSparkMax(5, MotorType.kBrushless)/*,
+                               new PWMVictorSPX(DriveConstants.kLeftMotor2Port)*/);
 
   // The motors on the right side of the drive.
   private final SpeedControllerGroup m_rightMotors =
-      new SpeedControllerGroup(new PWMVictorSPX(DriveConstants.kRightMotor1Port),
-                               new PWMVictorSPX(DriveConstants.kRightMotor2Port));
+      new SpeedControllerGroup(new CANSparkMax(6, MotorType.kBrushless)/*,
+                                new PWMVictorSPX(DriveConstants.kLeftMotor2Port)*/);
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   // The left-side drive encoder
+  
   private final Encoder m_leftEncoder =
       new Encoder(DriveConstants.kLeftEncoderPorts[0], DriveConstants.kLeftEncoderPorts[1],
                   DriveConstants.kLeftEncoderReversed);
