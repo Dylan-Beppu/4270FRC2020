@@ -27,8 +27,10 @@ public class Visiontest extends Command {
   protected void execute() {
     
     //Robot.kProbe.probingfunction();
-    
+    Robot.kvision.toggleon();
+    Robot.kvision.shootshoot();
     Robot.kvision.track();
+    Robot.kvision.camPosReset();
    
   }
 

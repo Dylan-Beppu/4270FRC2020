@@ -7,14 +7,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+//import edu.wpi.first.wpilibj.Talon;
+//import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+//import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 //import com.kauailabs.*;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 
 
 import edu.wpi.first.wpilibj.Encoder;

@@ -82,6 +82,8 @@ public class Robot extends TimedRobot {
     kShifter.isfast = true;
     //kElevator.armdown();
 
+    kvision.togglebtn = false;
+
 //
    /// RobotMap.ultra.pidGet();
   //  double Robot
