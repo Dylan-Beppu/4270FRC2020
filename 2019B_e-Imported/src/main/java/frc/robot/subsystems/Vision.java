@@ -18,6 +18,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 //import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
 import edu.wpi.first.wpilibj.command.Command;
 //import edu.wpi.first.wpilibj.Joystick;
@@ -38,8 +39,13 @@ import frc.robot.commands.Visiontest;
  */
 public class vision extends Subsystem {
   NetworkTableEntry tx;
+  NetworkTableEntry ty;
   NetworkTableEntry ledmode;
+  public double camhight;
+  public double targethight;
   public boolean togglebtn;
+  private double dts;
+  public boolean vib;
   //NetworkTableEntry ty;
 
   
@@ -141,10 +147,12 @@ public class vision extends Subsystem {
   public void track(){
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("limelight");
-
+    camhight = 1.2573;
+    targethight = 2.1082;
 
 
     tx = table.getEntry("tx");
+    ty = table.getEntry("ty");
     if(togglebtn == true){
     
     intake.setOpenLoopRampRate(1);
@@ -156,6 +164,14 @@ public class vision extends Subsystem {
     else{
       unblindMe();
       intake.set(0);
+    }
+
+    dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()));
+    if(dts < 10){
+      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 1);
+    }
+    else{
+      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 0);
     }
     
     //ty = table.getEntry("ty");
