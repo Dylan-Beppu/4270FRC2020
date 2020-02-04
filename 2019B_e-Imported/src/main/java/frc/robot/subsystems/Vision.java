@@ -112,6 +112,14 @@ public class vision extends Subsystem {
       roller.set(0);
     }
   }
+  public void camencreset(){
+    if(Robot.m_oi.stick.getRawButton(9) == true){
+      in.getEncoder().setPosition(0);
+    }
+    else{
+
+    }
+  }
   public void camPosReset(){
     in.setIdleMode(IdleMode.kBrake);
     in.getEncoder().getPosition();
@@ -119,18 +127,34 @@ public class vision extends Subsystem {
       if(in.getEncoder().getPosition() > 1){
         in.set(-0.5);
       }
-      else if(1 > in.getEncoder().getPosition() && in.getEncoder().getPosition() > 0.05){
-        in.set(-0.01);
+      else if(1 > in.getEncoder().getPosition() && in.getEncoder().getPosition() > 0.1){
+        in.set(-in.getEncoder().getPosition()/2);
       }
       else if(in.getEncoder().getPosition() < -1){
         in.set(0.5);
       }
-      else if(in.getEncoder().getPosition() < -0.05 && in.getEncoder().getPosition() > -1){
-        in.set(0.01);
+      else if(in.getEncoder().getPosition() < -0.1 && in.getEncoder().getPosition() > -1){
+        in.set(in.getEncoder().getPosition()/2);
       }
       else{
         in.set(0);
       }
+    }
+  }
+  public void areweinrange(){
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("limelight");
+    camhight = 1.2573;
+    targethight = 2.1082;
+    ty = table.getEntry("ty");
+    dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()));
+    if(dts < 5 && 4 < dts){
+      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 1);
+      Robot.m_oi.stick.setRumble(RumbleType.kRightRumble, 1);
+    }
+    else{
+      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 0);
+      Robot.m_oi.stick.setRumble(RumbleType.kRightRumble, 0);
     }
   }
   public void toggleon(){
@@ -147,12 +171,11 @@ public class vision extends Subsystem {
   public void track(){
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("limelight");
-    camhight = 1.2573;
-    targethight = 2.1082;
+
 
 
     tx = table.getEntry("tx");
-    ty = table.getEntry("ty");
+
     if(togglebtn == true){
     
     intake.setOpenLoopRampRate(1);
@@ -166,13 +189,7 @@ public class vision extends Subsystem {
       intake.set(0);
     }
 
-    dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()));
-    if(dts < 10){
-      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 1);
-    }
-    else{
-      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 0);
-    }
+    
     
     //ty = table.getEntry("ty");
     if(tx.getValue().getDouble() <= -1 && togglebtn == true){

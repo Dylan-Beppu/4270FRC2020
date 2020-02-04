@@ -25,7 +25,8 @@ public class Visiontest extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
+    Robot.kvision.areweinrange();
+    Robot.kvision.camencreset();
     //Robot.kProbe.probingfunction();
     Robot.kvision.toggleon();
     Robot.kvision.shootshoot();
