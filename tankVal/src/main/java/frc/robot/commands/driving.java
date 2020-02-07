@@ -30,6 +30,7 @@ public class driving extends Command {
   @Override
   protected void execute() {
     Robot.kDrivetrain.tank();
+    Robot.kDrivetrain.outputToSmartDashboard();
     //Robot.kdrive.findingtiks();
       
   }
@@ -43,6 +44,7 @@ public class driving extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+      Robot.kDrivetrain.driveStraight(0);
 
   }
 
