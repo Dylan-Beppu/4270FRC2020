@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.driving;
@@ -59,6 +60,10 @@ public class drivetrain extends Subsystem {
       rightMaster.set(ControlMode.PercentOutput,0);
       
     }
+  }
+  public void outputToSmartDashboard() {
+    SmartDashboard.putNumber("TicksL", leftMaster.getSelectedSensorPosition());
+    SmartDashboard.putNumber("TicksR", rightMaster.getSelectedSensorPosition());
   }
   public void driveStraight(double speed){
     rightMaster.set(ControlMode.PercentOutput, speed);
