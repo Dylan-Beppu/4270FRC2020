@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,8 +27,8 @@ import edu.wpi.first.networktables.NetworkTableValue;
 public class drivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final TalonSRX leftMaster = RobotMap.leftdrive1;
-  private final TalonSRX rightMaster = RobotMap.rightdrive1;
+  private final WPI_TalonSRX leftMaster = RobotMap.leftdrive1;
+  private final WPI_TalonSRX rightMaster = RobotMap.rightdrive1;
   private double deadzoneleft = 0.15;
   private double deadzoneright = 0.15;
   //NetworkTableEntry ticks;
@@ -41,7 +41,7 @@ public class drivetrain extends Subsystem {
   protected void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new driving());
+    //setDefaultCommand(new driving());
     
   }
   
@@ -61,10 +61,10 @@ public class drivetrain extends Subsystem {
       
     }
   }
-  public void outputToSmartDashboard() {
+  /*public void outputToSmartDashboard() {
     SmartDashboard.putNumber("TicksL", leftMaster.getSelectedSensorPosition());
     SmartDashboard.putNumber("TicksR", rightMaster.getSelectedSensorPosition());
-  }
+  }*/
   public void driveStraight(double speed){
     rightMaster.set(ControlMode.PercentOutput, speed);
     leftMaster.set(ControlMode.PercentOutput, speed);

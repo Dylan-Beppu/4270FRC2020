@@ -30,7 +30,7 @@ public class driving extends Command {
   @Override
   protected void execute() {
     Robot.kDrivetrain.tank();
-    Robot.kDrivetrain.outputToSmartDashboard();
+    //Robot.kDrivetrain.outputToSmartDashboard();
     //Robot.kdrive.findingtiks();
       
   }

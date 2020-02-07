@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -16,6 +16,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  * floating around.
  */
 public class RobotMap {
-  public static TalonSRX leftdrive1 = new TalonSRX(3);
-  public static TalonSRX rightdrive1 = new TalonSRX(1);
+  public static WPI_TalonSRX leftdrive1 = new WPI_TalonSRX(3);
+  public static WPI_TalonSRX rightdrive1 = new WPI_TalonSRX(1);
 }
