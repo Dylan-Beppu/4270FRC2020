@@ -35,11 +35,11 @@ public class RobotMap {
   //Right drive
 
   public static WPI_TalonSRX rightdriveF = new WPI_TalonSRX(1);
-  public static WPI_TalonSRX rightdriveB = new WPI_TalonSRX(2);
+  //public static WPI_TalonSRX rightdriveB = new WPI_TalonSRX(2);
 
   //Left drive
   public static WPI_TalonSRX leftdriveF = new WPI_TalonSRX(3);
-  public static WPI_TalonSRX leftdriveB = new WPI_TalonSRX(4);
+  //public static WPI_TalonSRX leftdriveB = new WPI_TalonSRX(4);
 
   //gryo
   public static AHRS gyro = new AHRS(SPI.Port.kMXP);

@@ -7,9 +7,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANDigitalInput;
+import com.revrobotics.CANEncoder;
 import com.kauailabs.navx.*;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -31,27 +35,33 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.RobotMap;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
+//import edu.wpi.first.networktables.NetworkTableValue;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTable;
+
 public class DriveSubsystem extends SubsystemBase {
   // The motors on the left side of the drive.
   private final SpeedControllerGroup m_leftMotors =
-      new SpeedControllerGroup(RobotMap.leftdriveF, RobotMap.leftdriveB);
+      new SpeedControllerGroup(RobotMap.leftdriveF/*, RobotMap.leftdriveB*/);
 
   // The motors on the right side of the drive.
   private final SpeedControllerGroup m_rightMotors =
-      new SpeedControllerGroup(RobotMap.rightdriveF, RobotMap.rightdriveB);
+      new SpeedControllerGroup(RobotMap.rightdriveF/*, RobotMap.rightdriveB*/);
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   // The left-side drive encoder
   private final Encoder m_leftEncoder =
-      new Encoder(RobotMap.leftdriveF.getSelectedSensorPosition(), RobotMap.leftdriveB.getSelectedSensorPosition(),
+      new Encoder(RobotMap.leftdriveF.getSelectedSensorPosition(), RobotMap.leftdriveF.getSelectedSensorPosition()/*, RobotMap.leftdriveB.getSelectedSensorPosition()*/,
                   DriveConstants.kLeftEncoderReversed);
 
   // The right-side drive encoder
-  private final Encoder m_rightEncoder =
-      new Encoder(RobotMap.rightdriveF.getSelectedSensorPosition(), RobotMap.rightdriveB.getSelectedSensorPosition(),
-                  DriveConstants.kRightEncoderReversed);
+  //private final TalonSRXFeedbackDevice m_rightEncoder = RobotMap.rightdriveF.pos getSelectedSensorPosition();
+  //private final Encoder m_rightEncoder =
+      //new Encoder(RobotMap.rightdriveF.getSelectedSensorPosition(), RobotMap.rightdriveF.getSelectedSensorPosition()/*, RobotMap.rightdriveB.getSelectedSensorPosition()*/,
+                  //DriveConstants.kRightEncoderReversed);
 
   // The gyro sensor
   private AHRS m_gyro = RobotMap.gyro;
@@ -64,9 +74,12 @@ public class DriveSubsystem extends SubsystemBase {
    * Creates a new DriveSubsystem.
    */
   public DriveSubsystem() {
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("NetworkTables");
+    NetworkTable table.
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    //m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
     resetEncoders();
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
@@ -74,9 +87,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //meser ticks moved by the morter
     // Update the odometry in the periodic block
     m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_leftEncoder.getDistance(),
-                      m_rightEncoder.getDistance());
+    RobotMap.leftdriveF.getSelectedSensorPosition(1));
   }
 
   /**
@@ -94,7 +108,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The current wheel speeds.
    */
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_leftEncoder.getRate());
   }
 
   /**
@@ -115,6 +129,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void arcadeDrive(double fwd, double rot) {
     m_drive.arcadeDrive(fwd, rot);
+    
   }
 
   /**
@@ -134,7 +149,8 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void resetEncoders() {
     m_leftEncoder.reset();
-    m_rightEncoder.reset();
+    //RobotMap.rightdriveF.getSelectedSensorPosition().reset();
+    //m_rightEncoder.reset();
   }
 
   /**
@@ -143,7 +159,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the average of the two encoder readings
    */
   public double getAverageEncoderDistance() {
-    return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
+    return (m_leftEncoder.getDistance() /*+ m_rightEncoder.getDistance()*/) / 2.0;
   }
 
   /**
@@ -161,7 +177,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the right drive encoder
    */
   public Encoder getRightEncoder() {
-    return m_rightEncoder;
+    return m_leftEncoder;
   }
 
   /**
