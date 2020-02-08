@@ -1,0 +1,17 @@
+﻿147771.000000 ticksL start
+
+-54094.000000 ticksL end
+
+201,865‬ ticksL diff
+
+
+-1544368.000000 ticksR start
+
+-1318935.000000 ticksR end
+
+225,433‬ ticksL diff
+
+
+‭213,649‬ ticks avg
+
+
