@@ -18,4 +18,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class RobotMap {
   public static WPI_TalonSRX leftdrive1 = new WPI_TalonSRX(3);
   public static WPI_TalonSRX rightdrive1 = new WPI_TalonSRX(1);
+  public static void init() {
+    rightdrive1.setInverted(true);
+    leftdrive1.setInverted(true);
+
+  }
+  
 }

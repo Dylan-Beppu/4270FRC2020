@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -34,14 +35,14 @@ public class drivetrain extends Subsystem {
   //NetworkTableEntry ticks;
   //public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   //public static edu.wpi.first.networktables.NetworkTable networkTable;
-
+  public double starttime;
 
 
   @Override
   protected void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new driving());
+    setDefaultCommand(new driving());
     
   }
   
@@ -61,10 +62,10 @@ public class drivetrain extends Subsystem {
       
     }
   }
-  /*public void outputToSmartDashboard() {
+  public void outputToSmartDashboard() {
     SmartDashboard.putNumber("TicksL", leftMaster.getSelectedSensorPosition());
     SmartDashboard.putNumber("TicksR", rightMaster.getSelectedSensorPosition());
-  }*/
+  }
   public void driveStraight(double speed){
     rightMaster.set(ControlMode.PercentOutput, speed);
     leftMaster.set(ControlMode.PercentOutput, speed);
@@ -77,4 +78,12 @@ public class drivetrain extends Subsystem {
   //  ticks = table.getEntry("ticks");
   //  ticks.setDouble(rightMaster.getSelectedSensorPosition());
   //}
+  public void justdrive(double duration){
+    starttime = Timer.getFPGATimestamp();
+    double desiredTime = starttime + duration;
+    while(Timer.getFPGATimestamp() < desiredTime)
+    {
+      tank();
+    }
+  }
 }

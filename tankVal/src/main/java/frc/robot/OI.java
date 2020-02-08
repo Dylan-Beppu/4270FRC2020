@@ -16,4 +16,7 @@ import frc.robot.commands.*;
  */
 public class OI {
   public Joystick primaryController = new Joystick(0);
+  public OI(){
+
+  }
 }

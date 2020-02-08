@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.SPI;
 /*import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.Spark;/*/
+import edu.wpi.first.wpilibj.Spark;*/
 import com.revrobotics.*;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.*;
@@ -21,6 +21,7 @@ import com.revrobotics.*;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -32,14 +33,14 @@ public class RobotMap {
   //public static Compressor aircomp = new Compressor(0);
 
   //Right drive
-  //public static TalonSRX rightdrive1 = new TalonSRX(1);
+  public static WPI_TalonSRX rightdrive1 = new WPI_TalonSRX(1);
   //public static TalonSRX rightdrive2 = new TalonSRX(2);
-  public static CANSparkMax rightdrive1 = new CANSparkMax(5,CANSparkMaxLowLevel.MotorType.kBrushless);
+  //public static CANSparkMax rightdrive1 = new CANSparkMax(5,CANSparkMaxLowLevel.MotorType.kBrushless);
   
   //Left drive
-  //public static TalonSRX leftdrive1 = new TalonSRX(3);
+  public static WPI_TalonSRX leftdrive1 = new WPI_TalonSRX(3);
   //public static TalonSRX leftdrive2 = new TalonSRX(4);
-  public static CANSparkMax leftdrive1 = new CANSparkMax(6,CANSparkMaxLowLevel.MotorType.kBrushless);
+  //public static CANSparkMax leftdrive1 = new CANSparkMax(6,CANSparkMaxLowLevel.MotorType.kBrushless);
   //public static CANEncoder leftCanEncoder = new CANEncoder(leftdrive1);
 
 

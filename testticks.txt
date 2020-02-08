@@ -12,6 +12,6 @@
 225,433‬ ticksL diff
 
 
-‭213,649‬ ticks avg
+‭213,649‬ ticks avg pre meter
 
 

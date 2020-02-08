@@ -39,11 +39,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    kDrivetrain = new drivetrain();
+    //kDrivetrain = new drivetrain();
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    RobotMap.init();
     
   }
 
