@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -30,6 +32,8 @@ public class drivetrain extends Subsystem {
   // here. Call these from Commands.
   private final WPI_TalonSRX leftMaster = RobotMap.leftdrive1;
   private final WPI_TalonSRX rightMaster = RobotMap.rightdrive1;
+  private final CANSparkMax set1 = RobotMap.setl;
+  private final CANSparkMax set2 = RobotMap.setr;
   private double deadzoneleft = 0.15;
   private double deadzoneright = 0.15;
   //NetworkTableEntry ticks;
@@ -44,6 +48,24 @@ public class drivetrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new driving());
     
+  }
+  public void shoot(){
+    set1.setOpenLoopRampRate(1);
+    set1.set(1);
+    set1.setIdleMode(IdleMode.kCoast);
+    set2.setOpenLoopRampRate(1);
+    set2.set(1);
+    set2.setIdleMode(IdleMode.kCoast);
+    if(Robot.m_oi.primaryController.getRawAxis(3)!=0){
+      set1.set(-0.57);
+      set2.set(0.57   );
+      }
+      else{
+        //set1.setVoltage(0);
+        set1.set(0);
+        //set2.setVoltage(0);
+        set2.set(0);
+      }
   }
   
   public void tank(){
