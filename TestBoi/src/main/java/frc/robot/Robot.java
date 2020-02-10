@@ -28,9 +28,10 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   //public static DrivetrainSubsystem kDrivetrain = new Drivetrain();
+  
   public static OI m_oi;
   RobotContainer container;
-  Drivetrain kDrivetrain;
+  public static Drivetrain kDrivetrain = new Drivetrain();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,7 +45,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     container = new RobotContainer();
     RobotMap.init();
-    //kDrivetrain = new Drivetrain();
+    kDrivetrain = new Drivetrain();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Spark;*/
-import com.revrobotics.*;
+//import com.revrobotics.*;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.*;
 //import ;
@@ -46,8 +46,8 @@ public class RobotMap {
 
   public static AHRS gyro = new AHRS(SPI.Port.kMXP);
   public static void init(){
-    rightdrive1.setInverted(false);
-    leftdrive1.setInverted(false);
+    rightdrive1.setInverted(true);
+    leftdrive1.setInverted(true);
   }
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

@@ -38,6 +38,8 @@ import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -52,8 +54,8 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import java.math.*;
 import com.kauailabs.navx.frc.AHRS;
 //import 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANEncoder;
+//import com.revrobotics.CANSparkMax;
 
 
 /**
@@ -61,8 +63,8 @@ import com.revrobotics.CANSparkMax;
  */
 public class Drivetrain extends SubsystemBase {
 
-  private static final double kGearRatio = 7.29; // gear ratio
-  private static final double kWheelRadiusInches = 3.0;
+  private static final double kGearRatio = 22; // gear ratio
+  private static final double kWheelRadiusInches = 2.0;
 
    //Right drive
   private final WPI_TalonSRX rightMaster = RobotMap.rightdrive1;
@@ -76,22 +78,22 @@ public class Drivetrain extends SubsystemBase {
   //private final CANSparkMax leftMaster = RobotMap.leftdrive1;
   //private final CANEncoder leftCanEncoder = RobotMap.Leftencoder
 
-  private double ticksPerMeater = 213649;
+  //private double ticksPerMeater = 213649;
   private double deadzoneleft = 0.1;
   private double deadzoneright = 0.1;
   
   private AHRS Gyro = RobotMap.gyro;
 
   //DifferentialDriveKinematics kinematics2 = new DifferentialDriveKinematics(Units.inchesToMeters(28)); //inches between distance between wheels
-  DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(28));
+  DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(24));
   
   //DifferentialDriveOdometry odometry2 = new DifferentialDriveOdometry(kinematics2, getHeading());
   DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
 
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06); 
 
-  PIDController leftPIDController = new PIDController(2.95, 0, 0);
-  PIDController rightPIDController = new PIDController(2.95, 0, 0);
+  PIDController leftPIDController = new PIDController(1, 0, 0);
+  PIDController rightPIDController = new PIDController(1, 0, 0);
   
 
   //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();  
@@ -109,58 +111,56 @@ public class Drivetrain extends SubsystemBase {
     //leftSub.follow(leftMaster);
     //rightSub.follow(rightMaster);
 
-    leftMaster.setInverted(false);
-    rightMaster.setInverted(true);
+    //leftMaster.setInverted(true);
+    //rightMaster.setInverted(true);
     
     //Gryo.reset(); //scrued up spelling again LOL
     Gyro.reset();
   }
 
-  public void tank(Joystick primaryJoystick){
-    if(Math.abs(primaryJoystick.getRawAxis(1)) > deadzoneleft){
-      //leftMaster.set(ControlMode.PercentOutput, primaryJoystick.getRawAxis(1));
-      leftMaster.set(primaryJoystick.getRawAxis(1));
+  public void tank(){
+    if(Math.abs(Robot.m_oi.primaryController.getRawAxis(1)) > deadzoneleft){
+      leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.primaryController.getRawAxis(1));
     }
     else{
-      //leftMaster.set(ControlMode.PercentOutput, 0);
-      leftMaster.set(0);
+      leftMaster.set(ControlMode.PercentOutput, 0);
     }
 
-    if(Math.abs(primaryJoystick.getRawAxis(5)) > deadzoneright){
-      //rightMaster.set(ControlMode.PercentOutput, primaryJoystick.getRawAxis(5));
-      rightMaster.set(primaryJoystick.getRawAxis(5));
+    if(Math.abs(Robot.m_oi.primaryController.getRawAxis(5)) > deadzoneright){
+      rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.primaryController.getRawAxis(5));
     }
     else{
-      //rightMaster.set(ControlMode.PercentOutput,0);
-      rightMaster.set(0);
+      rightMaster.set(ControlMode.PercentOutput,0);
+      
     }
   }
 
   public Rotation2d getHeading() {
     return Rotation2d.fromDegrees(-Gyro.getAngle());
+    
   }
   //leftMaster.getActiveTrajectoryVelocity()
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-        leftMaster.getSelectedSensorPosition() / 213649,  rightMaster.getSelectedSensorPosition() / 213649);
+        leftMaster.getSelectedSensorVelocity()*100 / 201865,  -rightMaster.getSelectedSensorVelocity()*100 / 225433);
   }
   public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()*100 / 213649;
+    return leftMaster.getSelectedSensorPosition()*100 / 201865;
   }
   public double getRdistance(){
-    return rightMaster.getSelectedSensorPosition()*100 / 213649;
+    return -rightMaster.getSelectedSensorPosition()*100 / 225433;
   }
   
 
   public double getLvelocity(){
 
-    return leftMaster.getSelectedSensorVelocity()*100 / 213649;
+    return leftMaster.getSelectedSensorVelocity()*100 / 201865;
     //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
   public double getRvelocity(){
-    return leftMaster.getSelectedSensorVelocity()*100 / 213649;
+    return -rightMaster.getSelectedSensorVelocity()*100 / 225433;
     //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
 
   }

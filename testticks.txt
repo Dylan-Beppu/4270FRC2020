@@ -9,9 +9,8 @@
 
 -1318935.000000 ticksR end
 
-225,433‬ ticksL diff
+225,433‬ ticksR diff
 
 
 ‭213,649‬ ticks avg pre meter
-
 

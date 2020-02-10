@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 
   public Joystick primaryController = new Joystick(0);
-  public Joystick secondaryController = new Joystick(1);
+  //public Joystick secondaryController = new Joystick(1);
 
   //public JoystickButton HighG;
 
