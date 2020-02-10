@@ -32,13 +32,14 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotMap {
   //public static Compressor aircomp = new Compressor(0);
 
-  //Right drive
-  public static WPI_TalonSRX rightdriveF = new WPI_TalonSRX(1);
-  public static WPI_TalonSRX rightdriveB = new WPI_TalonSRX(2);
+ //Right drive
+  public static WPI_TalonSRX rightdrive1 = new WPI_TalonSRX(1);
+  public static WPI_TalonSRX rightdrive2 = new WPI_TalonSRX(2);
 
+  
   //Left drive
-  public static WPI_TalonSRX leftdriveF = new WPI_TalonSRX(3);
-  public static WPI_TalonSRX leftdriveB = new WPI_TalonSRX(4);
+  public static WPI_TalonSRX leftdrive1 = new WPI_TalonSRX(3);
+  public static WPI_TalonSRX leftdrive2 = new WPI_TalonSRX(4);
 
   //gryo
   public static AHRS gyro = new AHRS(SPI.Port.kMXP);
@@ -50,5 +51,12 @@ public class RobotMap {
   public static CANSparkMax visionm = new CANSparkMax(23, MotorType.kBrushless);
   public static CANSparkMax intake = new CANSparkMax(9, MotorType.kBrushless);
 
-public static CANSparkMax side = new CANSparkMax(18, MotorType.kBrushless);
+  public static CANSparkMax side = new CANSparkMax(18, MotorType.kBrushless);
+
+  public static void init(){
+    rightdrive1.setInverted(false);
+    leftdrive1.setInverted(false);
+    rightdrive2.setInverted(false);
+    leftdrive2.setInverted(false);
+  }
 }

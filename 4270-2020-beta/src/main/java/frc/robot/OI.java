@@ -24,40 +24,6 @@ public class OI {
 
   public Joystick SomeOneElce = new Joystick(1);
 
-  //public JoystickButton A;
-
-  public JoystickButton UP;
-
-  public JoystickButton Down;
-
-  public JoystickButton in;
-
-  public JoystickButton out;
-
-  public JoystickButton armup;
-
-  public JoystickButton armdown;
-
-  public JoystickButton fast;
-  public JoystickButton slow;
-
-  public JoystickButton balllow;
-  public JoystickButton ballmid;
-  public JoystickButton ballhigh;
-
-  public JoystickButton hatchlow;
-  public JoystickButton hatchmid;
-  public JoystickButton hatchhigh;
-
-  public JoystickButton ManUp;
-  public JoystickButton ManDown;
-
-  public JoystickButton InitProb;
-  public JoystickButton PinchBtn;
-  public JoystickButton Ybtn;
-  public JoystickButton test;
-
-
   public OI(){
    // A =  new JoystickButton(stick, 20);
     //A.whileHeld(new testcommand());

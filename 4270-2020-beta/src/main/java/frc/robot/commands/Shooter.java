@@ -6,14 +6,17 @@ import frc.robot.subsystems.Turret;
 
 public class Shooter extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Shooter m_subsystem;
+    private final Turret m_subsystem;
 
-    @param subsystem 
-
-    public Shooter(Turret) {
+   /**
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+    public Shooter(Turret subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Turret):
+    addRequirements(subsystem);
   }
 
 
@@ -24,35 +27,28 @@ public class Shooter extends CommandBase {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.kvision.areweinrange();
-    Robot.kvision.camencreset();
+  public void execute() {
+    Robot.kTurret.areweinrange();
+    Robot.kTurret.camencreset();
     //Robot.kProbe.probingfunction();
-    Robot.kvision.toggleon();
-    Robot.kvision.shootshoot();
-    Robot.kvision.track();
-    Robot.kvision.camPosReset();
+    Robot.kTurret.toggleon();
+    Robot.kTurret.shootshoot();
+    Robot.kTurret.track();
+    Robot.kTurret.camPosReset();
    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     //Robot.kProbe.switchExtension();
-    Robot.kvision.spinStop();
-    Robot.kvision.unblindMe();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
+    Robot.kTurret.spinStop();
+    Robot.kTurret.unblindMe();
   }
 }

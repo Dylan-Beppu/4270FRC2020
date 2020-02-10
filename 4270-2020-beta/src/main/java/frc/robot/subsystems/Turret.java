@@ -96,7 +96,7 @@ public class Turret extends SubsystemBase {
     ledmode.setDouble(1);
   }
   public void shootshoot(){
-    if(Robot.m_oi.stick.getRawAxis(3) != 0){
+    if(Robot.m_oi.BailysJob.getRawAxis(3) != 0){
       roller.set(1);
     }
     else{
@@ -104,7 +104,7 @@ public class Turret extends SubsystemBase {
     }
   }
   public void camencreset(){
-    if(Robot.OI.stick.getRawButton(9) == true){
+    if(Robot.m_oi.BailysJob.getRawButton(9) == true){
       in.getEncoder().setPosition(0);
     }
     else{
@@ -114,7 +114,7 @@ public class Turret extends SubsystemBase {
   public void camPosReset(){
     in.setIdleMode(IdleMode.kBrake);
     in.getEncoder().getPosition();
-    if(Robot.m_oi.stick.getRawButton(3) == true){
+    if(Robot.m_oi.BailysJob.getRawButton(3) == true){
       if(in.getEncoder().getPosition() > 1){
         in.set(-0.5);
       }
@@ -140,16 +140,16 @@ public class Turret extends SubsystemBase {
     ty = table.getEntry("ty");
     dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()));
     if(dts < 5 && 4 < dts){
-      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 1);
-      Robot.m_oi.stick.setRumble(RumbleType.kRightRumble, 1);
+      Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 1);
+      Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 1);
     }
     else{
-      Robot.m_oi.stick.setRumble(RumbleType.kLeftRumble, 0);
-      Robot.m_oi.stick.setRumble(RumbleType.kRightRumble, 0);
+      Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 0);
+      Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 0);
     }
   }
   public void toggleon(){
-    if(Robot.m_oi.stick.getRawButtonPressed(6)){
+    if(Robot.m_oi.BailysJob.getRawButtonPressed(6)){
       if(togglebtn == true){
       togglebtn = false;
       }
