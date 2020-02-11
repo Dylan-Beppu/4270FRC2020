@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    //container.reset();
     m_oi = new OI();
     container = new RobotContainer();
     RobotMap.init();
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    
   }
 
   /**
@@ -71,6 +73,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    container.reset();
   }
 
   @Override
@@ -91,9 +94,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    //kDrivetrain.resetpos();
     //m_autonomousCommand = m_chooser.getSelected();
     container.reset();
     container.getAutonomousCommand().schedule();
+    
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -134,6 +139,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
+    container.reset();
+    //container.hi();
     
   }
 

@@ -40,6 +40,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.BaseTalonPIDSetConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -64,6 +68,10 @@ import com.kauailabs.navx.frc.AHRS;
 public class Drivetrain extends SubsystemBase {
 
   private static final double kGearRatio = 22; // gear ratio
+  //gear ration goes form motor-> encoder -> first stage 10:1 -> second stage 12:1
+  //first stage 10 to 1
+  //second stage 12 to 1
+
   private static final double kWheelRadiusInches = 2.0;
 
    //Right drive
@@ -92,13 +100,17 @@ public class Drivetrain extends SubsystemBase {
 
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06); 
 
+  
   PIDController leftPIDController = new PIDController(1, 0, 0);
   PIDController rightPIDController = new PIDController(1, 0, 0);
-  
+  //TalonSRXConfiguration leftPIDController = new TalonSRXConfiguration().primaryPID.;
+  //BaseTalonPIDSetConfiguration(QuadEncoder);
+  //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();
+  //configs.primaryPID.selectedFeedbackSensor = TalonSRXFeedbackDevice.QuadEncoder.toFeedbackDevice();
+  //configs.primaryPID.selectedFeedbackSensor = TalonFXFeedbackDevice.IntegratedSensor.toFeedbackDevice();
 
   //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();  
   //TalonSRXPIDSetConfiguration rightPIDController = new TalonSRXPIDSetConfiguration();
-
 
 
   Pose2d pose = new Pose2d();
@@ -131,7 +143,6 @@ public class Drivetrain extends SubsystemBase {
     }
     else{
       rightMaster.set(ControlMode.PercentOutput,0);
-      
     }
   }
 
@@ -142,26 +153,33 @@ public class Drivetrain extends SubsystemBase {
   //leftMaster.getActiveTrajectoryVelocity()
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
-    return new DifferentialDriveWheelSpeeds(
-        leftMaster.getSelectedSensorVelocity()*100 / 201865,  -rightMaster.getSelectedSensorVelocity()*100 / 225433);
+    return  new DifferentialDriveWheelSpeeds(
+        -leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,  
+        rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60);
   }
   public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()*100 / 201865;
+    return -leftMaster.getSelectedSensorPosition()*100 / 201865;
   }
+  //ltixks = 225433
+  //rticks = 201865
   public double getRdistance(){
-    return -rightMaster.getSelectedSensorPosition()*100 / 225433;
+    return rightMaster.getSelectedSensorPosition()*100 / 225433;
   }
   
-
-  public double getLvelocity(){
-
-    return leftMaster.getSelectedSensorVelocity()*100 / 201865;
-    //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+  public void resetpos(){
+    leftMaster.setSelectedSensorPosition(0);
+    rightMaster.setSelectedSensorPosition(0);
   }
 
+  public double getLvelocity(){
+    //leftMaster
+    //return -leftMaster.getSelectedSensorVelocity()*100 / 201865;
+    return leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+  }
+//19.71337890625‬ rotstions to m
   public double getRvelocity(){
-    return -rightMaster.getSelectedSensorVelocity()*100 / 225433;
-    //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+    //return rightMaster.getSelectedSensorVelocity()*100 / 225433;
+    return rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
 
   }
 
@@ -198,7 +216,7 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    pose = odometry.update(getHeading(), getLdistance(), getRdistance());
+    pose = odometry.update(getHeading(), getLvelocity(), getRvelocity());
   }
 
 

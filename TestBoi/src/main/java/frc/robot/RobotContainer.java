@@ -34,7 +34,7 @@ public class RobotContainer {
       
       //pose2d is seting the waypoints, try make diffrent trjectores rather than just one, may need a sepreat file for each one
       Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-          Arrays.asList(new Pose2d(), new Pose2d(2, 0, new Rotation2d())
+          Arrays.asList(new Pose2d(3.221, -1.822, new Rotation2d()), new Pose2d(5.375, -0.739, Rotation2d.fromDegrees(0))
               /*new Pose2d(2, 0, Rotation2d.fromDegrees(0))*/),
           config
       );
@@ -58,5 +58,8 @@ public class RobotContainer {
   
     public void reset() {
       drive.reset();
+    }
+    public void hi(){
+      drive.tank();
     }
   }
