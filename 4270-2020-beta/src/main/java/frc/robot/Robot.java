@@ -16,6 +16,8 @@ import frc.robot.commands.Shooter;
 import frc.robot.subsystems.Turret;
 import frc.robot.commands.Driving;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,10 +31,15 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   public static Turret kTurret = new Turret();
+  public static Intake kIntake = new Intake();
+  public static Index kIndex = new Index();
+  public static Hang kHang = new Hang();
+  public static Spinwheel kSpinwheel = new Spinwheel();
 
   public static OI m_oi;
   RobotContainer container;
   public static Drivetrain kDrivetrain = new Drivetrain();
+  public static double auto;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -45,10 +52,12 @@ public class Robot extends TimedRobot {
     RobotMap.init();
     kDrivetrain = new Drivetrain();
     kTurret = new Turret();
+    kIntake = new Intake();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
-    //m_chooser.addOption("hi", object);
+    //m_chooser.addOption("My Auto", new kDrivetrain.auto1());
+    //SmartDashboard.putData("Auto mode", m_chooser);
+    //m_chooser.addOption("test1", );
+    ////m_chooser.addOption("hi", object);
   }
 
   /**

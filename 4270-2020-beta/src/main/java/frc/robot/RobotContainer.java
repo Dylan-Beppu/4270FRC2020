@@ -20,12 +20,13 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-
+import frc.robot.Robot;
 /**
  * Add your docs here.
  */
 public class RobotContainer {
     private Drivetrain drive = new Drivetrain();
+    
   
     public Command getAutonomousCommand() {
       TrajectoryConfig config = new TrajectoryConfig(

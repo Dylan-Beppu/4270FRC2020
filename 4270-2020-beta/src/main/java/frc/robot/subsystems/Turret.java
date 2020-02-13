@@ -39,6 +39,7 @@ public class Turret extends SubsystemBase {
   public boolean togglebtn;
   private double dts;
   public boolean vib;
+  
   //NetworkTableEntry ty;
 
   
@@ -58,9 +59,11 @@ public class Turret extends SubsystemBase {
   //private double Xangle;
 
 
-  private final CANSparkMax in = RobotMap.visionm;
-  private final CANSparkMax intake = RobotMap.intake;
-  private final CANSparkMax roller = RobotMap.side;
+  private final CANSparkMax Rotateboi = RobotMap.Rotateboi;
+  private final CANSparkMax FLyBoiL = RobotMap.FlyboiL;
+  private final CANSparkMax FLyBoiR = RobotMap.FlyboiR;
+
+  private final CANSparkMax TopIndex = RobotMap.IndexTop;
 
   //private final TalonSRX twist = RobotMap.VisionTurn;
   //private  Xangle = NetworkTableInstance.getDefault().getTable("table").getEntry("<ty>").getValue();
@@ -71,16 +74,16 @@ public class Turret extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void LR(double speed){
-    in.set(speed);
+    Rotateboi.set(speed);
   }
   public void spinL(double speed){
-    in.set(speed);
+    Rotateboi.set(speed);
   }
   public void spinR(double speed){
-    in.set(speed);
+    Rotateboi.set(speed);
   }
   public void spinStop(){
-    in.set(0);
+    Rotateboi.set(0);
   }
   
   public void blindMe(){
@@ -97,38 +100,38 @@ public class Turret extends SubsystemBase {
   }
   public void shootshoot(){
     if(Robot.m_oi.BailysJob.getRawAxis(3) != 0){
-      roller.set(1);
+      TopIndex.set(1);
     }
     else{
-      roller.set(0);
+      TopIndex.set(0);
     }
   }
   public void camencreset(){
     if(Robot.m_oi.BailysJob.getRawButton(9) == true){
-      in.getEncoder().setPosition(0);
+      Rotateboi.getEncoder().setPosition(0);
     }
     else{
 
     }
   }
   public void camPosReset(){
-    in.setIdleMode(IdleMode.kBrake);
-    in.getEncoder().getPosition();
+    Rotateboi.setIdleMode(IdleMode.kBrake);
+    Rotateboi.getEncoder().getPosition();
     if(Robot.m_oi.BailysJob.getRawButton(3) == true){
-      if(in.getEncoder().getPosition() > 1){
-        in.set(-0.5);
+      if(Rotateboi.getEncoder().getPosition() > 1){
+        Rotateboi.set(-0.5);
       }
-      else if(1 > in.getEncoder().getPosition() && in.getEncoder().getPosition() > 0.1){
-        in.set(-in.getEncoder().getPosition()/2);
+      else if(1 > Rotateboi.getEncoder().getPosition() && Rotateboi.getEncoder().getPosition() > 0.1){
+        Rotateboi.set(-Rotateboi.getEncoder().getPosition()/2);
       }
-      else if(in.getEncoder().getPosition() < -1){
-        in.set(0.5);
+      else if(Rotateboi.getEncoder().getPosition() < -1){
+        Rotateboi.set(0.5);
       }
-      else if(in.getEncoder().getPosition() < -0.1 && in.getEncoder().getPosition() > -1){
-        in.set(in.getEncoder().getPosition()/2);
+      else if(Rotateboi.getEncoder().getPosition() < -0.1 && Rotateboi.getEncoder().getPosition() > -1){
+        Rotateboi.set(Rotateboi.getEncoder().getPosition()/2);
       }
       else{
-        in.set(0);
+        Rotateboi.set(0);
       }
     }
   }
@@ -169,15 +172,20 @@ public class Turret extends SubsystemBase {
 
     if(togglebtn == true){
     
-    intake.setOpenLoopRampRate(1);
-    intake.set(1);
-    intake.setIdleMode(IdleMode.kCoast);
+      FLyBoiR.setOpenLoopRampRate(1);
+      FLyBoiR.set(-0.57);
+      FLyBoiR.setIdleMode(IdleMode.kCoast);
+      FLyBoiL.setOpenLoopRampRate(1);
+      FLyBoiL.set(0.57);
+      FLyBoiL.setIdleMode(IdleMode.kCoast);
     blindMe();
     
     }
     else{
       unblindMe();
-      intake.set(0);
+      FLyBoiL.set(0);
+      FLyBoiR.set(0);
+
     }
 
     
@@ -185,11 +193,11 @@ public class Turret extends SubsystemBase {
     //ty = table.getEntry("ty");
     if(tx.getValue().getDouble() <= -1 && togglebtn == true){
       spinL(tx.getValue().getDouble()/-50);
-      //in.set(-speed);
+      //Rotateboi.set(-speed);
       //twist.set(ControlMode.PercentOutput, 0.5);
     }
     else if(tx.getValue().getDouble() >= 1 && togglebtn == true){
-      //in.set(speed);
+      //Rotateboi.set(speed);
       spinR(tx.getValue().getDouble()/-50);
       
       //twist.set(ControlMode.PercentOutput, -0.5);
@@ -197,7 +205,7 @@ public class Turret extends SubsystemBase {
     else{
       spinStop();
       
-      //in.set(0);
+      //Rotateboi.set(0);
       //twist.set(ControlMode.PercentOutput, 0);
     }
   }

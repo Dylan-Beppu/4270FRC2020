@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 //import edu.wpi.first.wpilibj.Talon;
+
 //import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 //import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
@@ -15,7 +16,6 @@ package frc.robot.subsystems;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 //import com.kauailabs.*;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
-
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -40,6 +40,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -67,13 +68,13 @@ public class Drivetrain extends SubsystemBase {
   private static final double kWheelRadiusInches = 2.0;
 
    //Right drive
-  private final WPI_TalonSRX rightMaster = RobotMap.rightdrive1;
+  private final WPI_TalonFX rightMaster = RobotMap.rightdrive1;
   //private final TalonSRX rightSub = RobotMap.rightdrive2;
   //private final CANSparkMax rightMaster = RobotMap.rightdrive1;
 
  
   //Left drive
-  private final WPI_TalonSRX leftMaster = RobotMap.leftdrive1;
+  private final WPI_TalonFX leftMaster = RobotMap.leftdrive1;
   //private final TalonSRX leftSub = RobotMap.leftdrive1;
   //private final CANSparkMax leftMaster = RobotMap.leftdrive1;
   //private final CANEncoder leftCanEncoder = RobotMap.Leftencoder
@@ -99,7 +100,7 @@ public class Drivetrain extends SubsystemBase {
   //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();  
   //TalonSRXPIDSetConfiguration rightPIDController = new TalonSRXPIDSetConfiguration();
 
-
+  double auto = Robot.auto;
 
   Pose2d pose = new Pose2d();
 
@@ -143,24 +144,25 @@ public class Drivetrain extends SubsystemBase {
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-        leftMaster.getSelectedSensorVelocity()*100 / 201865,  -rightMaster.getSelectedSensorVelocity()*100 / 225433);
-  }
+      leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1,  
+      rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1);
+}
   public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()*100 / 201865;
+    return leftMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
   }
   public double getRdistance(){
-    return -rightMaster.getSelectedSensorPosition()*100 / 225433;
+    return rightMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
   }
   
 
   public double getLvelocity(){
 
-    return leftMaster.getSelectedSensorVelocity()*100 / 201865;
+    return leftMaster.getSelectedSensorVelocity()/1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
     //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
   public double getRvelocity(){
-    return -rightMaster.getSelectedSensorVelocity()*100 / 225433;
+    return rightMaster.getSelectedSensorVelocity()/1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
     //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
 
   }
@@ -200,8 +202,24 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     pose = odometry.update(getHeading(), getLdistance(), getRdistance());
   }
-
-
+  public void auto1(){
+    auto = 1;
+  }
+  public void auto2(){
+    auto = 2;
+  }
+  public void auto3(){
+    auto = 3;
+  }
+  public void auto4(){
+    auto = 4;
+  }
+  public void auto5(){
+    auto = 5;
+  }
+  public void auto6(){
+    auto = 6;
+  }
 
   
 }
