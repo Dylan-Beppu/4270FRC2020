@@ -100,7 +100,7 @@ public class Drivetrain extends SubsystemBase {
 
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06); 
 
-  
+
   PIDController leftPIDController = new PIDController(1, 0, 0);
   PIDController rightPIDController = new PIDController(1, 0, 0);
   //TalonSRXConfiguration leftPIDController = new TalonSRXConfiguration().primaryPID.;
@@ -121,9 +121,8 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
     //leftSub.follow(leftMaster);
-    //rightSub.follow(rightMaster);
-
-    //leftMaster.setInverted(true);
+    //rightSub.follow(rightMaster)
+    leftMaster.setInverted(true);
     //rightMaster.setInverted(true);
     
     //Gryo.reset(); //scrued up spelling again LOL
@@ -154,16 +153,16 @@ public class Drivetrain extends SubsystemBase {
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return  new DifferentialDriveWheelSpeeds(
-        -leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,  
-        rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60);
+        leftMaster.getSelectedSensorVelocity() /1024 *600 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 ,  
+        rightMaster.getSelectedSensorVelocity() /1024 *600 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60);
   }
   public double getLdistance(){
-    return -leftMaster.getSelectedSensorPosition()*100 / 201865;
+    return leftMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches));
   }
   //ltixks = 225433
   //rticks = 201865
   public double getRdistance(){
-    return rightMaster.getSelectedSensorPosition()*100 / 225433;
+    return rightMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches));
   }
   
   public void resetpos(){
@@ -174,15 +173,15 @@ public class Drivetrain extends SubsystemBase {
   public double getLvelocity(){
     //leftMaster
     //return -leftMaster.getSelectedSensorVelocity()*100 / 201865;
-    return leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+    return leftMaster.getSelectedSensorVelocity()/1024 *600 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 //19.71337890625‬ rotstions to m
   public double getRvelocity(){
     //return rightMaster.getSelectedSensorVelocity()*100 / 225433;
-    return rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
+    return rightMaster.getSelectedSensorVelocity()/1024 *600 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
 
   }
-
+ 
   public DifferentialDriveKinematics getKinematics() {
     return kinematics;
   }
@@ -205,9 +204,9 @@ public class Drivetrain extends SubsystemBase {
 
   public void setOutputVolts(double leftVolts, double rightVolts) {
     //leftMaster.configVoltageCompSaturation(leftVolts / 12);
-    leftMaster.set(leftVolts / 12);
+    leftMaster.set(leftVolts / 12 *-1);
     //rightMaster.configVoltageCompSaturation(rightVolts / 12);
-    rightMaster.set(rightVolts / 12);
+    rightMaster.set(rightVolts / 12 *-1);
   }
 
   public void reset() {
@@ -216,7 +215,7 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    pose = odometry.update(getHeading(), getLvelocity(), getRvelocity());
+    pose = odometry.update(getHeading(), getLdistance(),getRdistance());
   }
 
 

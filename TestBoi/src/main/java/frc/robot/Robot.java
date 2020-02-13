@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    
     //m_chooser.addOption("hi", object);
   }
 
@@ -94,8 +95,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //kDrivetrain.resetpos();
+    kDrivetrain.resetpos();
     //m_autonomousCommand = m_chooser.getSelected();
+    /*
+    self.chooser = wp.SendableChooser()
+		self.chooser.addDefault("None", 4)
+		self.chooser.addObject("Angle Auto A", 1)
+		self.chooser.addObject("Straight/Enc", 2)
+		self.chooser.addObject("Angle Auto B", 3)
+		self.chooser.addObject("Straight/Timer", 5)
+		wp.SmartDashboard.putData("Choice", self.chooser)
+    */
     container.reset();
     container.getAutonomousCommand().schedule();
     
@@ -140,7 +150,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
     container.reset();
-    //container.hi();
+    container.hi();
     
   }
 

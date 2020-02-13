@@ -29,7 +29,9 @@ public class driving extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.kDrivetrain.shoot();
+    //Robot.kDrivetrain.shoot();
+    Robot.kDrivetrain.topspeed();
+    Robot.kDrivetrain.bottomspeed();
     Robot.kDrivetrain.tank();
     Robot.kDrivetrain.outputToSmartDashboard();
     //Robot.kdrive.findingtiks();

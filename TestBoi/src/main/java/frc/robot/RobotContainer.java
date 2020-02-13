@@ -31,10 +31,10 @@ public class RobotContainer {
       TrajectoryConfig config = new TrajectoryConfig(
           Units.feetToMeters(2.0), Units.feetToMeters(2.0));
       config.setKinematics(drive.getKinematics());
-      
+            
       //pose2d is seting the waypoints, try make diffrent trjectores rather than just one, may need a sepreat file for each one
       Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-          Arrays.asList(new Pose2d(3.221, -1.822, new Rotation2d()), new Pose2d(5.375, -0.739, Rotation2d.fromDegrees(0))
+          Arrays.asList(new Pose2d(), new Pose2d(1, 0, new Rotation2d())
               /*new Pose2d(2, 0, Rotation2d.fromDegrees(0))*/),
           config
       );

@@ -67,6 +67,12 @@ public class drivetrain extends Subsystem {
         set2.set(0);
       }
   }
+  public void topspeed(){
+    set1.set(1);
+  }
+  public void bottomspeed(){
+    set2.set(-1);
+  }
   
   public void tank(){
     if(Math.abs(Robot.m_oi.primaryController.getRawAxis(1)) > deadzoneleft){
