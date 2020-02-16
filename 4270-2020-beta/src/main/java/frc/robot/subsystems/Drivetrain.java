@@ -69,15 +69,12 @@ public class Drivetrain extends SubsystemBase {
 
    //Right drive
   private final WPI_TalonFX rightMaster = RobotMap.rightdrive1;
-  //private final TalonSRX rightSub = RobotMap.rightdrive2;
-  //private final CANSparkMax rightMaster = RobotMap.rightdrive1;
+  private final WPI_TalonFX rightSub = RobotMap.rightdrive2;
 
  
   //Left drive
   private final WPI_TalonFX leftMaster = RobotMap.leftdrive1;
-  //private final TalonSRX leftSub = RobotMap.leftdrive1;
-  //private final CANSparkMax leftMaster = RobotMap.leftdrive1;
-  //private final CANEncoder leftCanEncoder = RobotMap.Leftencoder
+  private final WPI_TalonFX leftSub = RobotMap.leftdrive1;
 
   //private double ticksPerMeater = 213649;
   private double deadzoneleft = 0.1;
@@ -97,9 +94,6 @@ public class Drivetrain extends SubsystemBase {
   PIDController rightPIDController = new PIDController(1, 0, 0);
   
 
-  //TalonSRXPIDSetConfiguration leftPIDController = new TalonSRXPIDSetConfiguration();  
-  //TalonSRXPIDSetConfiguration rightPIDController = new TalonSRXPIDSetConfiguration();
-
   double auto = Robot.auto;
 
   Pose2d pose = new Pose2d();
@@ -109,8 +103,8 @@ public class Drivetrain extends SubsystemBase {
   
 
   public Drivetrain() {
-    //leftSub.follow(leftMaster);
-    //rightSub.follow(rightMaster);
+    leftSub.follow(leftMaster);
+    rightSub.follow(rightMaster);
 
     //leftMaster.setInverted(true);
     //rightMaster.setInverted(true);
@@ -119,20 +113,60 @@ public class Drivetrain extends SubsystemBase {
     Gyro.reset();
   }
 
-  public void tank(){
-    if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
-      leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
-    }
-    else{
-      leftMaster.set(ControlMode.PercentOutput, 0);
-    }
+  public void lowGear(){
+    Robot.kShifter.isfast = false;
+  }
 
-    if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
-      rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));
+  public void highGear(){
+    Robot.kShifter.isfast = true;
+  }
+  public void shift(){
+      if(Robot.m_oi.BailysJob.getRawButtonPressed(5)){
+        if(Robot.kShifter.isfast == true){
+          Robot.kShifter.isfast = false;
+        }
+        else{
+          Robot.kShifter.isfast = true;
+        }
+      }
+    }  
+  public void tank(){
+    if(Robot.kShifter.isfast == true){
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
+        leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
+      }
+      else{
+        leftMaster.set(ControlMode.PercentOutput, 0);
+        //leftSub.set(ControlMode.PercentOutput, 0);
+      }
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));
+        //rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
+      }
+      else{
+        rightMaster.set(ControlMode.PercentOutput,0);
+        //rightSub.set(ControlMode.PercentOutput, 0);
+      }
     }
+    //when slow
     else{
-      rightMaster.set(ControlMode.PercentOutput,0);
-      
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
+        //leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
+      }
+      else{
+        leftMaster.set(ControlMode.PercentOutput, 0);
+        //leftSub.set(ControlMode.PercentOutput, 0);
+      }
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.8);
+        //rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
+      }
+      else{
+        rightMaster.set(ControlMode.PercentOutput,0);
+        //rightSub.set(ControlMode.PercentOutput, 0);
+      } 
     }
   }
 
@@ -144,25 +178,25 @@ public class Drivetrain extends SubsystemBase {
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-      leftMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1,  
-      rightMaster.getSelectedSensorVelocity()*100 /1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1);
+      leftMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1,  
+      rightMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1);
 }
   public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
+    return leftMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
   }
   public double getRdistance(){
-    return rightMaster.getSelectedSensorPosition()/1024 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
+    return rightMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
   }
   
 
   public double getLvelocity(){
 
-    return leftMaster.getSelectedSensorVelocity()/1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
+    return leftMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
     //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
   public double getRvelocity(){
-    return rightMaster.getSelectedSensorVelocity()/1024 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
+    return rightMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
     //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
 
   }
@@ -190,8 +224,10 @@ public class Drivetrain extends SubsystemBase {
   public void setOutputVolts(double leftVolts, double rightVolts) {
     //leftMaster.configVoltageCompSaturation(leftVolts / 12);
     leftMaster.set(leftVolts / 12);
+    //leftSub.set(leftVolts / 12);
     //rightMaster.configVoltageCompSaturation(rightVolts / 12);
     rightMaster.set(rightVolts / 12);
+    //rightSub.set(rightVolts / 12);    
   }
 
   public void reset() {
@@ -202,6 +238,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     pose = odometry.update(getHeading(), getLdistance(), getRdistance());
   }
+
   public void auto1(){
     auto = 1;
   }

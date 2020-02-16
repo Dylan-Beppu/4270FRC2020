@@ -60,4 +60,8 @@ public class RobotContainer {
     public void reset() {
       drive.reset();
     }
+    public void hi(){
+      drive.tank();
+      drive.shift();
+    }
   }

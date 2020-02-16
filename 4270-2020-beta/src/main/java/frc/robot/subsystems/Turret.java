@@ -64,7 +64,7 @@ public class Turret extends SubsystemBase {
   private final CANSparkMax FLyBoiR = RobotMap.FlyboiR;
 
   private final CANSparkMax TopIndex = RobotMap.IndexTop;
-
+  private double turretENCoffset;
   //private final TalonSRX twist = RobotMap.VisionTurn;
   //private  Xangle = NetworkTableInstance.getDefault().getTable("table").getEntry("<ty>").getValue();
   //private frc.robot.driver.Limelight.;
@@ -114,11 +114,14 @@ public class Turret extends SubsystemBase {
 
     }
   }
+  //turet max allowed 90deg
+  //turet absolute max 100-105 deg
   public void camPosReset(){
     Rotateboi.setIdleMode(IdleMode.kBrake);
     Rotateboi.getEncoder().getPosition();
+    turretENCoffset = 1;
     if(Robot.m_oi.BailysJob.getRawButton(3) == true){
-      if(Rotateboi.getEncoder().getPosition() > 1){
+      if(Rotateboi.getEncoder().getPosition() > 1 - turretENCoffset){
         Rotateboi.set(-0.5);
       }
       else if(1 > Rotateboi.getEncoder().getPosition() && Rotateboi.getEncoder().getPosition() > 0.1){
@@ -135,6 +138,7 @@ public class Turret extends SubsystemBase {
       }
     }
   }
+
   public void areweinrange(){
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("limelight");

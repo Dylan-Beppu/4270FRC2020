@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
   public static Index kIndex = new Index();
   public static Hang kHang = new Hang();
   public static Spinwheel kSpinwheel = new Spinwheel();
+  public static Shifter kShifter = new Shifter();
 
   public static OI m_oi;
   RobotContainer container;
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
     kDrivetrain = new Drivetrain();
     kTurret = new Turret();
     kIntake = new Intake();
+    kShifter = new Shifter();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //m_chooser.addOption("My Auto", new kDrivetrain.auto1());
     //SmartDashboard.putData("Auto mode", m_chooser);
@@ -81,6 +83,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    container.reset();
   }
 
   @Override
@@ -92,7 +95,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    container.reset();
+    kDrivetrain.lowGear();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -123,6 +129,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    container.reset();
+    container.hi();
   }
 
   @Override
