@@ -52,11 +52,12 @@ public class Robot extends TimedRobot {
 
     /* Talon FXs to play music through.  
     More complex music MIDIs will contain several tracks, requiring multiple instruments.  */
-    TalonFX [] _fxes =  { new TalonFX(1), new TalonFX(2) };
+    TalonFX [] _fxes =  { new TalonFX(1), new TalonFX(2), new TalonFX(3), new TalonFX(4) };
 
     /* An array of songs that are available to be played, can you guess the song/artists? */
   String[] _songs = new String[] {
     "Impereal.chrp",
+    "Nokia",
 
   };
 
