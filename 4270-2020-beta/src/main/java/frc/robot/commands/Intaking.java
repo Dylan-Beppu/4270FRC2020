@@ -6,17 +6,12 @@ import frc.robot.subsystems.Intake;
 
 public class Intaking extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Intake m_subsystem;
+    private final Intake kIntake;
 
-   /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
     public Intaking(Intake subsystem) {
-    m_subsystem = subsystem;
+    kIntake = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kIntake);
   }
 
 

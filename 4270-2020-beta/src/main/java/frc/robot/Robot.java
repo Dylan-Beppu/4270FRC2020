@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -12,10 +5,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.Shooter;
-import frc.robot.subsystems.Turret;
 import frc.robot.commands.Driving;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -30,17 +22,25 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   private RobotContainer m_robotContainer;
-  public static Turret kTurret = new Turret();
-  public static Intake kIntake = new Intake();
-  public static Index kIndex = new Index();
-  public static Hang kHang = new Hang();
-  public static Spinwheel kSpinwheel = new Spinwheel();
-  public static Shifter kShifter = new Shifter();
 
   public static OI m_oi;
   RobotContainer container;
   public static Drivetrain kDrivetrain = new Drivetrain();
   public static double auto;
+
+  public static Index kIndex = new Index();
+  public static Indexing kIndexing = new Indexing(kIndex);
+  public static Turret kTurret = new Turret();
+  public static Shooter kShooter = new Shooter(kTurret);
+  public static Intake kIntake = new Intake();
+  public static Intaking kIntaking = new Intaking(kIntake);
+  public static Shifter kShifter = new Shifter();
+  public static Fast kFast = new Fast(kShifter);
+  public static Hang kHang = new Hang();
+  public static Hanging kHanging = new Hanging(kHang);
+  public static Spinwheel kSpinwheel = new Spinwheel();
+  public static Spinwheeling kSpinwheeling = new Spinwheeling(kSpinwheel);
+    
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,10 +51,17 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     container = new RobotContainer();
     RobotMap.init();
-    kDrivetrain = new Drivetrain();
-    kTurret = new Turret();
-    kIntake = new Intake();
-    kShifter = new Shifter();
+    kShooter.schedule();
+    kIntaking.schedule();
+    kIndexing.schedule();
+    kFast.schedule();
+    kHanging.schedule();
+    kSpinwheeling.schedule();
+    //kShooter = new Shooter(kTurret);
+    //kDrivetrain = new Drivetrain();
+    
+    //kIntake = new Intake();
+    //kShifter = new Shifter();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //m_chooser.addOption("My Auto", new kDrivetrain.auto1());
     //SmartDashboard.putData("Auto mode", m_chooser);
@@ -76,6 +83,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    //kShooter.schedule();
+
   }
 
   /**
@@ -96,7 +105,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     container.reset();
-    kDrivetrain.lowGear();
+    //kDrivetrain.lowGear();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
 
@@ -129,8 +138,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
     container.reset();
     container.hi();
+
+    //robot.commands.Shooter();
+
+    
   }
 
   @Override

@@ -1,28 +1,28 @@
 package frc.robot.commands;
 
+import java.util.Set;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.Turret;
 
+//for help with the new way https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html
+//if the can bus isent compleat, neos wornt work!!! But talonfx might :)
 public class Shooter extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Turret m_subsystem;
-
-   /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-    public Shooter(Turret subsystem) {
-    m_subsystem = subsystem;
+  private final Turret kTurret;
+    
+  public Shooter(Turret subsystem) {
+    kTurret = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kTurret);
   }
 
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,11 +30,10 @@ public class Shooter extends CommandBase {
   public void execute() {
     Robot.kTurret.areweinrange();
     Robot.kTurret.camencreset();
-    //Robot.kProbe.probingfunction();
     Robot.kTurret.toggleon();
     Robot.kTurret.shootshoot();
     Robot.kTurret.track();
-    Robot.kTurret.camPosReset();
+    //Robot.kTurret.camPosReset();
    
   }
 

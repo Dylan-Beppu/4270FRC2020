@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 //import edu.wpi.first.wpilibj.Talon;
@@ -77,8 +70,8 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX leftSub = RobotMap.leftdrive1;
 
   //private double ticksPerMeater = 213649;
-  private double deadzoneleft = 0.1;
-  private double deadzoneright = 0.1;
+  private double deadzoneleft = 0.18;
+  private double deadzoneright = 0.18;
   
   private AHRS Gyro = RobotMap.gyro;
 
@@ -138,34 +131,31 @@ public class Drivetrain extends SubsystemBase {
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
-        //leftSub.set(ControlMode.PercentOutput, 0);
+        leftSub.set(ControlMode.PercentOutput, 0);
       }
       if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
         rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));
-        //rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
-        //rightSub.set(ControlMode.PercentOutput, 0);
+        rightSub.set(ControlMode.PercentOutput, 0);
       }
     }
     //when slow
     else{
       if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
         leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
-        //leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
-        //leftSub.set(ControlMode.PercentOutput, 0);
+        leftSub.set(ControlMode.PercentOutput, 0);
       }
       if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
         rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.8);
-        //rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
-        //rightSub.set(ControlMode.PercentOutput, 0);
+        rightSub.set(ControlMode.PercentOutput, 0);
       } 
     }
   }

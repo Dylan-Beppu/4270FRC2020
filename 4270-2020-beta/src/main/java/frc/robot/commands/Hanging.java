@@ -6,17 +6,12 @@ import frc.robot.subsystems.Hang;
 
 public class Hanging extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Hang m_subsystem;
+    private final Hang kHang;
 
-   /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
     public Hanging(Hang subsystem) {
-    m_subsystem = subsystem;
+    kHang = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kHang);
   }
 
 

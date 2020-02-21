@@ -6,17 +6,12 @@ import frc.robot.subsystems.Index;
 
 public class Indexing extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Index m_subsystem;
+    private final Index kIndex;
 
-   /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
     public Indexing(Index subsystem) {
-    m_subsystem = subsystem;
+    kIndex = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kIndex);
   }
 
 
@@ -28,7 +23,7 @@ public class Indexing extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.kIndex.index();
+   // Robot.kIndex.index();
   }
 
   // Make this return true when this Command no longer needs to run execute()

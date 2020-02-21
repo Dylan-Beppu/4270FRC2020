@@ -16,20 +16,20 @@ import frc.robot.RobotMap;
 
 public class Spinwheel extends SubsystemBase {
 
-  private final CANSparkMax R2D2 = RobotMap.spin1;
+  private final CANSparkMax R2D2 = RobotMap.Endgame;
 
 
-  private final ColorSensorV3 colorSensor = RobotMap.colorSensor;
-  private final ColorMatch colorMatcher = RobotMap.colorMatcher;
+  //private final ColorSensorV3 colorSensor = RobotMap.colorSensor;
+  //private final ColorMatch colorMatcher = RobotMap.colorMatcher;
 
-  private final Color kBlueTarget = RobotMap.kBlueTarget;
-  private final Color kGreenTarget = RobotMap.kGreenTarget;
-  private final Color kRedTarget = RobotMap.kRedTarget;
-  private final Color kYellowTarget = RobotMap.kYellowTarget;
+  //private final Color kBlueTarget = RobotMap.kBlueTarget;
+  //private final Color kGreenTarget = RobotMap.kGreenTarget;
+  //private final Color kRedTarget = RobotMap.kRedTarget;
+  //private final Color kYellowTarget = RobotMap.kYellowTarget;
 
-  Color detectedColor = colorSensor.getColor();
+  //Color detectedColor = colorSensor.getColor();
   String colorString;
-  ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+  //ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
   double counter1;
   double Tempcolor;
 
@@ -71,7 +71,7 @@ public class Spinwheel extends SubsystemBase {
 
   }
 
-  public void RotateToColor(Color Colorval){
+  /*public void RotateToColor(Color Colorval){
     if(match.color == Colorval){
       R2D2.set(0);
     }
@@ -109,16 +109,13 @@ public class Spinwheel extends SubsystemBase {
       colorString = "Unknown";
     }
 
-    /**
-     * Open Smart Dashboard or Shuffleboard to see the color detected by the 
-     * sensor.
-     */
+    Open Smart Dashboard or Shuffleboard to see the color detected by the sensor.
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
-  }
+  }*/
 
   @Override
   public void periodic() {

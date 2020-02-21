@@ -8,7 +8,7 @@ import frc.robot.RobotMap;
 
 public class Index extends SubsystemBase {
   private final CANSparkMax IndexBottom = RobotMap.IndexBottom;
-  private final CANSparkMax IndexTop = RobotMap.IndexTop;
+  //private final CANSparkMax IndexTop = RobotMap.Topin;
 
 
   public void IndexFill(double speed){
@@ -18,20 +18,22 @@ public class Index extends SubsystemBase {
     else{
       IndexBottom.set(1);
     }*/
-    IndexBottom.set(speed);
+    //IndexBottom.set(speed);
   }
   public void index(){
-    if(Robot.m_oi.BailysJob.getRawButtonPressed(1) == true){
-      IndexFill(1);
+    if(Robot.m_oi.BailysJob.getRawAxis(2) != 0){
+      RobotMap.LeftIntake.set(0.5);
+      //IndexFill(1);
     }
     else {
-      IndexBottom.set(0);
+      //IndexBottom.set(0);
+      RobotMap.LeftIntake.set(0);
     }
   }
 
  public void IndexStop(){
-  IndexBottom.set(0);
-  IndexTop.set(0);
+  //IndexBottom.set(0);
+  RobotMap.LeftIntake.set(0);
  }
 
 

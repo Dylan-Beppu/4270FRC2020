@@ -3,32 +3,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.subsystems.Shifter;;
+import frc.robot.subsystems.Shifter;
 
 public class Fast extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Shifter m_subsystem;
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
+    private final Shifter kShifter;
+
   public Fast(Shifter subsystem) {
-    m_subsystem = subsystem;
+    kShifter = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kShifter);
   }
   
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
+      //sets to low gear
+      //kShifter.isfast = false;
+      //kShifter.slow();
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.kShifter.fast();
-    Robot.kShifter.isfast = false;
+    //kShifter.fast();
+    
   }
 
     // Make this return true when this Command no longer needs to run execute()

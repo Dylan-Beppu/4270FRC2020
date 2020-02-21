@@ -8,18 +8,26 @@ import frc.robot.RobotMap;
 import frc.robot.commands.Fast;
 
 public class Shifter extends SubsystemBase {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
   private final DoubleSolenoid speedsole = RobotMap.shifter;
+  private final DoubleSolenoid Armsole = RobotMap.arm;
 
   public boolean isfast;
 
+  //drive gearig
   public void fast(){
     speedsole.set(DoubleSolenoid.Value.kForward);
   }
 
   public void slow(){
     speedsole.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void IntakeDown(){
+    Armsole.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void IntakeUp(){
+    Armsole.set(DoubleSolenoid.Value.kReverse);
   }
 
 }

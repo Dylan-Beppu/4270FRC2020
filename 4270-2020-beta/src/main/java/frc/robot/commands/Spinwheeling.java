@@ -1,13 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+//import frc.robot.Robot;
+//import frc.robot.RobotMap;
 import frc.robot.subsystems.Spinwheel;;
 
 public class Spinwheeling extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Spinwheel m_subsystem;
+    private final Spinwheel kSpinwheel;
 
    /**
    * Creates a new ExampleCommand.
@@ -15,9 +15,9 @@ public class Spinwheeling extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
     public Spinwheeling(Spinwheel subsystem) {
-    m_subsystem = subsystem;
+    kSpinwheel = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kSpinwheel);
   }
 
 
@@ -29,7 +29,7 @@ public class Spinwheeling extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.kSpinwheel.colorDectect();
+    //Robot.kSpinwheel.colorDectect();
    
   }
 
