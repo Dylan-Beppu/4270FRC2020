@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Transform2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -51,27 +53,10 @@ public class RobotContainer {
   // by the selector method at runtime.  Note that selectcommand works on Object(), so the
   // selector does not have to be an enum; it could be any desired type (string, integer,
   // boolean, double...)
-  private final Command m_exampleSelectCommand =
-      new SelectCommand(
-          // Maps selector values to commands
-          Map.ofEntries(
-              entry(CommandSelector.Red1, new PrintCommand("Command one was selected!")),
-              entry(CommandSelector.Red2, new PrintCommand("Command two was selected!")),
-              entry(CommandSelector.Blue1, new PrintCommand("Command three was selected!")),
-              entry(CommandSelector.Blue2, new PrintCommand("Command three was selected!"))
-          ),
-          this::select
-      );
 
     public RobotContainer(){
       
-    /* String trajectoryJSON = "paths/YOURPATH.wpilib.json";
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-    } catch (IOException ex){
-      DriverStation.reportError("Unable to open trajectory:" + trajectoryJSON, ex.getStackTrace());
-    }*/
+    
     //Transform2d transform = new Pose2d(4,4, Rotation2d.fromDegrees(50)).minus(trajectory.getInitialPose());
     //Trajectory newTrajectory = trajectory.transformBy(transform);
     }
@@ -79,25 +64,24 @@ public class RobotContainer {
     
 
     public Command getAutonomousCommand() {
-      return m_exampleSelectCommand;
-
-      //if(select().valueOf("Red1") = CommandSelector.Red1){
-//
-      //}
-    }
-
     
-    public Command pathing(){
       TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(2.0), Units.feetToMeters(2.0));
       config.setKinematics(drive.getKinematics());
       
       //pose2d is seting the waypoints, try make diffrent trjectores rather than just one, may need a sepreat file for each one
       //or change it to pathweaver paths
-      Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-          Arrays.asList(new Pose2d(), new Pose2d(2, 0, new Rotation2d())
-              /*new Pose2d(2, 0, Rotation2d.fromDegrees(0))*/),
-          config
-      );
+    String trajectoryJSON = "paths/3ball1.json";
+    //Trajectory trajectory = null;
+    Trajectory trajectory = new Trajectory(new ArrayList<Trajectory.State>());
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+      SmartDashboard.putBoolean("haspathbeenfound", true);
+    } catch (IOException ex){
+      DriverStation.reportError("Unable to open trajectory:" + trajectoryJSON, ex.getStackTrace());
+      SmartDashboard.putBoolean("haspathbeenfound", false);
+    }
+    
       
       RamseteCommand command = new RamseteCommand(
           trajectory,
@@ -116,12 +100,12 @@ public class RobotContainer {
       return command.andThen(() -> drive.setOutputVolts(0, 0));
     }
   
+  
     public void reset() {
       drive.reset();
     }
     public void hi(){
       drive.tank();
-      
       // kShooter.schedule();
       ///kShooter.execute();
       //drive.shift();

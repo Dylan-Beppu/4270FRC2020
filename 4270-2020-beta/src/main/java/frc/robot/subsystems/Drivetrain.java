@@ -87,7 +87,7 @@ public class Drivetrain extends SubsystemBase {
   PIDController rightPIDController = new PIDController(1, 0, 0);
   
 
-  double auto = Robot.auto;
+
 
   Pose2d pose = new Pose2d();
 
@@ -227,25 +227,4 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     pose = odometry.update(getHeading(), getLdistance(), getRdistance());
   }
-
-  public void auto1(){
-    auto = 1;
-  }
-  public void auto2(){
-    auto = 2;
-  }
-  public void auto3(){
-    auto = 3;
-  }
-  public void auto4(){
-    auto = 4;
-  }
-  public void auto5(){
-    auto = 5;
-  }
-  public void auto6(){
-    auto = 6;
-  }
-
-  
 }

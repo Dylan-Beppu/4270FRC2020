@@ -67,7 +67,7 @@ public class Turret extends SubsystemBase {
   private final CANSparkMax Rotateboi = RobotMap.Rotateboi;
   private final CANSparkMax FLyBoiL = RobotMap.FlyboiL;
 
-  //private final CANSparkMax TopIndex = RobotMap.Topin;
+  private final CANSparkMax Topin = RobotMap.Topin;
   private final CANSparkMax Bindex = RobotMap.IndexBottom;
   double turretENCoffset;
   
@@ -193,21 +193,17 @@ public class Turret extends SubsystemBase {
     
       RobotMap.FlyboiR.setOpenLoopRampRate(0.7);
       RobotMap.FlyboiR.set(0.62);
-      RobotMap.FlyboiR.setIdleMode(IdleMode.kCoast);
       RobotMap.FlyboiL.setOpenLoopRampRate(0.7);
       RobotMap.FlyboiL.set(-0.62);
-      RobotMap.FlyboiL.setIdleMode(IdleMode.kCoast);
-      RobotMap.Topin.set(-1);
-      RobotMap.Topin.setIdleMode(IdleMode.kCoast);
+      Topin.set(-1);
     blindMe();
     
     }
-    else{
+    else if(togglebtn == false){
       unblindMe();
       FLyBoiL.set(0);
       FLyBoiR.set(0);
-      RobotMap.Topin.set(0);
-
+      Topin.set(0);
     }
 
     

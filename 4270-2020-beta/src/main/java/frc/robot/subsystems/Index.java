@@ -8,7 +8,6 @@ import frc.robot.RobotMap;
 
 public class Index extends SubsystemBase {
   //private final CANSparkMax IndexBottom = RobotMap.IndexBottom;
-  //private final CANSparkMax IndexTop = RobotMap.Topin;
 
 
   public void IndexFill(double speed){

@@ -148,7 +148,6 @@ public class Robot extends TimedRobot {
     Auto autoSel = AutoSelect.getSelected();
     if(autoSel == Auto.ball6){
       
-      //SequentialCommandGroup();
     }
     else if(autoSel == Auto.ball6){
 

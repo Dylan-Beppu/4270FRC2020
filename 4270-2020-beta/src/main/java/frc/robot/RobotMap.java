@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.util.Color;
 
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
@@ -92,8 +93,11 @@ public class RobotMap {
   
   public static void init(){
     rightdrive1.setInverted(true);
-    leftdrive1.setInverted(false);
     rightdrive2.setInverted(true);
+    leftdrive1.setInverted(false);
     leftdrive2.setInverted(false);
+    Topin.setIdleMode(IdleMode.kCoast);
+    RobotMap.FlyboiL.setIdleMode(IdleMode.kCoast);
+    RobotMap.FlyboiR.setIdleMode(IdleMode.kCoast);
   }
 }
