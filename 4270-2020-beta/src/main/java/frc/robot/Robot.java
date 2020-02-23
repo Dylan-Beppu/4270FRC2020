@@ -1,10 +1,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.Shooter;
 import frc.robot.commands.Driving;
@@ -18,15 +24,21 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+   private Command m_autonomousCommand;
+  
+  Command autonomusCommand;
+  SendableChooser<Auto> AutoSelect;
+  SendableChooser<Command> command = new SendableChooser<>();
+  
+  public enum Auto {
+		ball6, ball9, none, test1, test2;
+  }
+  
   private RobotContainer m_robotContainer;
 
   public static OI m_oi;
   RobotContainer container;
   public static Drivetrain kDrivetrain = new Drivetrain();
-  public static double auto;
 
   public static Index kIndex = new Index();
   public static Indexing kIndexing = new Indexing(kIndex);
@@ -51,12 +63,18 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     container = new RobotContainer();
     RobotMap.init();
-    kShooter.schedule();
-    kIntaking.schedule();
-    kIndexing.schedule();
-    kFast.schedule();
-    kHanging.schedule();
-    kSpinwheeling.schedule();
+    AutoSelect = new SendableChooser<>();
+    SendableRegistry.setName(AutoSelect, "AutoSelect");
+    Shuffleboard.getTab("Autonomous").add(AutoSelect).withWidget(BuiltInWidgets.kSplitButtonChooser);
+    AutoSelect.addOption("6 ball auto", Auto.ball6);
+    AutoSelect.addOption("9 ball auto", Auto.ball9);
+    AutoSelect.addOption("no auto", Auto.none);
+    AutoSelect.addOption("drive straite test", Auto.test1);
+    AutoSelect.addOption("s curve test", Auto.test2);
+
+    //SmartDashboard
+    //positionChooser.setName("pos");
+
     //kShooter = new Shooter(kTurret);
     //kDrivetrain = new Drivetrain();
     
@@ -64,11 +82,12 @@ public class Robot extends TimedRobot {
     //kShifter = new Shifter();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //m_chooser.addOption("My Auto", new kDrivetrain.auto1());
+    //Command autonomousCommand;
     //SmartDashboard.putData("Auto mode", m_chooser);
-    //m_chooser.addOption("test1", );
-    ////m_chooser.addOption("hi", object);
   }
-
+  
+  
+  SendableChooser<Command> chooser = new SendableChooser<>();
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
@@ -83,6 +102,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    
     //kShooter.schedule();
 
   }
@@ -93,6 +113,9 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     container.reset();
+    AutoSelect = new SendableChooser<>();
+		//positionChooser.setName("Position");
+
   }
 
   @Override
@@ -121,7 +144,28 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
+  public void buildAutonomous(){
+    Auto autoSel = AutoSelect.getSelected();
+    if(autoSel == Auto.ball6){
+      
+      //SequentialCommandGroup();
+    }
+    else if(autoSel == Auto.ball6){
 
+    }
+    else if(autoSel == Auto.ball9){
+
+    }
+    else if(autoSel == Auto.none){
+
+    }
+    else if(autoSel == Auto.test1){
+
+    }
+    else if(autoSel == Auto.test2){
+
+    }
+  }
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
@@ -130,6 +174,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      
     }
   }
 
@@ -138,10 +183,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
     container.reset();
     container.hi();
-
+    kShooter.schedule();
+    kIntaking.schedule();
+    kIndexing.schedule();
+    kFast.schedule();
+    //kHanging.schedule();
+    //kSpinwheeling.schedule();
     //robot.commands.Shooter();
 
     
