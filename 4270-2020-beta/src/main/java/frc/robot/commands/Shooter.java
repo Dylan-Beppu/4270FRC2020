@@ -31,7 +31,7 @@ public class Shooter extends CommandBase {
     Robot.kTurret.areweinrange();
     Robot.kTurret.camencreset();
     Robot.kTurret.toggleon();
-    Robot.kTurret.shootshoot();
+    //Robot.kTurret.shootshoot();
     Robot.kTurret.track();
     //Robot.kTurret.camPosReset();
    

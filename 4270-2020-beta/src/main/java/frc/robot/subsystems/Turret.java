@@ -106,7 +106,7 @@ public class Turret extends SubsystemBase {
     ledmode.setDouble(1);
   }
 
-  public void shootshoot(){
+  /*public void shootshoot(){
     if(Robot.m_oi.BailysJob.getRawAxis(3) != 0){
       RobotMap.CenterIntake.set(0.5);
       Bindex.set(-0.7);
@@ -115,7 +115,7 @@ public class Turret extends SubsystemBase {
       Bindex.set(0);
       RobotMap.CenterIntake.set(0);
     }
-  }
+  }*/
   
   public void camencreset(){
     if(Robot.m_oi.BailysJob.getRawButton(9) == true){

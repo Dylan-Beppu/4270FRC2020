@@ -75,8 +75,8 @@ public class RobotMap {
   //public static final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   //beam brake
-  //public static DigitalInput BeamBrakeTop = new DigitalInput(0);
-  //public static DigitalInput BeamBrakeBotom = new DigitalInput(1);
+  public static DigitalInput BeamBrakeTop = new DigitalInput(0);
+  public static DigitalInput BeamBrakeBotom = new DigitalInput(1);
 
 
   //pneumatics stuff
