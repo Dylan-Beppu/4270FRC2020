@@ -1,17 +1,17 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.*;
+//import com.revrobotics.*;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.jni.CANSparkMaxJNI;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+//import com.revrobotics.jni.CANSparkMaxJNI;
+//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 //import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
+//import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
 //import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +27,7 @@ import frc.robot.RobotMap;
 //import frc.robot.commands.Visiontest;
 //import frc.robot.driver.Limelight;
 //import frc.robot.OI;
-import frc.robot.commands.Shooter;
+//import frc.robot.commands.Shooter;
 
 
 /**
@@ -67,7 +67,7 @@ public class Turret extends SubsystemBase {
   private final CANSparkMax Rotateboi = RobotMap.Rotateboi;
   private final CANSparkMax FLyBoiL = RobotMap.FlyboiL;
 
-  private final CANSparkMax TopIndex = RobotMap.Topin;
+  //private final CANSparkMax TopIndex = RobotMap.Topin;
   private final CANSparkMax Bindex = RobotMap.IndexBottom;
   double turretENCoffset;
   
@@ -215,11 +215,11 @@ public class Turret extends SubsystemBase {
     //ty = table.getEntry("ty");&& Rotateboi.getEncoder().getPosition() < 21 && Rotateboi.getEncoder().getPosition() > -21
     if(tx.getValue().getDouble() <= -0.5 && togglebtn == true ){
       //spinL(tx.getValue().getDouble()/-30);
-      //Rotateboi.set(-0.5);
+      Rotateboi.set(-0.5);
       //twist.set(ControlMode.PercentOutput, 0.5);&& Rotateboi.getEncoder().getPosition() < 21 && Rotateboi.getEncoder().getPosition() > -21
     }
     else if(tx.getValue().getDouble() >= 0.5 && togglebtn == true ){
-      //Rotateboi.set(0.5);
+      Rotateboi.set(0.5);
       //spinR(tx.getValue().getDouble()/ 30);
       
       //twist.set(ControlMode.PercentOutput, -0.5);

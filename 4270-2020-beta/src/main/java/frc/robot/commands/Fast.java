@@ -6,12 +6,10 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Shifter;
 
 public class Fast extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Shifter kShifter;
 
   public Fast(Shifter subsystem) {
     kShifter = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kShifter);
   }
   
@@ -19,14 +17,15 @@ public class Fast extends CommandBase {
     @Override
     public void initialize() {
       //sets to low gear
-      //kShifter.isfast = false;
-      //kShifter.slow();
+      kShifter.isfast = false;
+      kShifter.slow();
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    //kShifter.fast();
+    kShifter.fast();
+    kShifter.Intakeppos();
     
   }
 

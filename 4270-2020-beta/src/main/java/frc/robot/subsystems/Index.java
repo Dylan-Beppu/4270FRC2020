@@ -7,7 +7,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Index extends SubsystemBase {
-  private final CANSparkMax IndexBottom = RobotMap.IndexBottom;
+  //private final CANSparkMax IndexBottom = RobotMap.IndexBottom;
   //private final CANSparkMax IndexTop = RobotMap.Topin;
 
 
@@ -22,7 +22,7 @@ public class Index extends SubsystemBase {
   }
   public void index(){
     if(Robot.m_oi.BailysJob.getRawAxis(2) != 0){
-      RobotMap.LeftIntake.set(0.5);
+      RobotMap.LeftIntake.set(-1);
       //IndexFill(1);
     }
     else {
