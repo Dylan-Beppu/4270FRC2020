@@ -96,12 +96,12 @@ public class Drivetrain extends SubsystemBase {
   
 
   public Drivetrain() {
-    leftSub.follow(leftMaster);
-    rightSub.follow(rightMaster);
+    //leftSub.follow(leftMaster);
+    //rightSub.follow(rightMaster);
 
     //leftMaster.setInverted(true);
     //rightMaster.setInverted(true);
-    
+
     //Gryo.reset(); //scrued up spelling again LOL
     Gyro.reset();
   }
@@ -125,15 +125,18 @@ public class Drivetrain extends SubsystemBase {
     }  
   public void tank(){
     if(Robot.kShifter.isfast == true){
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, -Robot.m_oi.BailysJob.getRawAxis(5));
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.9);
+         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.9);
+
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, -Robot.m_oi.BailysJob.getRawAxis(1));
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.9);
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.9);
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
@@ -142,15 +145,17 @@ public class Drivetrain extends SubsystemBase {
     }
     //when slow
     else{
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, -Robot.m_oi.BailysJob.getRawAxis(5)*0.8);
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
+        leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1));
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, -Robot.m_oi.BailysJob.getRawAxis(1)*0.8);
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));      
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
@@ -213,10 +218,10 @@ public class Drivetrain extends SubsystemBase {
   public void setOutputVolts(double leftVolts, double rightVolts) {
     //leftMaster.configVoltageCompSaturation(leftVolts / 12);
     leftMaster.set(leftVolts / 12);
-    //leftSub.set(leftVolts / 12);
+    leftSub.set(leftVolts / 12);
     //rightMaster.configVoltageCompSaturation(rightVolts / 12);
     rightMaster.set(rightVolts / 12);
-    //rightSub.set(rightVolts / 12);    
+    rightSub.set(rightVolts / 12);    
   }
 
   public void reset() {

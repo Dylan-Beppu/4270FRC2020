@@ -29,7 +29,7 @@ public class Shooter extends CommandBase {
   @Override
   public void execute() {
     Robot.kTurret.areweinrange();
-    Robot.kTurret.camencreset();
+    //Robot.kTurret.camencreset();
     Robot.kTurret.toggleon();
     //Robot.kTurret.shootshoot();
     Robot.kTurret.track();

@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
   private final Shifter kShifter = Robot.kShifter;
   
   public void intakeMan() {
-    if(Robot.m_oi.BailysJob.getRawButton(5) == true){
+    if(Robot.m_oi.BtnPanle.getRawButton(1) == true){
       Intake.set(-1); 
        
       //kShifter.IntakeDown();
@@ -29,7 +29,7 @@ public class Intake extends SubsystemBase {
 
   public void intakeAuto(double speed, boolean Down) {
     if(Down == true){
-      Intake.set(-1);
+      Intake.set(-0.8);
       //kShifter.IntakeDown();
     }
     else if(Down == false){

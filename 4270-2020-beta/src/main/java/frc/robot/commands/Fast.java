@@ -19,13 +19,17 @@ public class Fast extends CommandBase {
       //sets to low gear
       kShifter.isfast = false;
       kShifter.slow();
+      kShifter.realese1();
+    //kShifter.IntakeUp();
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    kShifter.fast();
+    kShifter.shifter ();
     kShifter.Intakeppos();
+    kShifter.realese();
+    //kShifter.turrthood(); 
     
   }
 

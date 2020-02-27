@@ -10,6 +10,7 @@ import com.revrobotics.*;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.jni.CANSparkMaxJNI;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 //import com.ctre.phoenix.*;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -17,7 +18,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.*;
 
-//import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.util.Color;
 
@@ -38,12 +38,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  */
 public class RobotMap {
  //Right drive
-  public static WPI_TalonFX rightdrive1 = new WPI_TalonFX(1);
-  public static WPI_TalonFX rightdrive2 = new WPI_TalonFX(2);
+  public static WPI_TalonFX rightdrive1 = new WPI_TalonFX(3);
+  public static WPI_TalonFX rightdrive2 = new WPI_TalonFX(4);
 
   //Left drive
-  public static WPI_TalonFX leftdrive1 = new WPI_TalonFX(3);
-  public static WPI_TalonFX leftdrive2 = new WPI_TalonFX(4);
+  public static WPI_TalonFX leftdrive1 = new WPI_TalonFX(1);
+  public static WPI_TalonFX leftdrive2 = new WPI_TalonFX(2);
 
   //gryo
   public static AHRS gyro = new AHRS(Port.kUSB);
@@ -75,8 +75,8 @@ public class RobotMap {
   //public static final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   //beam brake
-  public static DigitalInput BeamBrakeTop = new DigitalInput(0);
-  public static DigitalInput BeamBrakeBotom = new DigitalInput(1);
+  public static DigitalInput BeamBrakeTop = new DigitalInput(8);
+  public static DigitalInput BeamBrakeBotom = new DigitalInput(9);
 
 
   //pneumatics stuff
@@ -86,18 +86,30 @@ public class RobotMap {
   //out|highgear 0 // in|lowgar 1
   public static DoubleSolenoid shifter = new DoubleSolenoid(0, 0, 1);
   //in|up 2 //out|down 3
-  public static DoubleSolenoid arm = new DoubleSolenoid(0, 3, 2);
+  public static DoubleSolenoid arm = new DoubleSolenoid(0, 2, 3);
   //in|down 4 //out|up 5
-  public static DoubleSolenoid hood = new DoubleSolenoid(0 , 5, 4);
+  public static DoubleSolenoid hood = new DoubleSolenoid(0 , 6, 7);
   
+  //flip here if dont work
+  public static DoubleSolenoid releasH = new DoubleSolenoid(0 , 4, 5);
   
   public static void init(){
+    rightdrive1.configFactoryDefault();
+    rightdrive2.configFactoryDefault();
+    leftdrive1.configFactoryDefault();
+    leftdrive2.configFactoryDefault();
     rightdrive1.setInverted(true);
     rightdrive2.setInverted(true);
     leftdrive1.setInverted(false);
     leftdrive2.setInverted(false);
+    rightdrive2.setNeutralMode(NeutralMode.Brake);
+    rightdrive1.setNeutralMode(NeutralMode.Coast );
+    leftdrive1.setNeutralMode(NeutralMode.Brake);
+    leftdrive2.setNeutralMode(NeutralMode.Coast);
     Topin.setIdleMode(IdleMode.kCoast);
     RobotMap.FlyboiL.setIdleMode(IdleMode.kCoast);
     RobotMap.FlyboiR.setIdleMode(IdleMode.kCoast);
+    Endgame.restoreFactoryDefaults();
+    Endgame.setIdleMode(IdleMode.kBrake);
   }
 }

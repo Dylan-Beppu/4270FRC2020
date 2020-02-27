@@ -10,6 +10,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,9 +30,8 @@ import frc.robot.RobotMap;
 //import frc.robot.OI;
 //import frc.robot.commands.Shooter;
 
-
 /**
- * Add your docs here.
+ *Turret subsystem
  */
 
 public class Turret extends SubsystemBase {
@@ -68,25 +68,27 @@ public class Turret extends SubsystemBase {
   private final CANSparkMax FLyBoiL = RobotMap.FlyboiL;
 
   private final CANSparkMax Topin = RobotMap.Topin;
-  private final CANSparkMax Bindex = RobotMap.IndexBottom;
+  //private final CANSparkMax Bindex = RobotMap.IndexBottom;
   double turretENCoffset;
+  double speedo1;
   
   //private final TalonSRX twist = RobotMap.VisionTurn;
   //private  Xangle = NetworkTableInstance.getDefault().getTable("table").getEntry("<ty>").getValue();
   //private frc.robot.driver.Limelight.;
+  
+  //NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  //NetworkTable table = inst.getTable("limelight");
+  //camhight = Units.inchesToMeters(35);
+  //targethight = 2.1082;
+  //ty = table.getEntry("ty");
+  //dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()+15));
 
   @Override
   public void periodic() {
     
     // This method will be called once per scheduler run
   }
-  public void LR(double speed){
-    RobotMap.Rotateboi.set(speed);
-  }
-  public void spinL(double speed){
-    RobotMap.Rotateboi.set(speed);
-  }
-  public void spinR(double speed){
+  public void spinTurret(double speed){
     RobotMap.Rotateboi.set(speed);
   }
   public void spinStop(){
@@ -131,26 +133,26 @@ public class Turret extends SubsystemBase {
   public void camPosReset(){
     Rotateboi.setIdleMode(IdleMode.kBrake);
     Rotateboi.getEncoder().getPosition();
-    turretENCoffset = 1;
-    if(Robot.m_oi.BailysJob.getRawButton(3) == true){
+    //turretENCoffset = 1;
+    //if(Robot.m_oi.BailysJob.getRawButton(3) == true){
       if(Rotateboi.getEncoder().getPosition() > 1){
         RobotMap.Rotateboi.set(-0.5);
       }
       else if(1 > Rotateboi.getEncoder().getPosition() && Rotateboi.getEncoder().getPosition() > 0.1){
-        RobotMap.Rotateboi.set(-Rotateboi.getEncoder().getPosition()/2);
+        RobotMap.Rotateboi.set(-0.1);
       }
       else if(Rotateboi.getEncoder().getPosition() < -1){
         RobotMap.Rotateboi.set(0.5);
-      }
+      }   
       else if(Rotateboi.getEncoder().getPosition() < -0.1 && Rotateboi.getEncoder().getPosition() > -1){
-        RobotMap.Rotateboi.set(Rotateboi.getEncoder().getPosition()/2);
+        RobotMap.Rotateboi.set(0.1);
       }
       else{
         RobotMap.Rotateboi.set(0);
       }
-    }
+    //}
   }
-
+  
   public void areweinrange(){
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("limelight");
@@ -158,17 +160,54 @@ public class Turret extends SubsystemBase {
     targethight = 2.1082;
     ty = table.getEntry("ty");
     dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()+15));
-    
+    SmartDashboard.putNumber("dts", dts);
     SmartDashboard.putNumber("Distants To target in m", dts);
-    if(dts < 5 && 4 < dts){
+    if(dts < 2 && togglebtn == true){
+      Robot.kShifter.hooddown();
+      speedo1 = Math.sin(dts/3);
+      //speedo1 = dts/4;
+      SmartDashboard.putNumber("speed", speedo1);
       //Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 1);
       //Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 1);
     }
-    else{
+    //dts < 8 &&
+    else if(dts > 2 && dts < 4.4 && togglebtn == true){
+      Robot.kShifter.hoodup();
+      //speedo1 = dts/5.5;
+      speedo1 = Math.sin(dts/4.4);
+      //speedo1 = (dts*2)/12-1;
+      SmartDashboard.putNumber("speed", speedo1);
+
+      //Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 0);
+      //Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 0);
+    }
+    else if(dts > 4.5 && dts < 7 && togglebtn == true){
+      Robot.kShifter.hoodup();
+      //speedo1 = dts/5.5;
+      //speedo1 = (dts*2)/15;
+      speedo1 = Math.sin(dts/7);
+      SmartDashboard.putNumber("speed", speedo1);
+
+      //Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 0);
+      //Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 0);
+    }
+    else if(dts > 7.2 && togglebtn == true){
+      Robot.kShifter.hoodup();
+      //speedo1 = dts/5.5;
+      //speedo1 = (dts*2)/15;
+      speedo1 = Math.sin(dts/9);
+      SmartDashboard.putNumber("speed", speedo1);
+
       //Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 0);
       //Robot.m_oi.BailysJob.setRumble(RumbleType.kRightRumble, 0);
     }
   }
+  //for autonomous
+  public void turretAuto(Boolean togglebtnvalue){
+    togglebtn = togglebtnvalue;
+    track();
+  }
+
   public void toggleon(){
     if(Robot.m_oi.BailysJob.getRawButtonPressed(6)){
       if(togglebtn == true){
@@ -190,17 +229,16 @@ public class Turret extends SubsystemBase {
     tx = table.getEntry("tx");
 
     if(togglebtn == true){
-    
       RobotMap.FlyboiR.setOpenLoopRampRate(0.7);
-      RobotMap.FlyboiR.set(0.62);
+      RobotMap.FlyboiR.set(speedo1);
       RobotMap.FlyboiL.setOpenLoopRampRate(0.7);
-      RobotMap.FlyboiL.set(-0.62);
-      Topin.set(-1);
+      RobotMap.FlyboiL.set(-speedo1);
+      Topin.set(-1); 
     blindMe();
     
     }
     else if(togglebtn == false){
-      unblindMe();
+      //unblindMe();
       FLyBoiL.set(0);
       FLyBoiR.set(0);
       Topin.set(0);
@@ -209,20 +247,30 @@ public class Turret extends SubsystemBase {
     
     
     //ty = table.getEntry("ty");&& Rotateboi.getEncoder().getPosition() < 21 && Rotateboi.getEncoder().getPosition() > -21
-    if(tx.getValue().getDouble() <= -0.5 && togglebtn == true ){
-      //spinL(tx.getValue().getDouble()/-30);
-      Rotateboi.set(-0.5);
+    //go left
+    if(tx.getValue().getDouble() <= -0.5 && togglebtn == true && Rotateboi.getEncoder().getPosition() < 21 && -21 < Rotateboi.getEncoder().getPosition()){
+      Rotateboi.set(tx.getValue().getDouble()/50);
+     // Rotateboi.set(-0.5);
       //twist.set(ControlMode.PercentOutput, 0.5);&& Rotateboi.getEncoder().getPosition() < 21 && Rotateboi.getEncoder().getPosition() > -21
     }
-    else if(tx.getValue().getDouble() >= 0.5 && togglebtn == true ){
-      Rotateboi.set(0.5);
-      //spinR(tx.getValue().getDouble()/ 30);
-      
-      //twist.set(ControlMode.PercentOutput, -0.5);
+    //go right
+    else if(tx.getValue().getDouble() >= 0.5 && togglebtn == true && Rotateboi.getEncoder().getPosition() < 21 && -21 < Rotateboi.getEncoder().getPosition()){
+      //Rotateboi.set(0.5);
+      Rotateboi.set(tx.getValue().getDouble()/ 50);
     }
+    //if over left self correct
+    else if(Rotateboi.getEncoder().getPosition() < -21 ){
+      Rotateboi.set(-0.2);
+    }
+    //if over right self correct
+    else if(Rotateboi.getEncoder().getPosition() > 21 ){
+      Rotateboi.set(0.2);
+    }
+    //stop
     else{
+      // --ToDo cam reset fix
       spinStop();
-      
+      //camPosReset();
       //Rotateboi.set(0);
       //twist.set(ControlMode.PercentOutput, 0);
     }

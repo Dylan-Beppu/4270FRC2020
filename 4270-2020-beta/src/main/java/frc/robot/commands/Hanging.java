@@ -23,7 +23,9 @@ public class Hanging extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-   
+    Robot.kHang.hangg();
+    // Robot.kHang.realese();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()

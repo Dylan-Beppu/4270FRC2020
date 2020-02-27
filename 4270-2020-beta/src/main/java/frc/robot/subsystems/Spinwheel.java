@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -32,19 +31,37 @@ public class Spinwheel extends SubsystemBase {
   //ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
   double counter1;
   double Tempcolor;
-
-  public void ColorSpin(Double Rotations){
+  public void resetTempcolor(){
     Tempcolor = 0;
+  }
+  /*public void getCurrentColor(){
+    if(Robot.m_oi.BtnPanle.getRawButtonPressed(1)){
+      if(colorString == "Blue" && Tempcolor == 0){
+        Tempcolor = 1;
+      }
+      else if(colorString == "Red" && Tempcolor == 0){
+        Tempcolor = 2;
+      }
+      else if(colorString == "Green" && Tempcolor == 0){
+        Tempcolor = 3;
+      }
+      else if(colorString == "Yellow" && Tempcolor == 0){
+        Tempcolor = 4;
+    }
+  }
+``*/
+  public void ColorSpin(Double Rotations){
+    
     if(colorString == "Blue" && Tempcolor == 0){
       Tempcolor = 1;
     }
-    else if(colorString == "Blue" && Tempcolor == 0){
+    else if(colorString == "Red" && Tempcolor == 0){
       Tempcolor = 2;
     }
-    else if(colorString == "Blue" && Tempcolor == 0){
+    else if(colorString == "Green" && Tempcolor == 0){
       Tempcolor = 3;
     }
-    else if(colorString == "Blue" && Tempcolor == 0){
+    else if(colorString == "Yellow" && Tempcolor == 0){
       Tempcolor = 4;
     }
     if(Tempcolor == 1){
@@ -69,6 +86,17 @@ public class Spinwheel extends SubsystemBase {
     }
 
 
+  }
+  public void mancol(){
+    if(Robot.m_oi.BtnPanle.getRawButton(3) == true){
+      R2D2.set(0.5);
+    }
+    else if(Robot.m_oi.BtnPanle.getRawButton(7) == true){
+      R2D2.set(-0.5);
+    }
+    else{
+      R2D2.set(0);
+    }
   }
 
   /*public void RotateToColor(Color Colorval){
