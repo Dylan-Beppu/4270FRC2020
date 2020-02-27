@@ -238,7 +238,7 @@ public class Turret extends SubsystemBase {
     
     }
     else if(togglebtn == false){
-      //unblindMe();
+      unblindMe();
       FLyBoiL.set(0);
       FLyBoiR.set(0);
       Topin.set(0);
