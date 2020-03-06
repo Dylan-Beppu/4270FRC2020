@@ -70,8 +70,8 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX leftSub = RobotMap.leftdrive1;
 
   //private double ticksPerMeater = 213649;
-  private double deadzoneleft = 0.18;
-  private double deadzoneright = 0.18;
+  private double deadzoneleft = 0.16;
+  private double deadzoneright = 0.16;
   
   private AHRS Gyro = RobotMap.gyro;
 
@@ -126,8 +126,8 @@ public class Drivetrain extends SubsystemBase {
   public void tank(){
     if(Robot.kShifter.isfast == true){
       if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.9);
-         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.9);
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.95);
+         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.95);
 
       }
       else{
@@ -226,6 +226,12 @@ public class Drivetrain extends SubsystemBase {
 
   public void reset() {
     odometry.resetPosition(new Pose2d(), getHeading());
+  }
+  public void autoBSpeed(double dirspd){
+    RobotMap.rightdrive1.set(-dirspd);
+    RobotMap.rightdrive2.set(-dirspd);
+    RobotMap.leftdrive1.set(dirspd);
+    RobotMap.leftdrive2.set(dirspd);
   }
 
   @Override

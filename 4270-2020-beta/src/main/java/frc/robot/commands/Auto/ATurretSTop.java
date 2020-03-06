@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Auto;
 
 import java.util.Set;
 
@@ -9,10 +9,10 @@ import frc.robot.subsystems.Turret;
 
 //for help with the new way https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html
 //if the can bus isent compleat, neos wornt work!!! But talonfx might :)
-public class Shooter extends CommandBase {
+public class ATurretSTop extends CommandBase {
   private final Turret kTurret;
     
-  public Shooter(Turret subsystem) {
+  public ATurretSTop(Turret subsystem) {
     kTurret = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kTurret);
@@ -22,19 +22,23 @@ public class Shooter extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-
+    //    m_climber.climb(50);
+    kTurret.togglebtn = false;
+    Robot.kTurret.spinStop();
+    Robot.kTurret.unblindMe();
+ 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-     Robot.kTurret.areweinrange();
+    //kTurret.turretAuto();
+    //Robot.kTurret.areweinrange();
     ////Robot.kTurret.camencreset();
-    Robot.kTurret.toggleon();
+    //Robot.kTurret.toggleon();
     ////Robot.kTurret.shootshoot();
-    Robot.kTurret.track();
+    //Robot.kTurret.track();
     ////Robot.kTurret.camPosReset();
-    //Robot.kTurret.basic();
    
   }
 

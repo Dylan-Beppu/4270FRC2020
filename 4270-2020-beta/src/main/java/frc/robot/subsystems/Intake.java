@@ -12,12 +12,12 @@ import frc.robot.RobotMap;
 import frc.robot.Robot;
 
 public class Intake extends SubsystemBase {
-  private final CANSparkMax Intake = RobotMap.Intake;
+  public final CANSparkMax Intake = RobotMap.Intake;
   private final Shifter kShifter = Robot.kShifter;
   
   public void intakeMan() {
     if(Robot.m_oi.BtnPanle.getRawButton(1) == true){
-      Intake.set(-1); 
+      Intake.set(-0.8); 
        
       //kShifter.IntakeDown();
     }
@@ -27,16 +27,7 @@ public class Intake extends SubsystemBase {
     }
   }
 
-  public void intakeAuto(double speed, boolean Down) {
-    if(Down == true){
-      Intake.set(-0.8);
-      //kShifter.IntakeDown();
-    }
-    else if(Down == false){
-      Intake.set(0);
-      //kShifter.IntakeUp();
-    }
-  }
+
 
  public void intakeStop(){
     Intake.set(0);

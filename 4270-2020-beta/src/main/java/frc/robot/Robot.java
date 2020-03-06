@@ -1,7 +1,9 @@
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,10 +16,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.Shooter;
+import frc.robot.commands.Auto.AFillup;
 import frc.robot.commands.Auto.Auto1;
+import frc.robot.commands.Auto.Auto2;
 import frc.robot.commands.Driving;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.cameraserver.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,13 +34,13 @@ public class Robot extends TimedRobot {
   public static String trajectoryJSON;
   private Command m_autonomousCommand;
   
-  Command autonomusCommand;
-  SendableChooser<Auto> AutoSelect;
-  SendableChooser<Command> command = new SendableChooser<>();
-  
-  public enum Auto {
-		ball6, ball9, none, test1, test2;
-  }
+  //Command autonomusCommand;
+  //SendableChooser<Auto> AutoSelect;
+  //SendableChooser<Command> command = new SendableChooser<>();
+  //
+  //public enum Auto {
+	//	ball6, ball9, none, test1, test2;
+  //}
   
   private RobotContainer m_robotContainer;
 
@@ -55,8 +60,10 @@ public class Robot extends TimedRobot {
   public static Hanging kHanging = new Hanging(kHang);
   public static Spinwheel kSpinwheel = new Spinwheel();
   public static Spinwheeling kSpinwheeling = new Spinwheeling(kSpinwheel);
-  public static Auto1 kAuto1 = new Auto1(kDrivetrain, kIntake);
-    
+
+
+  private UsbCamera cam;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -67,31 +74,15 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     container = new RobotContainer();
     RobotMap.init();
-    AutoSelect = new SendableChooser<>();
-    SendableRegistry.setName(AutoSelect, "AutoSelect");
-    Shuffleboard.getTab("Autonomous").add(AutoSelect).withWidget(BuiltInWidgets.kSplitButtonChooser);
-    AutoSelect.addOption("6 ball auto", Auto.ball6);
-    AutoSelect.addOption("9 ball auto", Auto.ball9);
-    AutoSelect.addOption("no auto", Auto.none);
-    AutoSelect.addOption("drive straite test", Auto.test1);
-    AutoSelect.addOption("s curve test", Auto.test2);
 
-    //SmartDashboard
-    //positionChooser.setName("pos");
+    cam = CameraServer.getInstance().startAutomaticCapture(0);
+    cam.setFPS(15);
+    cam.setResolution(320, 240);
 
-    //kShooter = new Shooter(kTurret);
-    //kDrivetrain = new Drivetrain();
-    
-    //kIntake = new Intake();
-    //kShifter = new Shifter();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    //m_chooser.addOption("My Auto", new kDrivetrain.auto1());
-    //Command autonomousCommand;
-    //SmartDashboard.putData("Auto mode", m_chooser);
   }
   
   
-  SendableChooser<Command> chooser = new SendableChooser<>();
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
@@ -106,7 +97,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    
+    cam.setFPS(15);
+    cam.setResolution(320, 240);
     //kShooter.schedule();
 
   }
@@ -117,9 +109,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     container.reset();
-    AutoSelect = new SendableChooser<>();
     kTurret.togglebtn = false;
-		//positionChooser.setName("Position");
 
   }
 
@@ -133,8 +123,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     container.reset();
+    Auto2 driveAuto = new Auto2(kDrivetrain);
     //kDrivetrain.lowGear();
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
 
     // schedule the autonomous command (example)
@@ -148,32 +139,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Auto autoSel = AutoSelect.getSelected();
-    if(autoSel == Auto.ball6){
-      //kTurret.turretAuto(true);
-    }
-    else if(autoSel == Auto.ball6){
-
-    }
-    else if(autoSel == Auto.ball9){
-
-    }
-    else if(autoSel == Auto.none){
-
-    }
-    else if(autoSel == Auto.test1){
-      
-      kAuto1.schedule();
-      //SequentialCommandGroup
-      //trajectoryJSON = "paths/3ball1.json";
-      //m_autonomousCommand.schedule();
-    }
-    else if(autoSel == Auto.test2){
-      //trajectoryJSON = "paths/3ball1.json";
-      //m_autonomousCommand.schedule();
-      
-      //wait(m_autonomousCommand.isFinished());
-    }
+    Scheduler.getInstance().run();
   }
   @Override
   public void teleopInit() {
@@ -195,12 +161,14 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     container.reset();
     container.hi();
+
     kShooter.schedule();
+
     kIntaking.schedule();
     kIndexing.schedule();
     kFast.schedule();
     kHanging.schedule();
-    //kSpinwheeling.schedule();
+    kSpinwheeling.schedule();
     //robot.commands.Shooter();
 
     

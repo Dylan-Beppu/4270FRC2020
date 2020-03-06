@@ -45,7 +45,7 @@ public class RobotContainer {
   
   // An example selector method for the selectcommand.  Returns the selector that will select
   // which command to run.  Can base this choice on logical conditions evaluated at runtime.
-  private CommandSelector select() {
+  public CommandSelector select() {
     return CommandSelector.Red1;
     //return CommandSelector.Red2;
   }
@@ -99,6 +99,7 @@ public class RobotContainer {
       );
   
       return command.andThen(() -> drive.setOutputVolts(0, 0));
+      
     }
     
   

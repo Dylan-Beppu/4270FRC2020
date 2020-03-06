@@ -26,9 +26,12 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PWMSparkMax;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -63,6 +66,8 @@ public class RobotMap {
   public static CANSparkMax Intake = new CANSparkMax(12, MotorType.kBrushless);
   public static CANSparkMax Endgame = new CANSparkMax(13, MotorType.kBrushless);
   
+  public static PWMSparkMax R2 = new PWMSparkMax(0);
+  
   //color sensor
   //public static final I2C.Port i2cPort = I2C.Port.kOnboard;
   //public static final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
@@ -78,7 +83,7 @@ public class RobotMap {
   public static DigitalInput BeamBrakeTop = new DigitalInput(8);
   public static DigitalInput BeamBrakeBotom = new DigitalInput(9);
 
-
+  public static UsbCamera Cam = new UsbCamera("camm", 1);
   //pneumatics stuff
   public static Compressor aircomp = new Compressor(0);
 

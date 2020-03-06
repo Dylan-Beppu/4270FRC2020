@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,7 +16,7 @@ import frc.robot.RobotMap;
 
 public class Spinwheel extends SubsystemBase {
 
-  private final CANSparkMax R2D2 = RobotMap.Endgame;
+  private final PWMSparkMax  R2D2 = RobotMap.R2;
 
 
   //private final ColorSensorV3 colorSensor = RobotMap.colorSensor;
