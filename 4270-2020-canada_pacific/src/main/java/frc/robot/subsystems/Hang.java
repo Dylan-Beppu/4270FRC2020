@@ -16,7 +16,7 @@ public class Hang extends SubsystemBase {
 
   }
   public void hangg(){
-    if(Robot.m_oi.BailysJob.getRawButton(3) == true){
+    if(Robot.m_oi.BailysJob.getRawButton(10) == true){
       Endgame.set(1);
     }
     else{

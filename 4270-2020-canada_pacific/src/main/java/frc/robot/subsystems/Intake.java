@@ -17,7 +17,7 @@ public class Intake extends SubsystemBase {
   
   public void intakeMan() {
     if(Robot.m_oi.BtnPanle.getRawButton(1) == true){
-      Intake.set(-0.8); 
+      Intake.set(-0.75); 
        
       //kShifter.IntakeDown();
     }

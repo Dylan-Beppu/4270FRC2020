@@ -57,7 +57,7 @@ public void realese1(){
   releasH.set(DoubleSolenoid.Value.kForward);
 }
 public void realese(){
-  if(Robot.m_oi.BailysJob.getRawButton(4) == true){
+  if(Robot.m_oi.BailysJob.getRawButton(9) == true){
     Robot.kShifter.relasehang();
   }
 }
@@ -70,10 +70,10 @@ public void realese(){
     }
   }
   public void shifter(){
-    if(Robot.m_oi.BailysJob.getRawButton(1) == true){
+    if(Robot.m_oi.BailysJob.getRawButton(2) == true){
       fast();
   }
-  else if(Robot.m_oi.BailysJob.getRawButton(2) == true){
+  else if(Robot.m_oi.BailysJob.getRawButton(3) == true){
     slow();
   }
 }

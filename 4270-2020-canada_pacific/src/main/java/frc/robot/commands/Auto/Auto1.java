@@ -5,16 +5,23 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.commands.Shooter;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class Auto2 extends SequentialCommandGroup {
+public class Auto1 extends SequentialCommandGroup {
   private boolean firstRun = true;
+  private boolean secondrun = true;
+  private boolean thirdrun = true;
+  private double startTime2;
+  private double  startTime1;
   private double startTime;
   private Drivetrain drive;
-  public Auto2(Drivetrain drive /*, Limelight vision, Shooter shooter*/) {
+  public Auto1(Drivetrain drive /*, Limelight vision, Shooter shooter*/) {
      this.drive = drive;
+     runAuto();
+     
     // addCommands(
     //   //new ATurret(Robot.kTurret),
     //   //new AShoot(Robot.kIndex),
@@ -34,15 +41,43 @@ public class Auto2 extends SequentialCommandGroup {
   }
 
   public void runAuto() {
-    if (firstRun) {
+    if (firstRun = true) {
       startTime = Timer.getFPGATimestamp();
       firstRun = false;
     }
-    if (Timer.getFPGATimestamp() - startTime < 2.0)
-      drive.setOutputVolts(12.0, 12.0); 
-    else drive.setOutputVolts(0.0, 0.0); 
+    while(Timer.getFPGATimestamp() - startTime < 1){
+      //drive.setOutputVolts(4, 4);
+      Robot.kTurret.turretAuto();
+      Robot.kTurret.togglebtn = true;
+    }
 
+    
+
+    if (secondrun = true) {
+      startTime1 = Timer.getFPGATimestamp();
+      secondrun = false;
+    }
+    while(Timer.getFPGATimestamp() - startTime1 < 5){
+      RobotMap.Topin.set(-1);
+      Robot.kIndex.Aindexup();
+      Robot.kTurret.turretAuto();
+    } 
+    Robot.kTurret.togglebtn = false;
+    Robot.kTurret.spinStop();
+    Robot.kTurret.unblindMe();
+    Robot.kIndex.IndexStop();
+    RobotMap.FlyboiR.set(0);
+    RobotMap.FlyboiL.set(0);
+    RobotMap.Topin.set(0); 
+
+    if (thirdrun = true) {
+      startTime2 = Timer.getFPGATimestamp();
+      thirdrun = false;
+    }
+    while(Timer.getFPGATimestamp() - startTime2 < 2){
+      
+      drive.setOutputVolts(4, 4);
+    }
+    drive.setOutputVolts(0.0, 0.0);
    }
-
-
 }

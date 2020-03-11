@@ -110,11 +110,13 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     container.reset();
     kTurret.togglebtn = false;
+    kTurret.unblindMe();
 
   }
 
   @Override
   public void disabledPeriodic() {
+    kTurret.unblindMe();
   }
 
   /**
@@ -124,13 +126,15 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     container.reset();
     Auto2 driveAuto = new Auto2(kDrivetrain);
+    //kShifter.fast();
+    //Auto1 driveAuto = new Auto1(kDrivetrain);
     //kDrivetrain.lowGear();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+      driveAuto.schedule();
     }
   }
 

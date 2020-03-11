@@ -117,6 +117,7 @@ public class Turret extends SubsystemBase {
       if(Rotateboi.getEncoder().getPosition() > 1){
         RobotMap.Rotateboi.set(-0.5);
       }
+
       else if(1 > Rotateboi.getEncoder().getPosition() && Rotateboi.getEncoder().getPosition() > 0.1){
         RobotMap.Rotateboi.set(-0.1);
       }
@@ -154,7 +155,7 @@ public class Turret extends SubsystemBase {
     else if(dts > 2 && dts < 4.4 && togglebtn == true){
       Robot.kShifter.hoodup();
       //speedo1 = dts/5.5;
-      speedo1 = Math.sin(dts/4.4);
+      speedo1 = Math.sin(dts/4.45);
       //speedo1 = (dts*2)/12-1; 
       SmartDashboard.putNumber("speed", speedo1);
 
@@ -165,8 +166,7 @@ public class Turret extends SubsystemBase {
       Robot.kShifter.hoodup();
       //speedo1 = dts/5.5;
       //speedo1 = (dts*2)/15;
-      speedo1 = Math.sin(dts/7.4
-      );
+      speedo1 = Math.sin(dts/7.4);
       SmartDashboard.putNumber("speed", speedo1);
 
       //Robot.m_oi.BailysJob.setRumble(RumbleType.kLeftRumble, 0);
@@ -219,20 +219,20 @@ public class Turret extends SubsystemBase {
       RobotMap.FlyboiR.set(speedo1);
       RobotMap.FlyboiL.setOpenLoopRampRate(0.05);
       RobotMap.FlyboiL.set(-speedo1);
-      Topin.set(-1); 
+      //Topin.set(-1); 
     blindMe();
     }
     else if(togglebtn == false && Robot.m_oi.BtnPanle.getRawButton(2)){
       unblindMe();
       FLyBoiL.set(-0.2);
       FLyBoiR.set(0.2);
-      Topin.set(-1);
+      //Topin.set(-1);
     }
     else if(togglebtn == false){
       unblindMe();
       FLyBoiL.set(0);
       FLyBoiR.set(0);
-      Topin.set(0);
+      //Topin.set(0);
     }
 
     
@@ -273,13 +273,13 @@ public class Turret extends SubsystemBase {
       RobotMap.FlyboiR.set(0.65);
       RobotMap.FlyboiL.setOpenLoopRampRate(0.7);
       RobotMap.FlyboiL.set(-0.75);
-      Topin.set(-1);
+      //Topin.set(-1);
       Robot.kShifter.hoodup(); 
   }
   else{
       RobotMap.FlyboiR.set(0);
       RobotMap.FlyboiL.set(0);
-      Topin.set(0); 
+      //Topin.set(0); 
   }
 }
   

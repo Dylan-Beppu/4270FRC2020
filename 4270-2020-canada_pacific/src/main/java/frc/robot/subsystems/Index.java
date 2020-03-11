@@ -82,26 +82,30 @@ public class Index extends SubsystemBase {
 
       }
     }
-    else if(Robot.m_oi.BailysJob.getRawAxis(3) != 0 && Robot.kTurret.togglebtn == true){
+    else if(Robot.m_oi.BailysJob.getRawButton(8) == true && Robot.kTurret.togglebtn == true){
       RobotMap.CenterIntake.set(0.5);
       IndexBottom.set(-1);
       RobotMap.LeftIntake.set(-0.5);
+      RobotMap.Topin.set(-1);
     }
     
     else if(Robot.m_oi.BtnPanle.getRawButton(6) == true){
       RobotMap.CenterIntake.set(-0.5);
       IndexBottom.set(1);
       RobotMap.LeftIntake.set(0.5);
+
     }
     else if(Robot.m_oi.BtnPanle.getRawButton(2) == true){
       RobotMap.CenterIntake.set(0.5);
       IndexBottom.set(-1);
       RobotMap.LeftIntake.set(-0.5);
+      RobotMap.Topin.set(-1);
     }
     else{
       IndexBottom.set(0);
       centerIntake.set(0);
       RobotMap.LeftIntake.set(0);
+      RobotMap.Topin.set(0);
     }
   }
 
@@ -119,9 +123,9 @@ public class Index extends SubsystemBase {
   ** upup down stop
   */
   public void Aindexup(){
-    RobotMap.CenterIntake.set(-0.5);
-      IndexBottom.set(1);
-      RobotMap.LeftIntake.set(0.5);
+    RobotMap.CenterIntake.set(0.5);
+      IndexBottom.set(-1);
+      RobotMap.LeftIntake.set(-0.5);
   }
  public void IndexStop(){
   //IndexBottom.set(0);

@@ -126,17 +126,17 @@ public class Drivetrain extends SubsystemBase {
   public void tank(){
     if(Robot.kShifter.isfast == true){
       if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(1)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.95);
-         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.95);
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.4);
+         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(1)*0.4);
 
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.9);
-        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5)*0.9);
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(3)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(3)*0.4);
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(3)*0.4);
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
@@ -153,9 +153,9 @@ public class Drivetrain extends SubsystemBase {
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(5)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));
-        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(5));      
+      if(Math.abs(Robot.m_oi.BailysJob.getRawAxis(3)) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(3));
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.BailysJob.getRawAxis(3));      
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
