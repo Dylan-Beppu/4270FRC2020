@@ -150,8 +150,10 @@ public class Turret extends SubsystemBase {
       SmartDashboard.putNumber("speed", speedo1);
     }
     else if(dts > 2 && togglebtn == true){
+      Robot.kShifter.hoodup();
       speedo1 = Math.sqrt(dts/3)-(dts/11);
       SmartDashboard.putNumber("speed", speedo1);
+      
 
     }
     /*
