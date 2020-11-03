@@ -96,8 +96,8 @@ public class Drivetrain extends SubsystemBase {
   
 
   public Drivetrain() {
-    //leftSub.follow(leftMaster);
-    //rightSub.follow(rightMaster);
+    leftSub.follow(leftMaster);
+    rightSub.follow(rightMaster);
 
     //leftMaster.setInverted(true);
     //rightMaster.setInverted(true);
@@ -172,11 +172,11 @@ public class Drivetrain extends SubsystemBase {
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-      leftMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1,  
+      leftMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,  
       rightMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1);
 }
   public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
+    return leftMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches));
   }
   public double getRdistance(){
     return rightMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
@@ -185,7 +185,7 @@ public class Drivetrain extends SubsystemBase {
 
   public double getLvelocity(){
 
-    return leftMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
+    return leftMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
     //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
   }
 
