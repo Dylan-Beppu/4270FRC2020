@@ -17,12 +17,20 @@ public class OI {
 
   public Joystick BtnPanle = new Joystick(1);
   //Joystick configuration
-  public JoystickButton DriTargTog = new JoystickButton(Driver, 6);
+  /*public JoystickButton DriTargTog = new JoystickButton(Driver, 6);
   public JoystickButton DriTargShoot = new JoystickButton(Driver, 8);
   public JoystickButton DriGearUp = new JoystickButton(Driver, 3);
   public JoystickButton DriGearDown = new JoystickButton(Driver, 2);
   public JoystickButton DriClimbRels = new JoystickButton(Driver, 9);
-  public JoystickButton DriClimbClm = new JoystickButton(Driver, 10);
+  public JoystickButton DriClimbClm = new JoystickButton(Driver, 10);*/
+
+  //xbox controles
+  public JoystickButton DriTargTog = new JoystickButton(Driver, 6);
+  public JoystickButton DriTargShoot = new JoystickButton(Driver, 5);
+  public JoystickButton DriGearUp = new JoystickButton(Driver, 2);
+  public JoystickButton DriGearDown = new JoystickButton(Driver, 1);
+  public JoystickButton DriClimbRels = new JoystickButton(Driver, 17);
+  public JoystickButton DriClimbClm = new JoystickButton(Driver, 18);
   /*public JoystickButton Joybtn7 = new JoystickButton(Driver, 7);
   public JoystickButton Joybtn8 = new JoystickButton(Driver, 8);
   public JoystickButton Joybtn9 = new JoystickButton(Driver, 9);
@@ -37,12 +45,22 @@ public class OI {
   public JoystickButton Joybtn18 = new JoystickButton(Driver, 18);*/
  
   //Buton Panle configeration
+  /*
+  public JoystickButton PanTargetTogle = new JoystickButton(Driver, 18);
+  public JoystickButton PanShoot = new JoystickButton(Driver, 18);
+  public JoystickButton PanBleh = new JoystickButton(Driver, 18);
+  public JoystickButton PanIntakeDown = new JoystickButton(Driver, 18);
+  public JoystickButton PanIndex = new JoystickButton(Driver, 18);
+  public JoystickButton PanOut = new JoystickButton(Driver, 18);
+  */
+  
   public JoystickButton PanTargetTogle = new JoystickButton(BtnPanle, 1);
   public JoystickButton PanShoot = new JoystickButton(BtnPanle, 2);
   public JoystickButton PanBleh = new JoystickButton(BtnPanle, 3);
   public JoystickButton PanIntakeDown = new JoystickButton(BtnPanle, 4);
   public JoystickButton PanIndex = new JoystickButton(BtnPanle, 5);
   public JoystickButton PanOut = new JoystickButton(BtnPanle, 6);
+  
   /*public JoystickButton Panbtn7 = new JoystickButton(BtnPanle, 7);
   public JoystickButton Panbtn8 = new JoystickButton(BtnPanle, 8);*/
 

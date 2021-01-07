@@ -1,37 +1,29 @@
 package frc.robot;
 
-//import edu.wpi.first.wpilibj.Compressor;
-
-/*import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.Spark;/*/
-import com.revrobotics.*;
-import com.revrobotics.CANSparkMax;
-//import com.revrobotics.jni.CANSparkMaxJNI;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 //import com.ctre.phoenix.*;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.*;
 
-import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.util.Color;
+//import edu.wpi.first.wpilibj.Compressor;
 
-import com.revrobotics.ColorSensorV3;
+/*import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Spark;/*/
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorMatch;
+//import com.revrobotics.jni.CANSparkMaxJNI;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWMSparkMax;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

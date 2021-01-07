@@ -4,16 +4,14 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.Auto.AShoot;
 
 public class Index extends SubsystemBase {
   private final CANSparkMax IndexBottom = RobotMap.IndexBottom;
   private final CANSparkMax centerIntake = RobotMap.CenterIntake;
   private final DigitalInput BeamBrakeTop = RobotMap.BeamBrakeTop;
-  private final DigitalInput BeamBrakeBottom = RobotMap.BeamBrakeBotom;
+  //private final DigitalInput BeamBrakeBottom = RobotMap.BeamBrakeBotom;
   public boolean ISFill;
 
   /*public boolean CheckISfill() {
@@ -25,24 +23,24 @@ public class Index extends SubsystemBase {
 
   public void Aindexfill(){
     while(ISFill = false){
-    if(BeamBrakeTop.get() == true && BeamBrakeBottom.get() == false ){
+    if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == false*/ ){
       IndexBottom.set(-1);
       centerIntake.set(0.5);
       RobotMap.LeftIntake.set(-0.5);
     }
     //top = ball, mid = none
-    else if(BeamBrakeTop.get() == false && BeamBrakeBottom.get() == true ){
+    else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == true*/ ){
       IndexBottom.set(0);
       centerIntake.set(0.5);
       RobotMap.LeftIntake.set(-0.5);
     }
     //top = ball, mid = ball
-    else if(BeamBrakeTop.get() == false && BeamBrakeBottom.get() == false){
+    else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == false*/){
       IndexBottom.set(0);
       centerIntake.set(0);
       RobotMap.LeftIntake.set(0);
     }
-    else if(BeamBrakeTop.get() == true && BeamBrakeBottom.get() == true){
+    else if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == true*/){
       IndexBottom.set(-1);
       centerIntake.set(0.5);
       RobotMap.LeftIntake.set(-0.5);
@@ -58,24 +56,24 @@ public class Index extends SubsystemBase {
     //top = none, mid = ball, low
     if(Robot.m_oi.PanIndex.get() == true && Robot.kTurret.togglebtn == false){
       //RobotMap.LeftIntake.set(-0.5);
-      if(BeamBrakeTop.get() == true && BeamBrakeBottom.get() == false ){
+      if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == false*/ ){
         IndexBottom.set(-1);
         centerIntake.set(0.5);
         RobotMap.LeftIntake.set(-0.5);
       }
       //top = ball, mid = none
-      else if(BeamBrakeTop.get() == false && BeamBrakeBottom.get() == true ){
+      else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == true*/ ){
         IndexBottom.set(0);
         centerIntake.set(0.5);
         RobotMap.LeftIntake.set(-0.5);
       }
       //top = ball, mid = ball
-      else if(BeamBrakeTop.get() == false && BeamBrakeBottom.get() == false){
+      else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == false*/){
         IndexBottom.set(0);
         centerIntake.set(0);
         RobotMap.LeftIntake.set(0);
       }
-      else if(BeamBrakeTop.get() == true && BeamBrakeBottom.get() == true){
+      else if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == true*/){
         IndexBottom.set(-1);
         centerIntake.set(0.5);
         RobotMap.LeftIntake.set(-0.5);

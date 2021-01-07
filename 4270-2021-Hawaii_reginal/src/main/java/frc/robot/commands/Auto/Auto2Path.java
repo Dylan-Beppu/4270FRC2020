@@ -1,4 +1,8 @@
 package frc.robot.commands.Auto;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
@@ -6,19 +10,6 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.util.Units;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.util.Units; 
-import frc.robot.Robot;
-import frc.robot.subsystems.*;
-
-import java.io.IOException;
-import java.nio.file.Path;
 
 public class Auto2Path extends CommandBase {
   private final Drivetrain drive;

@@ -1,55 +1,23 @@
 package frc.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.Talon;
-
-//import com.ctre.phoenix.motorcontrol.ControlMode;
-//import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-//import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
-//import com.kauailabs.*;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableValue;
-
-import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.commands.*;
-import frc.robot.OI;
-
-import frc.robot.subsystems.Drivetrain;
-
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.kauailabs.navx.frc.AHRS;
+//import 
+//import com.revrobotics.CANEncoder;
+//import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.networktables.*;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import java.math.*;
-import com.kauailabs.navx.frc.AHRS;
-//import 
-//import com.revrobotics.CANEncoder;
-//import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 
 /**
@@ -118,18 +86,18 @@ public class Drivetrain extends SubsystemBase {
   }  */
   public void tank(){
     if(Robot.kShifter.isfast == true){
-      if(Math.abs(Robot.m_oi.Driver.getRawAxis(1)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1)*0.4);
-         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1)*0.4);
+      if(Math.abs(Robot.m_oi.Driver.getRawAxis(1)*-1) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1)*0.4);//swich val 1
+         leftSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1)*0.4);//swich val 1
 
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.Driver.getRawAxis(3)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(3)*0.4);
-        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(3)*0.4);
+      if(Math.abs(Robot.m_oi.Driver.getRawAxis(5)*-1) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(5)*0.4); //swich val 3
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(5)*0.4);//swich val 3
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);
@@ -138,17 +106,17 @@ public class Drivetrain extends SubsystemBase {
     }
     //when slow
     else{
-      if(Math.abs(Robot.m_oi.Driver.getRawAxis(1)) > deadzoneleft){
-        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1));
-        leftSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1));
+      if(Math.abs(Robot.m_oi.Driver.getRawAxis(1)*-1) > deadzoneleft){
+        leftMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1));//swich val 1
+        leftSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(1));//swich val 1
       }
       else{
         leftMaster.set(ControlMode.PercentOutput, 0);
         leftSub.set(ControlMode.PercentOutput, 0);
       }
-      if(Math.abs(Robot.m_oi.Driver.getRawAxis(3)) > deadzoneright){
-        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(3));
-        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(3));      
+      if(Math.abs(Robot.m_oi.Driver.getRawAxis(5)*-1) > deadzoneright){
+        rightMaster.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(5));  //swich val 3
+        rightSub.set(ControlMode.PercentOutput, Robot.m_oi.Driver.getRawAxis(5));      //swich val 3
       }
       else{
         rightMaster.set(ControlMode.PercentOutput,0);

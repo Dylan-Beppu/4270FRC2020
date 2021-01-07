@@ -1,16 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWMSparkMax;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.ColorSensorV3;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.SparkMax;
-
-import frc.robot.Robot;
+//import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 
@@ -88,7 +80,7 @@ public class Spinwheel extends SubsystemBase {
 
 
   }
-  public void mancol(){
+ /* public void mancol(){
     if(Robot.m_oi.BtnPanle.getRawButton(3) == true){
       R2D2.set(0.5);
     }
@@ -98,7 +90,7 @@ public class Spinwheel extends SubsystemBase {
     else{
       R2D2.set(0);
     }
-  }
+  }*/
 
   /*public void RotateToColor(Color Colorval){
     if(match.color == Colorval){

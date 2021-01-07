@@ -10,7 +10,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,11 +39,13 @@ public class Turret extends SubsystemBase {
   NetworkTableEntry ty;
   NetworkTableEntry ledmode;
   public double camhight;
+  public double turethight;
   public double targethight;
   public boolean togglebtn;
   public double dts;
   public boolean vib;
-  
+  public double targVelocity;
+  public double turretAng;
   //NetworkTableEntry ty;
 
   
@@ -66,10 +68,11 @@ public class Turret extends SubsystemBase {
   private final CANSparkMax FLyBoiR = RobotMap.FlyboiR;
   private final CANSparkMax Rotateboi = RobotMap.Rotateboi;
   private final CANSparkMax FLyBoiL = RobotMap.FlyboiL;
-  private final CANSparkMax Topin = RobotMap.Topin;
+  //private final CANSparkMax Topin = RobotMap.Topin;
   //private final CANSparkMax Bindex = RobotMap.IndexBottom;
   double turretENCoffset;
   double speedo1;
+  Boolean debounc0 = false;
   
   
  
@@ -153,9 +156,19 @@ public class Turret extends SubsystemBase {
       Robot.kShifter.hoodup();
       speedo1 = Math.sqrt(dts/3)-(dts/11);
       SmartDashboard.putNumber("speed", speedo1);
-      
-
     }
+
+
+
+    turretAng = 15;
+    //may need to put absoute value so the square root dosen't error out
+    //also might need offset to dts to account for point bing slightly behind camra sensor
+    //velocity is meters per second; computers like metric because powers of 10
+    targVelocity = Math.sqrt((-4.9*(Math.pow(dts,2)/Math.pow(Math.sin(Math.toRadians(turretAng)),2)))/(targethight-turethight-dts));
+    SmartDashboard.putNumber("Target Velocity", targVelocity);
+    
+    
+    
     /*
     //dts < 8 &&
     else if(dts > 2 && dts < 4.4 && togglebtn == true){
@@ -195,7 +208,8 @@ public class Turret extends SubsystemBase {
   }
 
   public void toggleon(){
-    if(Robot.m_oi.DriTargTog.get()|| Robot.m_oi.PanTargetTogle.get()){
+    if(Robot.m_oi.DriTargTog.get() && debounc0 == false){
+      debounc0 = true;
       if(togglebtn == true){
         togglebtn = false;
       }
@@ -203,7 +217,11 @@ public class Turret extends SubsystemBase {
         togglebtn = true;
       }
     }
+    else if(Robot.m_oi.DriTargTog.get() == false){
+      debounc0=false;
+    } 
   }
+  
   
     //turet max allowed 90deg
   //turet absolute max 100-105 deg

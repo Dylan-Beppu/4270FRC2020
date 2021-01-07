@@ -1,14 +1,10 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.Shooter;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.Drivetrain;
 
 public class Auto2 extends SequentialCommandGroup {
   private boolean firstRun = true;

@@ -31,7 +31,7 @@ public class Spinwheeling extends CommandBase {
   @Override
   public void execute() {
     //Robot.kSpinwheel.colorDectect();
-    Robot.kSpinwheel.mancol();
+    //Robot.kSpinwheel.mancol();
    
   }
 

@@ -3,11 +3,6 @@ package frc.robot;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Map;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.SelectCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -22,14 +17,15 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 //import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.util.Units;
+//import java.util.Arrays;
+//import java.util.Map;
+import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-//import edu.wpi.first.wpilibj2.command.SelectCommand;
-import frc.robot.Robot;
-import frc.robot.subsystems.*;
 //import frc.robot.commands.*;
 //import static java.util.Map.entry;
+import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
   //private final RobotMap kRobotMap = new RobotMap();

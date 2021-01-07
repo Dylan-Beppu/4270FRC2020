@@ -1,28 +1,25 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.InterruptableSensorBase.WaitResult;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.Fast;
+import frc.robot.commands.Hanging;
+import frc.robot.commands.Indexing;
+import frc.robot.commands.Intaking;
 import frc.robot.commands.Shooter;
-import frc.robot.commands.Auto.AFillup;
-import frc.robot.commands.Auto.Auto1;
+import frc.robot.commands.Spinwheeling;
 import frc.robot.commands.Auto.Auto2;
-import frc.robot.commands.Driving;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Hang;
+import frc.robot.subsystems.Index;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shifter;
+import frc.robot.subsystems.Spinwheel;
+import frc.robot.subsystems.Turret;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -42,7 +39,7 @@ public class Robot extends TimedRobot {
 	//	ball6, ball9, none, test1, test2;
   //}
   
-  private RobotContainer m_robotContainer;
+  //private RobotContainer m_robotContainer;
 
   public static OI m_oi;
   RobotContainer container;
