@@ -41,7 +41,7 @@ public class RobotMap {
   public static WPI_TalonFX leftdrive2 = new WPI_TalonFX(2);
 
   //gryo
-  public static AHRS gyro = new AHRS(Port.kUSB);
+ public static AHRS gyro = new AHRS(Port.kUSB);
 
   //Index
   public static CANSparkMax LeftIntake = new CANSparkMax(5, MotorType.kBrushless);

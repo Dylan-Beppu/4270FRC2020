@@ -72,7 +72,7 @@ public class Auto1 extends SequentialCommandGroup {
     }
     while(Timer.getFPGATimestamp() - startTime2 < 2){
       
-      drive.setOutputVolts(4, 4);
+      //drive.setOutputVolts(4, 4);
     }
     drive.setOutputVolts(0.0, 0.0);
    }

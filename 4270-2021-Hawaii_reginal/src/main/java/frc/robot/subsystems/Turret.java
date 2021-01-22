@@ -73,7 +73,7 @@ public class Turret extends SubsystemBase {
   double turretENCoffset;
   double speedo1;
   Boolean debounc0 = false;
-  
+  double flygearratio = 3/1;
   
  
   @Override
@@ -166,9 +166,9 @@ public class Turret extends SubsystemBase {
     //velocity is meters per second; computers like metric because powers of 10
     targVelocity = Math.sqrt((-4.9*(Math.pow(dts,2)/Math.pow(Math.sin(Math.toRadians(turretAng)),2)))/(targethight-turethight-dts));
     SmartDashboard.putNumber("Target Velocity", targVelocity);
-    
-    
-    
+   // speedo1 = ta
+    //look here for example https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Velocity%20Closed%20Loop%20Control/src/main/java/frc/robot/Robot.java
+    //frc code !+Gam3^time#2021
     /*
     //dts < 8 &&
     else if(dts > 2 && dts < 4.4 && togglebtn == true){

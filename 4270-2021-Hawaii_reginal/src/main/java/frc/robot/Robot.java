@@ -12,6 +12,7 @@ import frc.robot.commands.Indexing;
 import frc.robot.commands.Intaking;
 import frc.robot.commands.Shooter;
 import frc.robot.commands.Spinwheeling;
+//import frc.robot.commands.Auto.Auto1;
 import frc.robot.commands.Auto.Auto2;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hang;
@@ -20,7 +21,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Spinwheel;
 import frc.robot.subsystems.Turret;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -29,15 +31,11 @@ import frc.robot.subsystems.Turret;
  */
 public class Robot extends TimedRobot {
   public static String trajectoryJSON;
-  private Command m_autonomousCommand;
+ // private Command m_autonomousCommand;
   
   //Command autonomusCommand;
-  //SendableChooser<Auto> AutoSelect;
-  //SendableChooser<Command> command = new SendableChooser<>();
-  //
-  //public enum Auto {
-	//	ball6, ball9, none, test1, test2;
-  //}
+	private Command autonomousCommand;
+	//private SendableChooser<Command> chooser = new SendableChooser<>();
   
   //private RobotContainer m_robotContainer;
 
@@ -59,7 +57,7 @@ public class Robot extends TimedRobot {
   public static Spinwheeling kSpinwheeling = new Spinwheeling(kSpinwheel);
 
 
-  private UsbCamera cam;
+  //private UsbCamera cam;
 
 
   /**
@@ -72,9 +70,16 @@ public class Robot extends TimedRobot {
     container = new RobotContainer();
     RobotMap.init();
 
-    cam = CameraServer.getInstance().startAutomaticCapture(0);
-    cam.setFPS(15);
-    cam.setResolution(320, 240);
+    //TODO: uncomment cam when reinstalled
+    //cam = CameraServer.getInstance().startAutomaticCapture(0);
+    //cam.setFPS(15);
+    //cam.setResolution(320, 240);
+
+    // Autonomous mode selector
+    
+    //chooser.setDefaultOption("Test", new Auto2(kDrivetrain));
+    //chooser.setDefaultOption("Auto", new Auto1(kDrivetrain));
+		//SmartDashboard.putData("Auto mode", chooser);
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
   }
@@ -93,9 +98,12 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
-    cam.setFPS(15);
-    cam.setResolution(320, 240);
+    
+    //CommandScheduler.getInstance().run();
+    //cam.setFPS(15);
+    //cam.setResolution(320, 240);
+    
+    
     //kShooter.schedule();
 
   }
@@ -114,6 +122,9 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     kTurret.unblindMe();
+    Scheduler.getInstance().run();
+    //SmartDashboard.putString("Auto Command", chooser.getSelected().getName());
+
   }
 
   /**
@@ -122,17 +133,17 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     container.reset();
-    Auto2 driveAuto = new Auto2(kDrivetrain);
+    //Auto2 driveAuto = new Auto2(kDrivetrain);
     //kShifter.fast();
     //Auto1 driveAuto = new Auto1(kDrivetrain);
     //kDrivetrain.lowGear();
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
+    //autonomousCommand = chooser.getSelected();
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      driveAuto.schedule();
-    }
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null) {
+			//autonomousCommand.start();
+		}
   }
 
   /**
@@ -141,6 +152,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    
   }
   @Override
   public void teleopInit() {
@@ -149,10 +161,9 @@ public class Robot extends TimedRobot {
     / / teleop starts running. If you want the autonomous to
     / / continue until interrupted by another command, remove
     // this line or comment it out.*/
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-      
-    }
+    if (autonomousCommand != null) {
+		//	autonomousCommand.cancel();
+		}
   }
 
   /**

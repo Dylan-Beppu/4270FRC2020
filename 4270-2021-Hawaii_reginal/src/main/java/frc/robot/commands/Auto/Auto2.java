@@ -50,11 +50,11 @@ public class Auto2 extends SequentialCommandGroup {
       startTime = Timer.getFPGATimestamp();
       firstRun = false;
     }
-    while(Timer.getFPGATimestamp() - startTime < 0.8){
+    /*while(Timer.getFPGATimestamp() - startTime < 0.8){
       drive.setOutputVolts(-4, -4);
       Robot.kTurret.turretAuto();
       Robot.kTurret.togglebtn = true;
-    }
+    }*/
     drive.setOutputVolts(0.0, 0.0);
 
     if (secondrun = true) {
