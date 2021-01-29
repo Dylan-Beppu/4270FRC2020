@@ -1,6 +1,7 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Index;
 
 //for help with the new way https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html
@@ -8,8 +9,8 @@ import frc.robot.subsystems.Index;
 public class AindexStop extends CommandBase {
   private final Index kIndex;
     
-  public AindexStop(Index subsystem) {
-    kIndex = subsystem;
+  public AindexStop() {
+    kIndex = Robot.kIndex;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kIndex);
   }

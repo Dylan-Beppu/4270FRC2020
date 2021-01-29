@@ -1,14 +1,10 @@
 package frc.robot.commands.Auto;
 
-import java.util.Set;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Robot;
+
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Index;
-import frc.robot.subsystems.Intake;
 
 //for help with the new way https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html
 //if the can bus isent compleat, neos wornt work!!! But talonfx might :)

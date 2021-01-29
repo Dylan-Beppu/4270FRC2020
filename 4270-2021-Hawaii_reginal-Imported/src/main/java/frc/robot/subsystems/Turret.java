@@ -81,9 +81,7 @@ public class Turret extends SubsystemBase {
     
     // This method will be called once per scheduler run
   }
-  public void spinTurret(double speed){
-    RobotMap.Rotateboi.set(speed);
-  }
+
   public void spinStop(){
     RobotMap.Rotateboi.set(0);
   }
@@ -169,44 +167,24 @@ public class Turret extends SubsystemBase {
    // speedo1 = ta
     //look here for example https://github.com/REVrobotics/SPARK-MAX-Examples/blob/master/Java/Velocity%20Closed%20Loop%20Control/src/main/java/frc/robot/Robot.java
     //frc code !+Gam3^time#2021
-    /*
-    //dts < 8 &&
-    else if(dts > 2 && dts < 4.4 && togglebtn == true){
-      Robot.kShifter.hoodup();
-      //speedo1 = dts/5.5;
-      speedo1 = Math.sin(dts/4.45);
-      //speedo1 = (dts*2)/12-1; 
-      SmartDashboard.putNumber("speed", speedo1);
-    }
-    else if(dts > 4.5 && dts < 7 && togglebtn == true){
-      Robot.kShifter.hoodup();
-      //speedo1 = dts/5.5;
-      //speedo1 = (dts*2)/15;
-      speedo1 = Math.sin(dts/7.4);
-      SmartDashboard.putNumber("speed", speedo1);
-    }
-    else if(dts > 7.2 && togglebtn == true){
-      Robot.kShifter.hoodup();
-      //speedo1 = dts/5.5;
-      //speedo1 = (dts*2)/15;
-      //speedo1 = Math.abs(Math.sin(dts/9.2));
-      
-      SmartDashboard.putNumber("speed", speedo1);
-    }
-    */
   }
   
 
-  //for autonomous
-  public void turretAuto(){
-    //togglebtn = togglebtnvalue;
+  //autonomous turret toggle
+  public void turretAuto(boolean state, boolean mode){
+    //mode ture = reguler, false = barf
+    togglebtn = state;
+    if(togglebtn == true && mode == true){
     areweinrange();
     track();
-  }
-  public void turetON(Boolean togglebtnvalue){
-    //togglebtn = togglebtnvalue;
+    }
+    else{
+      //runs the barf comand and the set zero one
+      basic();
+    } 
   }
 
+  //turret toggle button
   public void toggleon(){
     if(Robot.m_oi.DriTargTog.get() && debounc0 == false){
       debounc0 = true;
@@ -223,13 +201,11 @@ public class Turret extends SubsystemBase {
   }
   
   
-    //turet max allowed 90deg
-  //turet absolute max 100-105 deg
-  //21 rotations|| 0 rotation
+  //track target and set fly wheel speed
   public void track(){
+  //turet max allowed 90deg | turet absolute max 100-105 deg | about 21 rotations to max angle
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable table = inst.getTable("limelight");
-
     tx = table.getEntry("tx");
 
     if(togglebtn == true){
@@ -264,7 +240,6 @@ public class Turret extends SubsystemBase {
     }
     //go right
     else if(tx.getValue().getDouble() >= 0.3 && togglebtn == true && Rotateboi.getEncoder().getPosition() < 18 && -18 < Rotateboi.getEncoder().getPosition()){
-      //Rotateboi.set(0.5);
       Rotateboi.set(tx.getValue().getDouble()/ 50);
     }
     //if over left self correct
@@ -277,14 +252,11 @@ public class Turret extends SubsystemBase {
     }
     //stop
     else{
-      //TODO: cam reset fix
       spinStop();
-      //camPosReset();
-    
-      //Rotateboi.set(0);
-      //twist.set(ControlMode.PercentOutput, 0);
     }
   }
+
+  //the barf one thanks Josh
   public void basic(){
     if(togglebtn == true){
       RobotMap.FlyboiR.setOpenLoopRampRate(0.7);

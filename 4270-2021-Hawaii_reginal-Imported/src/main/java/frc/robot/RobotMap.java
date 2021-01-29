@@ -18,7 +18,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 //import com.revrobotics.jni.CANSparkMaxJNI;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -75,7 +75,7 @@ public class RobotMap {
   public static DigitalInput BeamBrakeTop = new DigitalInput(8);
   public static DigitalInput BeamBrakeBotom = new DigitalInput(9);
 
-  public static UsbCamera Cam = new UsbCamera("camm", 1);
+  //public static UsbCamera Cam = new UsbCamera("camm", 1);
   //pneumatics stuff
   public static Compressor aircomp = new Compressor(0);
 
@@ -108,5 +108,6 @@ public class RobotMap {
     RobotMap.FlyboiR.setIdleMode(IdleMode.kCoast);
     Endgame.restoreFactoryDefaults();
     Endgame.setIdleMode(IdleMode.kBrake);
+    
   }
 }

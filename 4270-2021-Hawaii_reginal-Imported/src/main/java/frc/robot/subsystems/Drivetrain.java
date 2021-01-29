@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units
+import edu.wpi.first.wpilibj.util.Units; // units class converts imperial to si units 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -129,7 +129,6 @@ public class Drivetrain extends SubsystemBase {
     return Rotation2d.fromDegrees(-Gyro.getAngle());
     
   }
-  //leftMaster.getActiveTrajectoryVelocity()
       
   public DifferentialDriveWheelSpeeds getSpeeds() {
     return new DifferentialDriveWheelSpeeds(

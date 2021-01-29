@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.controller.RamseteController;
+
 //import edu.wpi.first.wpilibj.geometry.Pose2d;
 //import edu.wpi.first.wpilibj.geometry.Rotation2d;
 //import edu.wpi.first.wpilibj.geometry.Transform2d;
@@ -27,6 +28,9 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 //import static java.util.Map.entry;
 import frc.robot.subsystems.Drivetrain;
 
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class RobotContainer {
   //private final RobotMap kRobotMap = new RobotMap();
   private final Drivetrain drive = new Drivetrain();
@@ -35,6 +39,10 @@ public class RobotContainer {
   //private final Shooter kShooter = new Shooter(kTurret);
   //boolean kAutoMode ;
   //private final
+
+  
+
+
   private enum CommandSelector {
     Red1, Red2, Blue1, Blue2
   }
@@ -58,6 +66,11 @@ public class RobotContainer {
     //Trajectory newTrajectory = trajectory.transformBy(transform);
     }
 
+
+    public Command getSelectedAuto(){
+      //Robot.autoChooser.getSelected();
+      return Robot.autoChooser.getSelected();
+    }
     
 
     public Command getAutonomousCommand() {

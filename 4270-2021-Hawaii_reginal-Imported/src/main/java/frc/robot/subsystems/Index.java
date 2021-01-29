@@ -12,7 +12,7 @@ public class Index extends SubsystemBase {
   private final CANSparkMax centerIntake = RobotMap.CenterIntake;
   private final DigitalInput BeamBrakeTop = RobotMap.BeamBrakeTop;
   //private final DigitalInput BeamBrakeBottom = RobotMap.BeamBrakeBotom;
-  public boolean ISFill;
+  public boolean ISFill = false;
 
   /*public boolean CheckISfill() {
     if(BeamBrakeTop.get() == false && BeamBrakeBottom.get() == false){
@@ -22,33 +22,33 @@ public class Index extends SubsystemBase {
   }*/
 
   public void Aindexfill(){
-    while(ISFill = false){
+ //   while(ISFill = false){
     if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == false*/ ){
       IndexBottom.set(-1);
       centerIntake.set(0.5);
       RobotMap.LeftIntake.set(-0.5);
     }
-    //top = ball, mid = none
-    else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == true*/ ){
-      IndexBottom.set(0);
-      centerIntake.set(0.5);
-      RobotMap.LeftIntake.set(-0.5);
-    }
+    // //top = ball, mid = none
+    // else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == true*/ ){
+    //   IndexBottom.set(0);
+    //   centerIntake.set(0.5);
+    //   RobotMap.LeftIntake.set(-0.5);
+    // }
     //top = ball, mid = ball
     else if(BeamBrakeTop.get() == false /*&& BeamBrakeBottom.get() == false*/){
       IndexBottom.set(0);
       centerIntake.set(0);
       RobotMap.LeftIntake.set(0);
     }
-    else if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == true*/){
-      IndexBottom.set(-1);
-      centerIntake.set(0.5);
-      RobotMap.LeftIntake.set(-0.5);
-    }
-  }
-  IndexBottom.set(0);
-  centerIntake.set(0);
-  RobotMap.LeftIntake.set(0);
+    //else if(BeamBrakeTop.get() == true /*&& BeamBrakeBottom.get() == true*/){
+    //  IndexBottom.set(-1);
+    //  centerIntake.set(0.5);
+    //  RobotMap.LeftIntake.set(-0.5);
+    //}
+  //}
+  //IndexBottom.set(0);
+  //centerIntake.set(0);
+  //RobotMap.LeftIntake.set(0);
   //Robot.kFillup.isFinished();
 }
   //think in 3 positions, top, mid, low
@@ -120,10 +120,18 @@ public class Index extends SubsystemBase {
   /*
   ** upup down stop
   */
-  public void Aindexup(){
+  public void Aindexup() {
+
+      RobotMap.CenterIntake.set(0.5);
+      IndexBottom.set(-1);
+      RobotMap.LeftIntake.set(-0.5);
+
+  }
+  public void ABleh(){
     RobotMap.CenterIntake.set(0.5);
       IndexBottom.set(-1);
       RobotMap.LeftIntake.set(-0.5);
+      RobotMap.Topin.set(-1);
   }
  public void IndexStop(){
   //IndexBottom.set(0);

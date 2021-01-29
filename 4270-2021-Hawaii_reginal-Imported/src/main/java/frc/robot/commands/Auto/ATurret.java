@@ -1,43 +1,34 @@
 package frc.robot.commands.Auto;
-
 //import java.util.Set;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.Turret;
 
-//for help with the new way https://docs.wpilib.org/en/latest/docs/software/commandbased/commands.html
-//if the can bus isent compleat, neos wornt work!!! But talonfx might :)
 public class ATurret extends CommandBase {
   private final Turret kTurret;
-    
-  public ATurret(Turret subsystem) {
-    kTurret = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(kTurret);
+  boolean Amode;
+  boolean Astate;
+  public ATurret(boolean state, boolean mode) {
+    Astate = state;
+    Amode = mode;
+
+    kTurret = Robot.kTurret;
+    addRequirements(kTurret);    
   }
 
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    //    m_climber.climb(50);
-    kTurret.togglebtn = true;
- 
+    //kTurret.togglebtn = true;
+     //    m_climber.climb(50);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    kTurret.turretAuto();
-    //Robot.kTurret.areweinrange();
-    ////Robot.kTurret.camencreset();
-    //Robot.kTurret.toggleon();
-    ////Robot.kTurret.shootshoot();
-    //Robot.kTurret.track();
-    ////Robot.kTurret.camPosReset();
-   
+    kTurret.turretAuto(Astate, Amode);
   }
 
   // Make this return true when this Command no longer needs to run execute()

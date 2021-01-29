@@ -3,9 +3,7 @@ package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 
 /**
  * An example command that uses an example subsystem.
@@ -19,10 +17,10 @@ public class Driving extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Driving(Drivetrain subsystem) {
-    kDrivetrain = subsystem;
+  public Driving() {
+    kDrivetrain = Robot.kDrivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(kDrivetrain);
   }
 
   // Called when the command is initially scheduled.

@@ -9,8 +9,9 @@ import frc.robot.subsystems.Index;
 public class AFillup extends CommandBase {
   private final Index kIndex;
     
-  public AFillup(Index subsystem) {
-    kIndex = subsystem;
+  public AFillup() {
+    
+    kIndex = Robot.kIndex;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kIndex);
   }

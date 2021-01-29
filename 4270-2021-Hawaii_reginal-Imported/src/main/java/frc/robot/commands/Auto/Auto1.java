@@ -7,9 +7,9 @@ import frc.robot.RobotMap;
 import frc.robot.subsystems.Drivetrain;
 
 public class Auto1 extends SequentialCommandGroup {
-  private boolean firstRun = true;
-  private boolean secondrun = true;
-  private boolean thirdrun = true;
+  boolean firstRun = true;
+  boolean secondrun = true;
+  boolean thirdrun = true;
   private double startTime2;
   private double  startTime1;
   private double startTime;
@@ -17,23 +17,6 @@ public class Auto1 extends SequentialCommandGroup {
   public Auto1(Drivetrain drive /*, Limelight vision, Shooter shooter*/) {
      this.drive = drive;
      runAuto();
-     
-    // addCommands(
-    //   //new ATurret(Robot.kTurret),
-    //   //new AShoot(Robot.kIndex),
-    //   //new WaitCommand(3),
-    //   new back(Robot.kDrivetrain),
-    //   //new ATurret(Robot.kTurret)
-    //   new WaitCommand(3),
-    //   new drivestop(Robot.kDrivetrain)
-
-    //   //new ATurret(Robot.kTurret),
-    //   //new AIntakeDown(Robot.kShifter).alongWith(new AIntakeIN(Robot.kIntake))
-    //   //TODO: find out how to put wait commands in code wether it be in this file or in each commmand file      
-    //   );//,
-      //change this to commands
-      //Robot.kShifter.hoodup().alongwith(Robot.kShifter.fast()));
-
   }
 
   public void runAuto() {
@@ -42,8 +25,8 @@ public class Auto1 extends SequentialCommandGroup {
       firstRun = false;
     }
     while(Timer.getFPGATimestamp() - startTime < 1){
-      //drive.setOutputVolts(4, 4);
-      Robot.kTurret.turretAuto();
+      drive.setOutputVolts(4, 4);
+      Robot.kTurret.turretAuto(true,true);
       Robot.kTurret.togglebtn = true;
     }
 
@@ -55,8 +38,8 @@ public class Auto1 extends SequentialCommandGroup {
     }
     while(Timer.getFPGATimestamp() - startTime1 < 5){
       RobotMap.Topin.set(-1);
-      Robot.kIndex.Aindexup();
-      Robot.kTurret.turretAuto();
+      //Robot.kIndex.Aindexup();
+      Robot.kTurret.turretAuto(true,true);
     } 
     Robot.kTurret.togglebtn = false;
     Robot.kTurret.spinStop();
@@ -72,7 +55,7 @@ public class Auto1 extends SequentialCommandGroup {
     }
     while(Timer.getFPGATimestamp() - startTime2 < 2){
       
-      //drive.setOutputVolts(4, 4);
+      drive.setOutputVolts(4, 4);
     }
     drive.setOutputVolts(0.0, 0.0);
    }

@@ -3,6 +3,7 @@ package frc.robot.commands.Auto;
 //import java.util.Set;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 //import frc.robot.Robot;
 //import frc.robot.subsystems.Index;
@@ -13,8 +14,8 @@ import frc.robot.subsystems.Intake;
 public class AIntakeIN extends CommandBase {
   private final Intake kIntake;
     
-  public AIntakeIN(Intake subsystem) {
-    kIntake = subsystem;
+  public AIntakeIN() {
+    kIntake = Robot.kIntake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kIntake);
   }
@@ -23,7 +24,7 @@ public class AIntakeIN extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    //    m_climber.climb(50);
+    //m_climber.climb(50);
     kIntake.Intake.set(-0.8);
     
  

@@ -1,7 +1,7 @@
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,8 +12,9 @@ import frc.robot.commands.Indexing;
 import frc.robot.commands.Intaking;
 import frc.robot.commands.Shooter;
 import frc.robot.commands.Spinwheeling;
-import frc.robot.commands.Auto.Auto1;
-import frc.robot.commands.Auto.Auto2;
+//import frc.robot.commands.Auto.Auto1;
+//import frc.robot.commands.Auto.Auto2;
+
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hang;
 import frc.robot.subsystems.Index;
@@ -21,6 +22,10 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Spinwheel;
 import frc.robot.subsystems.Turret;
+//import frc.robot.commands.Auto.AutoTest2;
+import frc.robot.commands.Auto.Auto2;
+import frc.robot.commands.Auto.AutoTest1;
+//import jdk.nashorn.internal.ir.ThrowNode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
@@ -34,8 +39,7 @@ public class Robot extends TimedRobot {
   
   //Command autonomusCommand;
 	private Command autonomousCommand;
-	private SendableChooser<Command> chooser = new SendableChooser<>();
-  
+	static SendableChooser<Command> autoChooser  = new SendableChooser<>();
   //private RobotContainer m_robotContainer;
 
   public static OI m_oi;
@@ -76,10 +80,18 @@ public class Robot extends TimedRobot {
 
     // Autonomous mode selector
     
-    chooser.setDefaultOption("Test", new Auto2(kDrivetrain));
-    chooser.setDefaultOption("Auto", new Auto1(kDrivetrain));
-		SmartDashboard.putData("Auto mode", chooser);
+    //chooser.setDefaultOption("Test", new Auto2(kDrivetrain));
+    //chooser.setDefaultOption("Auto", new Auto1(kDrivetrain));
+    //chooser.setDefaultOption("Test", new AutoTest2());
+    //chooser.setDefaultOption("Auto", new AutoTest1());
+    //SmartDashboard.putData("Auto mode", chooser);
+    autoChooser.setDefaultOption("test", new AutoTest1());
+    autoChooser.addOption("test1", new Auto2());
+    SmartDashboard.putData("Autonomous routine", autoChooser);
 
+    //chooser.setDefaultOption("Test", 1);
+    //chooser.addOption("Auto", 2);
+		//SmartDashboard.putData("Auto mode", chooser);
   }
   
   
@@ -97,7 +109,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     
-    //CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
     //cam.setFPS(15);
     //cam.setResolution(320, 240);
     
@@ -114,14 +126,16 @@ public class Robot extends TimedRobot {
     container.reset();
     kTurret.togglebtn = false;
     kTurret.unblindMe();
-
+    //chooser.setDefaultOption("Test", AutoTest2);
+    //chooser.addOption("Auto", AutoTest1);
+    
   }
 
   @Override
   public void disabledPeriodic() {
     kTurret.unblindMe();
     Scheduler.getInstance().run();
-    SmartDashboard.putString("Auto Command", chooser.getSelected().getName());
+//    SmartDashboard.putString("Auto Command", chooser.getSelected().getName());
 
   }
 
@@ -135,10 +149,12 @@ public class Robot extends TimedRobot {
     //kShifter.fast();
     //Auto1 driveAuto = new Auto1(kDrivetrain);
     //kDrivetrain.lowGear();
-    
-    autonomousCommand = chooser.getSelected();
+    //kTurret.unblindMe();
+    autonomousCommand = container.getSelectedAuto();  // autoChooser.getSelected();
 
-		// schedule the autonomous command (example)
+    //autonomousCommand = chooser.getSelected();
+
+    // schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.schedule();
 		}
@@ -149,7 +165,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    //Scheduler.getInstance().run();
     
   }
   @Override
