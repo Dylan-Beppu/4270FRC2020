@@ -43,5 +43,6 @@ public class ATurret extends CommandBase {
     //Robot.kProbe.switchExtension();
     Robot.kTurret.spinStop();
     Robot.kTurret.unblindMe();
+    kTurret.turretAuto(false, false);
   }
 }

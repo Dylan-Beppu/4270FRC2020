@@ -17,5 +17,6 @@ public class Auto2 extends SequentialCommandGroup {
     new AShoot().withTimeout(3),  
     new ATurret(true, true)
     ));
+
   }
 }

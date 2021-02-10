@@ -143,7 +143,6 @@ public class Turret extends SubsystemBase {
     dts = (targethight-camhight)/ Math.tan(Math.toRadians(ty.getValue().getDouble()+15));
     SmartDashboard.putNumber("dts", dts);
     SmartDashboard.putNumber("Distants To target in m", dts);
-    //TODO: fix after comp target hight, it is 35 in or 2.278126‬ ‬meaters
     if(dts < 2 && togglebtn == true){
       Robot.kShifter.hooddown();
       speedo1 = Math.sin(dts/3);
@@ -175,7 +174,8 @@ public class Turret extends SubsystemBase {
     //mode ture = reguler, false = barf
     togglebtn = state;
     if(togglebtn == true && mode == true){
-    areweinrange();
+    //areweinrange();
+    speedo1 = 0.4;
     track();
     }
     else{
@@ -260,9 +260,9 @@ public class Turret extends SubsystemBase {
   public void basic(){
     if(togglebtn == true){
       RobotMap.FlyboiR.setOpenLoopRampRate(0.7);
-      RobotMap.FlyboiR.set(0.65);
+      RobotMap.FlyboiR.set(0.6);
       RobotMap.FlyboiL.setOpenLoopRampRate(0.7);
-      RobotMap.FlyboiL.set(-0.75);
+      RobotMap.FlyboiL.set(-0.6);
       //Topin.set(-1);
       Robot.kShifter.hoodup(); 
   }

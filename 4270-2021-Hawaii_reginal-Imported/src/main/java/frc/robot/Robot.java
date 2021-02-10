@@ -85,8 +85,8 @@ public class Robot extends TimedRobot {
     //chooser.setDefaultOption("Test", new AutoTest2());
     //chooser.setDefaultOption("Auto", new AutoTest1());
     //SmartDashboard.putData("Auto mode", chooser);
-    autoChooser.setDefaultOption("test", new AutoTest1());
-    autoChooser.addOption("test1", new Auto2());
+    autoChooser.setDefaultOption("Clear system", new AutoTest1());
+    autoChooser.addOption("Statinary Turet", new Auto2());
     SmartDashboard.putData("Autonomous routine", autoChooser);
 
     //chooser.setDefaultOption("Test", 1);
