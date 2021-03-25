@@ -7,8 +7,14 @@ import com.kauailabs.navx.frc.AHRS;
 //import com.revrobotics.CANEncoder;
 //import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
@@ -20,10 +26,19 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 
+import frc.robot.Constants.DriveConstants;
+
+
+@SuppressWarnings("import unused")
+
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class Drivetrain extends SubsystemBase {
+  private double X;
+  private double Y;
+  private double R;
+  private boolean ToBallState = false;
 
   private static final double kGearRatio = 22; // gear ratio
   private static final double kWheelRadiusInches = 2.0;
@@ -47,7 +62,6 @@ public class Drivetrain extends SubsystemBase {
   DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(24));
   
   //DifferentialDriveOdometry odometry2 = new DifferentialDriveOdometry(kinematics2, getHeading());
-  DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
 
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.3, 1.96, 0.06); 
 
@@ -59,7 +73,7 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     leftSub.follow(leftMaster);
     rightSub.follow(rightMaster);
-
+    rightMaster.getSelectedSensorPosition(1);
     //leftMaster.setInverted(true);
     //rightMaster.setInverted(true);
 
@@ -74,16 +88,8 @@ public class Drivetrain extends SubsystemBase {
   public void highGear(){
     Robot.kShifter.isfast = true;
   }
-  /*public void shift(){
-    if(Robot.m_oi.Driver.getRawButtonPressed(5)){
-      if(Robot.kShifter.isfast == true){
-        Robot.kShifter.isfast = false;
-      }
-      else{
-        Robot.kShifter.isfast = true;
-      }
-    }
-  }  */
+
+
   public void tank(){
     if(Robot.kShifter.isfast == true){
       if(Math.abs(Robot.m_oi.Driver.getRawAxis(1)*-1) > deadzoneleft){
@@ -125,77 +131,50 @@ public class Drivetrain extends SubsystemBase {
     }
   }
 
-  public Rotation2d getHeading() {
-    return Rotation2d.fromDegrees(-Gyro.getAngle());
-    
-  }
-      
-  public DifferentialDriveWheelSpeeds getSpeeds() {
-    return new DifferentialDriveWheelSpeeds(
-      leftMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60,  
-      rightMaster.getSelectedSensorVelocity()*100 /2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1);
-}
-  public double getLdistance(){
-    return leftMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches));
-  }
-  public double getRdistance(){
-    return rightMaster.getSelectedSensorPosition()/2048 /kGearRatio * (Math.PI * Units.inchesToMeters(kWheelRadiusInches) *-1);
-  }
-  
 
-  public double getLvelocity(){
-
-    return leftMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
-    //return leftMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
-  }
-
-  public double getRvelocity(){
-    return rightMaster.getSelectedSensorVelocity()/2048 *60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60 *-1;
-    //return rightMaster.getSelectedSensorVelocity()*60 / kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches) / 60;
-
-  }
-
-  public DifferentialDriveKinematics getKinematics() {
-    return kinematics;
-  }
-
-  public Pose2d getPose() {
-    return pose;
-  }
-
-  public SimpleMotorFeedforward getFeedforward() {
-    return feedforward;
-  }
-
-  public PIDController getLeftPIDController() {
-    return leftPIDController;
-  }
-
-  public PIDController getRightPIDController() {
-    return rightPIDController;
-  }
-
-  public void setOutputVolts(double leftVolts, double rightVolts) {
-    //leftMaster.configVoltageCompSaturation(leftVolts / 12);
-    leftMaster.set(leftVolts / 12);
-    leftSub.set(leftVolts / 12);
-    //rightMaster.configVoltageCompSaturation(rightVolts / 12);
-    rightMaster.set(rightVolts / 12);
-    rightSub.set(rightVolts / 12);    
-  }
-
-  public void reset() {
-    odometry.resetPosition(new Pose2d(), getHeading());
-  }
   public void autoBSpeed(double dirspd){
     RobotMap.rightdrive1.set(-dirspd);
     RobotMap.rightdrive2.set(-dirspd);
     RobotMap.leftdrive1.set(dirspd);
     RobotMap.leftdrive2.set(dirspd);
   }
-
-  @Override
-  public void periodic() {
-    pose = odometry.update(getHeading(), getLdistance(), getRdistance());
+  
+  public void followSet(boolean Stateset){
+    ToBallState = Stateset;
   }
+
+  public void Camfollow(){
+    //check distance not cam is rotated 90 deg
+    if (ToBallState == true){
+      NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("SmartDashboard");
+    X = table.getEntry("X").getValue().getDouble();
+    Y = table.getEntry("Y").getValue().getDouble();
+    R = table.getEntry("R").getValue().getDouble();
+      if (X > 130 && X < 255 && R < 20){
+        if (Y > 90 && Y < 110){
+          setOutputVolts(-3, -3);
+        }else if(Y <= 90){
+          setOutputVolts(-2, -3);
+        }else if(Y >= 110){
+          setOutputVolts(-3, -2);
+        }
+      }else{
+        ToBallState = false;
+        setOutputVolts(0, 0);
+      }
+      //ToBallState = false;
+      
+    }
+
+  }
+  public void setOutputVolts(double Ldrive,double Rdrive){
+    RobotMap.rightdrive1.set(-Rdrive/12);
+    RobotMap.rightdrive2.set(-Rdrive/12);
+    RobotMap.leftdrive1.set(Ldrive/12);
+    RobotMap.leftdrive2.set(Ldrive/12);
+  }
+
+  //Wapoint starts here ------------------------------------------------------------------------------------------
+
 }

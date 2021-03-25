@@ -3,11 +3,16 @@ package frc.robot;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
-
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 //import edu.wpi.first.wpilibj.geometry.Pose2d;
 //import edu.wpi.first.wpilibj.geometry.Rotation2d;
 //import edu.wpi.first.wpilibj.geometry.Transform2d;
@@ -15,8 +20,10 @@ import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 //import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.util.Units;
 //import java.util.Arrays;
 //import java.util.Map;
@@ -24,6 +31,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
 //import frc.robot.commands.*;
 //import static java.util.Map.entry;
 import frc.robot.subsystems.Drivetrain;
@@ -34,7 +43,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   //private final RobotMap kRobotMap = new RobotMap();
   private final Drivetrain drive = new Drivetrain();
-  private String trajectoryJSON = Robot.trajectoryJSON;
+  //private String trajectoryJSON = Robot.trajectoryJSON;
   //private final Turret kTurret = new Turret();
   //private final Shooter kShooter = new Shooter(kTurret);
   //boolean kAutoMode ;
@@ -73,48 +82,7 @@ public class RobotContainer {
     }
     
 
-    public Command getAutonomousCommand() {
-    
-      TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(2.0), Units.feetToMeters(2.0));
-      config.setKinematics(drive.getKinematics());
-      
-      //pose2d is seting the waypoints, try make diffrent trjectores rather than just one, may need a sepreat file for each one
-      //or change it to pathweaver paths
-    trajectoryJSON = null;
-    //Trajectory trajectory = null;
-    Trajectory trajectory = new Trajectory(new ArrayList<Trajectory.State>());
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-      SmartDashboard.putBoolean("haspathbeenfound", true);
-    } catch (IOException ex){
-      DriverStation.reportError("Unable to open trajectory:" + trajectoryJSON, ex.getStackTrace());
-      SmartDashboard.putBoolean("haspathbeenfound", false);
-    }
-    
-      
-      RamseteCommand command = new RamseteCommand(
-          trajectory,
-          drive::getPose,
-          new RamseteController(2, .7),
-          drive.getFeedforward(),
-          drive.getKinematics(),
-          drive::getSpeeds,
-          drive.getLeftPIDController(),
-          drive.getRightPIDController(),
-          drive::setOutputVolts,
-          drive
-          
-      );
-  
-      return command.andThen(() -> drive.setOutputVolts(0, 0));
-      
-    }
-    
-  
-    public void reset() {
-      drive.reset();
-    }
+   
     public void hi(){
       drive.tank();
       // kShooter.schedule();

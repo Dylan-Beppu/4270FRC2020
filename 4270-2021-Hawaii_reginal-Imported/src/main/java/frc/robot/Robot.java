@@ -25,6 +25,7 @@ import frc.robot.subsystems.Turret;
 //import frc.robot.commands.Auto.AutoTest2;
 import frc.robot.commands.Auto.Auto2;
 import frc.robot.commands.Auto.AutoTest1;
+import frc.robot.commands.Auto.Auto3;
 //import jdk.nashorn.internal.ir.ThrowNode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -87,6 +88,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData("Auto mode", chooser);
     autoChooser.setDefaultOption("Clear system", new AutoTest1());
     autoChooser.addOption("Statinary Turet", new Auto2());
+    autoChooser.addOption("Follow ball 30 sec", new Auto3());
     SmartDashboard.putData("Autonomous routine", autoChooser);
 
     //chooser.setDefaultOption("Test", 1);
@@ -123,7 +125,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    container.reset();
+    //container.reset();
     kTurret.togglebtn = false;
     kTurret.unblindMe();
     //chooser.setDefaultOption("Test", AutoTest2);
@@ -144,7 +146,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    container.reset();
+    //container.reset();
     //Auto2 driveAuto = new Auto2(kDrivetrain);
     //kShifter.fast();
     //Auto1 driveAuto = new Auto1(kDrivetrain);
@@ -185,7 +187,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    container.reset();
+    //container.reset();
     container.hi();
 
     kShooter.schedule();
