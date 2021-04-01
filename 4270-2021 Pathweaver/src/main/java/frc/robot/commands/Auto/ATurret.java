@@ -3,18 +3,15 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.*;
 
 public class ATurret extends CommandBase {
   private final Turret kTurret;
-  boolean Amode;
-  boolean Astate;
-  public ATurret(boolean state, boolean mode) {
-    Astate = state;
-    Amode = mode;
+  private final Index kIndex;
 
+  public ATurret() {
     kTurret = Robot.kTurret;
-    addRequirements(kTurret);    
+    kIndex = Robot.kIndex;
   }
 
 
@@ -28,7 +25,8 @@ public class ATurret extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    kTurret.turretAuto(Astate, Amode);
+    kTurret.turretAuto(true);
+    kIndex.Aindexup();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,6 +41,8 @@ public class ATurret extends CommandBase {
     //Robot.kProbe.switchExtension();
     Robot.kTurret.spinStop();
     Robot.kTurret.unblindMe();
-    kTurret.turretAuto(false, false);
+    kTurret.turretAuto(false);
+    kIndex.IndexStop();
+
   }
 }

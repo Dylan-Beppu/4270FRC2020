@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.buttons.Button;
 //import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Units;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import edu.wpi.first.wpilibj2.command.WaitCommand;
 //import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
@@ -168,20 +169,18 @@ public class Turret extends SubsystemBase {
     //frc code !+Gam3^time#2021
   }
   
-
   //autonomous turret toggle
-  public void turretAuto(boolean state, boolean mode){
+  public void turretAuto(boolean state){
     //mode ture = reguler, false = barf
     togglebtn = state;
-    if(togglebtn == true && mode == true){
+    if(togglebtn == true ){
     //areweinrange();
     speedo1 = 0.4;
-    track();
+   track();
     }
     else{
-      //runs the barf comand and the set zero one
       basic();
-    } 
+    }
   }
 
   //turret toggle button
@@ -273,4 +272,5 @@ public class Turret extends SubsystemBase {
   }
 }
   
+
 }

@@ -24,11 +24,11 @@ import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Spinwheel;
 import frc.robot.subsystems.Turret;
 //import frc.robot.commands.Auto.AutoTest2;
-import frc.robot.commands.Auto.Auto2;
-import frc.robot.commands.Auto.AutoTest1;
-import frc.robot.commands.Auto.Auto3;
-import frc.robot.commands.Auto.Auto4;
-import frc.robot.commands.Auto.Auto5;
+//import frc.robot.commands.Auto.*;
+import frc.robot.commands.AutoRouteans.*;
+//import frc.robot.commands.Auto.Auto3;
+//import frc.robot.commands.Auto.Auto4;
+//import frc.robot.commands.Auto.Auto5;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
     // cam.setResolution(320, 240);
 
     // Autonomous mode selector 
-    autoChooser.setDefaultOption("Clear system", new AutoTest1());
+    autoChooser.setDefaultOption("Clear system", new Auto3());
     //autoChooser.addOption("Statinary Turet", new Auto2());
     autoChooser.addOption("Drive 1m foward", new Auto3());
     autoChooser.addOption("6ft", new Auto4());

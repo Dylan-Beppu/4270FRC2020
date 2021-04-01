@@ -9,10 +9,8 @@ import frc.robot.subsystems.Index;
 public class AFillup extends CommandBase {
   private final Index kIndex;
     
-  public AFillup() {
-    
+  public AFillup() {    
     kIndex = Robot.kIndex;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(kIndex);
   }
 
@@ -20,7 +18,6 @@ public class AFillup extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    //    m_climber.climb(50);
     kIndex.ISFill = false;
     
  
@@ -40,12 +37,9 @@ public class AFillup extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    //Robot.kProbe.switchExtension();
-    Robot.kTurret.spinStop();
-    Robot.kTurret.unblindMe();
+    kIndex.IndexStop();
   }
 }

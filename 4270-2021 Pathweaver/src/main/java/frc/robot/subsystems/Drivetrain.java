@@ -296,7 +296,7 @@ public class Drivetrain extends SubsystemBase {
     // String trajectoryJSON = "Paths/output/Unnamed.wpilib.json";
 
     try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve("output/"+trajectoryJSON);
 
       Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
 
