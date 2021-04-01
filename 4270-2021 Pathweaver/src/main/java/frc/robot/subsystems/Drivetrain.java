@@ -79,6 +79,8 @@ public class Drivetrain extends SubsystemBase {
   PIDController rightPIDController = new PIDController(1, 0, 0);
 
   Pose2d pose = new Pose2d();
+  private double leftval = 0;
+  private double rightval = 0;
 
   // The motors on the left side of the drive.
   private final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(leftMaster, leftSub);
@@ -105,29 +107,30 @@ public class Drivetrain extends SubsystemBase {
   public void tank() {
     if (Robot.kShifter.isfast == true) {
       if (Math.abs(Robot.m_oi.Driver.getRawAxis(1) * -1) > deadzoneleft) {
-        m_leftMotors.set(Robot.m_oi.Driver.getRawAxis(1) * 0.4);
+        leftval =  Robot.m_oi.Driver.getRawAxis(1) * 0.4;        
       } else {
-        m_leftMotors.set(0);
+        leftval = 0;        
       }
       if (Math.abs(Robot.m_oi.Driver.getRawAxis(5) * -1) > deadzoneright) {
-        m_rightMotors.set(Robot.m_oi.Driver.getRawAxis(5) * 0.4);
+        rightval =  Robot.m_oi.Driver.getRawAxis(5) * 0.4;  
       } else {
-        m_rightMotors.set(0);
+        rightval = 0;
       }
     }
     // when slow
     else {
       if (Math.abs(Robot.m_oi.Driver.getRawAxis(1) * -1) > deadzoneleft) {
-        m_leftMotors.set(Robot.m_oi.Driver.getRawAxis(1));
+        leftval = Robot.m_oi.Driver.getRawAxis(1);
       } else {
-        m_leftMotors.set(0);
+        leftval = 0;  
       }
       if (Math.abs(Robot.m_oi.Driver.getRawAxis(5) * -1) > deadzoneright) {
-        m_rightMotors.set(Robot.m_oi.Driver.getRawAxis(5));
+        rightval =  Robot.m_oi.Driver.getRawAxis(5);  
       } else {
-        m_rightMotors.set(0);
+        rightval = 0;
       }
     }
+    m_drive.tankDrive(leftval, rightval);
   }
 
   public void autoBSpeed(double dirspd) {
@@ -176,9 +179,9 @@ public class Drivetrain extends SubsystemBase {
   // ------------------------------------------------------------------------------------------
 
   private double nativeUnitsToDistanceMeters(double sensorCounts) {
-    double motorRotations = (double) sensorCounts / DriveConstants.kEncoderCPR;
+    double motorRotations = sensorCounts / DriveConstants.kEncoderCPR;
     double wheelRotations = motorRotations / DriveConstants.kGearRatio;
-    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(DriveConstants.kWheelDiameterInc));
+    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(DriveConstants.kWheelDiameterInc/2));
     return positionMeters;
   }
 

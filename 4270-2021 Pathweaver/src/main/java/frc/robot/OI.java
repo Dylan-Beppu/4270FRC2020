@@ -15,7 +15,7 @@ public class OI {
 
   public Joystick Driver = new Joystick(0);
 
-  public Joystick BtnPanle = new Joystick(1);
+  //public Joystick BtnPanle = new Joystick(1);
   // Joystick configuration (Switch pro controler)
   /*
    * public JoystickButton DriTargTog = new JoystickButton(Driver, 6); public
@@ -49,21 +49,21 @@ public class OI {
    */
 
   // Buton Panle configeration
-  /*
-   * public JoystickButton PanTargetTogle = new JoystickButton(Driver, 18); public
-   * JoystickButton PanShoot = new JoystickButton(Driver, 18); public
-   * JoystickButton PanBleh = new JoystickButton(Driver, 18); public
-   * JoystickButton PanIntakeDown = new JoystickButton(Driver, 18); public
-   * JoystickButton PanIndex = new JoystickButton(Driver, 18); public
-   * JoystickButton PanOut = new JoystickButton(Driver, 18);
-   */
+  
+   public JoystickButton PanTargetTogle = new JoystickButton(Driver, 18); 
+   public JoystickButton PanShoot = new JoystickButton(Driver, 18); 
+   public JoystickButton PanBleh = new JoystickButton(Driver, 18); 
+   public JoystickButton PanIntakeDown = new JoystickButton(Driver, 18); 
+   public JoystickButton PanIndex = new JoystickButton(Driver, 18); 
+   public JoystickButton PanOut = new JoystickButton(Driver, 18);
+   
 
-  public JoystickButton PanTargetTogle = new JoystickButton(BtnPanle, 1);
-  public JoystickButton PanShoot = new JoystickButton(BtnPanle, 2);
-  public JoystickButton PanBleh = new JoystickButton(BtnPanle, 3);
-  public JoystickButton PanIntakeDown = new JoystickButton(BtnPanle, 4);
-  public JoystickButton PanIndex = new JoystickButton(BtnPanle, 5);
-  public JoystickButton PanOut = new JoystickButton(BtnPanle, 6);
+  //public JoystickButton PanTargetTogle = new JoystickButton(BtnPanle, 1);
+  //public JoystickButton PanShoot = new JoystickButton(BtnPanle, 2);
+  //public JoystickButton PanBleh = new JoystickButton(BtnPanle, 3);
+  //public JoystickButton PanIntakeDown = new JoystickButton(BtnPanle, 4);
+  //public JoystickButton PanIndex = new JoystickButton(BtnPanle, 5);
+  //public JoystickButton PanOut = new JoystickButton(BtnPanle, 6);
 
   /*
    * public JoystickButton Panbtn7 = new JoystickButton(BtnPanle, 7); public

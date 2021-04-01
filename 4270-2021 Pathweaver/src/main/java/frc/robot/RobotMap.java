@@ -96,8 +96,8 @@ public class RobotMap {
     rightdrive2.configFactoryDefault();
     leftdrive1.configFactoryDefault();
     leftdrive2.configFactoryDefault();
-    rightdrive1.setInverted(true);
-    rightdrive2.setInverted(true);
+    rightdrive1.setInverted(false);
+    rightdrive2.setInverted(false);
     leftdrive1.setInverted(false);
     leftdrive2.setInverted(false);
     rightdrive2.setNeutralMode(NeutralMode.Brake);

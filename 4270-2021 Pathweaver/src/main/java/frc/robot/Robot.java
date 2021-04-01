@@ -27,7 +27,8 @@ import frc.robot.subsystems.Turret;
 import frc.robot.commands.Auto.Auto2;
 import frc.robot.commands.Auto.AutoTest1;
 import frc.robot.commands.Auto.Auto3;
-//import jdk.nashorn.internal.ir.ThrowNode;
+import frc.robot.commands.Auto.Auto4;
+import frc.robot.commands.Auto.Auto5;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -84,15 +85,12 @@ public class Robot extends TimedRobot {
     // cam.setResolution(320, 240);
 
     // Autonomous mode selector 
-
-    // chooser.setDefaultOption("Test", new Auto2(kDrivetrain));
-    // chooser.setDefaultOption("Auto", new Auto1(kDrivetrain));
-    // chooser.setDefaultOption("Test", new AutoTest2());
-    // chooser.setDefaultOption("Auto", new AutoTest1());
-    // SmartDashboard.putData("Auto mode", chooser);
     autoChooser.setDefaultOption("Clear system", new AutoTest1());
-    autoChooser.addOption("Statinary Turet", new Auto2());
+    //autoChooser.addOption("Statinary Turet", new Auto2());
     autoChooser.addOption("Drive 1m foward", new Auto3());
+    autoChooser.addOption("6ft", new Auto4());
+
+    autoChooser.addOption("turn", new Auto5());
     SmartDashboard.putData("Autonomous routine", autoChooser);
 
     //Starting position selsctor
@@ -100,21 +98,14 @@ public class Robot extends TimedRobot {
     // Replace null tihe the starting pos name and in all the atounomouses files
     // have them get the selected item and changeg there first path acordingly.
     // may not need the red or blue sides as the field is identical on both sides.
-    startpos.setDefaultOption("None",null);
-    startpos.addOption("Blue1", null);
-    startpos.addOption("Blue2", null);
-    startpos.addOption("Blue3", null);
-    startpos.addOption("Red1", null);
-    startpos.addOption("Red2", null);
-    startpos.addOption("Red3", null);
-    SmartDashboard.putData("Starting position", startpos);
-
-
-
-
-    // chooser.setDefaultOption("Test", 1);
-    // chooser.addOption("Auto", 2);
-    // SmartDashboard.putData("Auto mode", chooser);
+    // startpos.setDefaultOption("None",null);
+    // startpos.addOption("Blue1", null);
+    // startpos.addOption("Blue2", null);
+    // startpos.addOption("Blue3", null);
+    // startpos.addOption("Red1", null);
+    // startpos.addOption("Red2", null);
+    // startpos.addOption("Red3", null);
+    // SmartDashboard.putData("Starting position", startpos);
   }
 
   /**
@@ -139,9 +130,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     // cam.setFPS(15);
     // cam.setResolution(320, 240);
-
-    // kShooter.schedule();
-
   }
 
   /**
@@ -149,20 +137,19 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    RobotMap.gyro.zeroYaw();
+    RobotMap.gyro.reset();
     // container.reset();
     kTurret.togglebtn = false;
     kTurret.unblindMe();
-    // chooser.setDefaultOption("Test", AutoTest2);
-    // chooser.addOption("Auto", AutoTest1);
-
   }
 
   @Override
   public void disabledPeriodic() {
+    RobotMap.gyro.zeroYaw();
+    RobotMap.gyro.reset();
     kTurret.unblindMe();
     Scheduler.getInstance().run();
-    // SmartDashboard.putString("Auto Command", chooser.getSelected().getName());
-
   }
 
   /**
@@ -171,17 +158,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    // container.reset();
-    // Auto2 driveAuto = new Auto2(kDrivetrain);
-    // kShifter.fast();
-    // Auto1 driveAuto = new Auto1(kDrivetrain);
-    // kDrivetrain.lowGear();
-    // kTurret.unblindMe();
-    autonomousCommand = container.getSelectedAuto(); // autoChooser.getSelected();
+    RobotMap.gyro.reset();
+    RobotMap.gyro.zeroYaw();
 
-    // autonomousCommand = chooser.getSelected();
+    autonomousCommand = container.getSelectedAuto();
 
-    // schedule the autonomous command (example)
+    //schedule the selected autonomous command
     if (autonomousCommand != null) {
       autonomousCommand.schedule();
     }
@@ -192,12 +174,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    // Scheduler.getInstance().run();
 
   }
 
   @Override
   public void teleopInit() {
+    RobotMap.gyro.reset();
+    RobotMap.gyro.zeroYaw();
     /*
      * This makes sure that the autonomous stops running when teleop starts
      * running. If you want the autonomous to continue until interrupted by
@@ -213,10 +196,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    // container.reset();
     kDriving.schedule();
     kShooter.schedule();
-
     kIntaking.schedule();
     kIndexing.schedule();
     kFast.schedule();
