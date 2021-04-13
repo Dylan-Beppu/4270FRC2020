@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 
+import com.playingwithfusion.CANVenom;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -55,10 +57,10 @@ import java.util.ArrayList;
 
 public class Robot extends TimedRobot {
 
-  static private double ENCODER_EDGES_PER_REV = 8192 / 4.;
+  static private double ENCODER_EDGES_PER_REV = 4096;
   static private int PIDIDX = 0;
-  static private int ENCODER_EPR = 8192;
-  static private double GEARING = 22;
+  static private int ENCODER_EPR = 4096;
+  static private double GEARING = 27.27;
   
   private double encoderConstant = (1 / GEARING) * (1 / ENCODER_EDGES_PER_REV);
 
@@ -122,13 +124,12 @@ public class Robot extends TimedRobot {
         // set right side methods = encoder methods
 
           
-        motor.setSensorPhase(false);
+        motor.setSensorPhase(true);
         rightEncoderPosition = ()
           -> motor.getSelectedSensorPosition(PIDIDX) * encoderConstant;
         rightEncoderRate = ()
           -> motor.getSelectedSensorVelocity(PIDIDX) * encoderConstant *
-               10;
-
+               10;          
 
         break;
       case LEFT:
@@ -162,13 +163,13 @@ public class Robot extends TimedRobot {
     stick = new Joystick(0);
     
     // create left motor
-    WPI_TalonFX leftMotor = setupWPI_TalonFX(1, Sides.LEFT, false);
+    WPI_TalonFX leftMotor = setupWPI_TalonFX(1, Sides.LEFT, true);
 
-    WPI_TalonFX leftFollowerID2 = setupWPI_TalonFX(2, Sides.FOLLOWER, false);
+    WPI_TalonFX leftFollowerID2 = setupWPI_TalonFX(2, Sides.FOLLOWER, true);
     leftFollowerID2.follow(leftMotor);
 
-    WPI_TalonFX rightMotor = setupWPI_TalonFX(3, Sides.RIGHT, false);
-    WPI_TalonFX rightFollowerID4 = setupWPI_TalonFX(4, Sides.FOLLOWER, false);    
+    WPI_TalonFX rightMotor = setupWPI_TalonFX(3, Sides.RIGHT, true);
+    WPI_TalonFX rightFollowerID4 = setupWPI_TalonFX(4, Sides.FOLLOWER, true);    
     rightFollowerID4.follow(rightMotor);
     drive = new DifferentialDrive(leftMotor, rightMotor);
     drive.setDeadband(0);

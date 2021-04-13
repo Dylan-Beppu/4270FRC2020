@@ -101,7 +101,7 @@ public class RobotMap {
     leftdrive1.setInverted(false);
     leftdrive2.setInverted(false);
     rightdrive2.setNeutralMode(NeutralMode.Brake);
-    rightdrive1.setNeutralMode(NeutralMode.Coast );
+    rightdrive1.setNeutralMode(NeutralMode.Coast);
     leftdrive1.setNeutralMode(NeutralMode.Brake);
     leftdrive2.setNeutralMode(NeutralMode.Coast);
     Topin.setIdleMode(IdleMode.kCoast);

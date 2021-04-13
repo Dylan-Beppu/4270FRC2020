@@ -304,8 +304,8 @@ public class Drivetrain extends SubsystemBase {
           new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
           new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
               DriveConstants.kaVoltSecondsSquaredPerMeter),
-          DriveConstants.kDriveKinematics, this::getWheelSpeeds, new PIDController(DriveConstants.kPDriveVel, 0, 0),
-          new PIDController(DriveConstants.kPDriveVel, 0, 0),
+          DriveConstants.kDriveKinematics, this::getWheelSpeeds, new PIDController(DriveConstants.kPDriveVel, DriveConstants.kIDriveVel, DriveConstants.kDDriveVel),
+          new PIDController(DriveConstants.kPDriveVel, DriveConstants.kIDriveVel, DriveConstants.kDDriveVel),
           // RamseteCommand passes volts to the callback
           this::tankDriveVolts, this);
 

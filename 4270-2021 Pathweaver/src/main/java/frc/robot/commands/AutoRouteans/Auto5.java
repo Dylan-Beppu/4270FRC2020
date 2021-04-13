@@ -20,7 +20,7 @@ public class Auto5 extends SequentialCommandGroup {
       //),
     new ParallelDeadlineGroup(
      // new ADrive(),
-      kDrivetrain.FollowPath("180.wpilib.json")
+      kDrivetrain.FollowPath("crazy.wpilib.json")
     )
     //new ParallelDeadlineGroup(
     //  new AFillup(),

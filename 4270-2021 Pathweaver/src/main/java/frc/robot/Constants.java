@@ -16,29 +16,36 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
+//see here for help with data analisis https://www.chiefdelphi.com/t/frc-robot-characterization-track-width-n-a/392068/15
 public final class Constants {
   public static final class DriveConstants {
 
     public static final boolean kLeftEncoderReversed = false;
     public static final boolean kRightEncoderReversed = true;
 
-    public static final double kTrackwidthMeters = 0.69;
+    //remembert to tune all the below for the frc robot using the Robot Characterization Toolsuite 
+    //start from commandline using "frc-characterization drive new" see here for help file:///C:/Users/Public/wpilib/2021/documentation/rtd/frc-docs-latest/index.html#document-docs/software/wpilib-tools/robot-characterization/index
+    //also use the right units
+    
+    public static final double kTrackwidthMeters = 0.3208593820918048; //not the same as robot base with thats sed in pathweaver
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
 
+    //base setup
     public static final double kEncoderCPR = 2048;
-    public static final double kWheelDiameterInc = 6;
+    public static final double kWheelDiameterInc = 6; 
 
-    // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
-    // These characterization values MUST be determined either experimentally or theoretically for *your* robot's drive.
-    // The Robot Characterization Toolsuite provides a convenient tool for obtaining these values for your robot.
-    public static final double ksVolts = 0.22;
-    public static final double kvVoltSecondsPerMeter = 1.98;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.3; //was 0.2
+    //SimpleMotorFeedforward varibles
+    public static final double ksVolts = 0.531;
+    public static final double kvVoltSecondsPerMeter = 12.2;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.725;
 
+    //grar ratio for high gear setting
     public static final double kGearRatio = 27.27;
-
-    // Example value only - as above, this must be tuned for your drive!
-    public static final double kPDriveVel = 1;
+    
+    //sets up pid controlers for ramsete command
+    public static final double kPDriveVel = 0.709; 
+    public static final double kIDriveVel = 0.0; 
+    public static final double kDDriveVel = 0.0; 
   }
 
   public static final class AutoConstants {

@@ -21,7 +21,7 @@ public class Auto4 extends SequentialCommandGroup {
       //),
     new ParallelDeadlineGroup(
      // new ADrive(),
-      kDrivetrain.FollowPath("6ft.wpilib.json")
+      kDrivetrain.FollowPath("180.wpilib.json")
     )
     //new ParallelDeadlineGroup(
     //  new AFillup(),
