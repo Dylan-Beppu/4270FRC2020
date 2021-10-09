@@ -61,14 +61,16 @@ public class Shifter extends SubsystemBase {
       Robot.kShifter.relasehang();
     }
   }
-    /*public void turrthood(){
+    /*
+    public void turrthood(){
       if(Robot.m_oi.BtnPanle.getRawButton(6) == true){
         hoodup();
       }
       else if(Robot.m_oi.BtnPanle.getRawButton(8) == true){
         hooddown();
       }
-    }*/
+    }
+    */
     public void shifter(){
       if(Robot.m_oi.DriGearUp.get()){
         fast();

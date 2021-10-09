@@ -52,9 +52,9 @@ public class OI {
   
    public JoystickButton PanTargetTogle = new JoystickButton(Driver, 18); 
    public JoystickButton PanShoot = new JoystickButton(Driver, 18); 
-   public JoystickButton PanBleh = new JoystickButton(Driver, 18); 
-   public JoystickButton PanIntakeDown = new JoystickButton(Driver, 18); 
-   public JoystickButton PanIndex = new JoystickButton(Driver, 18); 
+   public JoystickButton PanBleh = new JoystickButton(Driver, 10); 
+   public JoystickButton PanIntakeDown = new JoystickButton(Driver, 4); 
+   public JoystickButton PanIndex = new JoystickButton(Driver, 3); 
    public JoystickButton PanOut = new JoystickButton(Driver, 18);
    
 

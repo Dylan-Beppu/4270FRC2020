@@ -18,8 +18,8 @@
     # Only if you are doing drive (leave empty "[]" if not)
     "rightMotorsInverted": [True,True],
     # Encoder edges-per-revolution (*NOT* cycles per revolution!)
-    # For the CTRE Mag Encoder, use 4096 (4 * 1024 = 4096)
-    "encoderEPR": 4096,
+    # For the CTRE Mag Encoder, use 4096 (4 * 2048 = 4096)
+    "encoderEPR": 2048,
     # Gearing accounts for the gearing between the encoder and the output shaft
     "gearing": 27.27,
     # Encoder ports (leave empty "[]" if not needed)
@@ -46,6 +46,8 @@
     # "" (NavX using default SPI, ADXRS450 using onboard CS0, or no gyro)
     "gyroPort": "SerialPort.Port.kUSB",
 }
+
+
 
 
 

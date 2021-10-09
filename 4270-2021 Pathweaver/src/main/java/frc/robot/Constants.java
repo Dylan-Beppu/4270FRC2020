@@ -27,7 +27,7 @@ public final class Constants {
     //start from commandline using "frc-characterization drive new" see here for help file:///C:/Users/Public/wpilib/2021/documentation/rtd/frc-docs-latest/index.html#document-docs/software/wpilib-tools/robot-characterization/index
     //also use the right units
     
-    public static final double kTrackwidthMeters = 0.3208593820918048; //not the same as robot base with thats sed in pathweaver
+    public static final double kTrackwidthMeters = 0.687510456765938; //not the same as robot base with thats sed in pathweaver
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
 
     //base setup
@@ -35,15 +35,15 @@ public final class Constants {
     public static final double kWheelDiameterInc = 6; 
 
     //SimpleMotorFeedforward varibles
-    public static final double ksVolts = 0.531;
-    public static final double kvVoltSecondsPerMeter = 12.2;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.725;
+    public static final double ksVolts = 0.506;
+    public static final  double kvVoltSecondsPerMeter = 5.93;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.346;
 
     //grar ratio for high gear setting
     public static final double kGearRatio = 27.27;
     
     //sets up pid controlers for ramsete command
-    public static final double kPDriveVel = 0.709; 
+    public static final double kPDriveVel = 0.0223; 
     public static final double kIDriveVel = 0.0; 
     public static final double kDDriveVel = 0.0; 
   }
@@ -51,6 +51,6 @@ public final class Constants {
   public static final class AutoConstants {
     // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
     public static final double kRamseteB = 2;
-    public static final double kRamseteZeta = 0.7;
+    public static final double kRamseteZeta = 0.25;
   }
 }
