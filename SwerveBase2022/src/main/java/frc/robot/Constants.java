@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  //TODO: prefferbaly mount on RoboRio
   public static AHRS gyro = new AHRS(Port.kUSB);
 
   public static final class OIConstants {
@@ -130,17 +131,17 @@ public final class Constants {
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
     public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI;
 
-    public static final int kEncoderCPR = 1024;
-    public static final double kWheelDiameterMeters = 0.15;
-    public static final double kDriveEncoderDistancePerPulse =
+    public static final int DriveEncoderCPR = 1024;
+    public static final double DriveWheelDiameterMeters = 0.15;
+    public static final double DriveEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+        (DriveWheelDiameterMeters * Math.PI) / (double) DriveEncoderCPR;
 
-    public static final double kTurningEncoderDistancePerPulse =
+    public static final double DriveTurningEncoderDistancePerPulse =
         // Assumes the encoders are on a 1:1 reduction with the module shaft.
-        (2 * Math.PI) / (double) kEncoderCPR;
+        (2 * Math.PI) / (double) DriveEncoderCPR;
 
-    public static final double kPModuleTurningController = 1;
+    public static final double DrivePModuleTurningController = 1;
 
     public static final double kPModuleDriveController = 1;
   }
