@@ -20,8 +20,8 @@ public class SwerveModule {
   private final CANSparkMax m_driveMotor;
   private final CANSparkMax m_turningMotor;
 
-  private final Encoder m_driveEncoder;
-  private final Encoder m_turningEncoder;
+  //private final Encoder m_driveEncoder;
+  //private final Encoder m_turningEncoder;
 
   private final PIDController m_drivePIDController =
       new PIDController(ModuleConstants.kPModuleDriveController, 0, 0);
@@ -43,36 +43,36 @@ public class SwerveModule {
    * @param turningMotorChannel ID for the turning motor.
    */
   public SwerveModule(
-      int driveMotorChannel,
-      int turningMotorChannel,
-      int[] driveEncoderPorts,
-      int[] turningEncoderPorts,
+      CANSparkMax driveMotorChannel,
+      CANSparkMax turningMotorChannel,
       boolean driveEncoderReversed,
       boolean turningEncoderReversed) {
 
-    m_driveMotor = new CANSparkMax(driveMotorChannel, MotorType.kBrushless);
-    m_turningMotor = new CANSparkMax(turningMotorChannel, MotorType.kBrushless);
+    m_driveMotor = driveMotorChannel;
+    m_turningMotor = turningMotorChannel;
 
 
-    this.m_driveEncoder = new Encoder(driveEncoderPorts[0], driveEncoderPorts[1]);
-
-    this.m_turningEncoder = new Encoder(turningEncoderPorts[0], turningEncoderPorts[1]);
+    //this.m_driveEncoder = m_driveMotor.getEncoder();
+    //this.m_driveEncoder = new Encoder(driveEncoderPorts[0], driveEncoderPorts[1]);
+    //this.m_turningEncoder = m_turningMotor.getEncoder();
+    //this.m_turningEncoder = new Encoder(turningEncoderPorts[0], turningEncoderPorts[1]);
 
     // Set the distance per pulse for the drive encoder. We can simply use the
     // distance traveled for one rotation of the wheel divided by the encoder
     // resolution.
-    m_driveEncoder.setDistancePerPulse(ModuleConstants.kDriveEncoderDistancePerPulse);
-
+    //TODO:set the right cpm in constancs
+    //m_driveMotor  //setDistancePerPulse(ModuleConstants.kDriveEncoderDistancePerPulse);
+      
     // Set whether drive encoder should be reversed or not
-    m_driveEncoder.setReverseDirection(driveEncoderReversed);
-
+  //  m_driveEncoder.setReverseDirection(driveEncoderReversed);
+//_driveMotor.encoder
     // Set the distance (in this case, angle) per pulse for the turning encoder.
     // This is the the angle through an entire rotation (2 * wpi::math::pi)
     // divided by the encoder resolution.
-    m_turningEncoder.setDistancePerPulse(ModuleConstants.kTurningEncoderDistancePerPulse);
+    //m_turningEncoder.setDistancePerPulse(ModuleConstants.kTurningEncoderDistancePerPulse);
 
     // Set whether turning encoder should be reversed or not
-    m_turningEncoder.setReverseDirection(turningEncoderReversed);
+   // m_turningEncoder.setReverseDirection(turningEncoderReversed);
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
@@ -85,7 +85,10 @@ public class SwerveModule {
    * @return The current state of the module.
    */
   public SwerveModuleState getState() {
-    return new SwerveModuleState(m_driveEncoder.getRate(), new Rotation2d(m_turningEncoder.get()));
+    //SwerveModuleState()
+    //return new SwerveModuleState(m_driveEncoder.getRate(), new Rotation2d(m_turningEncoder.get()));
+    return new SwerveModuleState(m_driveMotor.getEncoder().get  .getRate(), new Rotation2d(m_turningEncoder.get()));
+
   }
 
   /**
@@ -103,7 +106,7 @@ public class SwerveModule {
         m_drivePIDController.calculate(m_driveEncoder.getRate(), state.speedMetersPerSecond);
 
     // Calculate the turning motor output from the turning PID controller.
-    final var turnOutput =
+    final double turnOutput =
         m_turningPIDController.calculate(m_turningEncoder.get(), state.angle.getRadians());
 
     // Calculate the turning motor output from the turning PID controller.
@@ -113,7 +116,7 @@ public class SwerveModule {
 
   /** Zeros all the SwerveModule encoders. */
   public void resetEncoders() {
-    m_driveEncoder.reset();
-    m_turningEncoder.reset();
+    m_driveMotor.getEncoder().setPosition(0);
+    m_turningMotor.getEncoder().setPosition(0);
   }
 }

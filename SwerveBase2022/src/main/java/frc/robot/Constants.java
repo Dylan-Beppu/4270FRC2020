@@ -58,35 +58,43 @@ public final class Constants {
   }
 
   public static final class DriveConstants {
+    //public static final TalonSRX kRearLeftDriveMotor = new TalonSRX(2);
     public static final CANSparkMax kFrontLeftDriveMotor = new CANSparkMax(1, MotorType.kBrushless);
-    public static final TalonSRX kRearLeftDriveMotor = new TalonSRX(2);
+    public static final CANSparkMax kRearLeftDriveMotor = new CANSparkMax(2, MotorType.kBrushless);
+    public static final CANSparkMax kFrontRightDriveMotor = new CANSparkMax(3, MotorType.kBrushless);
+    public static final CANSparkMax kRearRightDriveMotor = new CANSparkMax(4, MotorType.kBrushless);
+    public static final CANSparkMax kFrontLeftTurningMotor = new CANSparkMax(5, MotorType.kBrushless);
+    public static final CANSparkMax kRearLeftTurningMotor = new CANSparkMax(6, MotorType.kBrushless);
+    public static final CANSparkMax kFrontRightTurningMotor = new CANSparkMax(7, MotorType.kBrushless);
+    public static final CANSparkMax kRearRightTurningMotor = new CANSparkMax(8, MotorType.kBrushless);
+
 
     //TODO: rename for canIDs actuly redo theis whole
-    public static final int kFrontLeftDriveMotorPort = 0;
-    public static final int kRearLeftDriveMotorPort = 2;
-    public static final int kFrontRightDriveMotorPort = 4;
-    public static final int kRearRightDriveMotorPort = 6;
+    // public static final int kFrontLeftDriveMotorPort = 0;
+    // public static final int kRearLeftDriveMotorPort = 2;
+    // public static final int kFrontRightDriveMotorPort = 4;
+    // public static final int kRearRightDriveMotorPort = 6;
 
-    public static final int kFrontLeftTurningMotorPort = 1;
-    public static final int kRearLeftTurningMotorPort = 3;
-    public static final int kFrontRightTurningMotorPort = 5;
-    public static final int kRearRightTurningMotorPort = 7;
+    // public static final int kFrontLeftTurningMotorPort = 1;
+    // public static final int kRearLeftTurningMotorPort = 3;
+    // public static final int kFrontRightTurningMotorPort = 5;
+    // public static final int kRearRightTurningMotorPort = 7;
     //TODO: figure out the encoder stuff and find out if the ones on the mk2 modules can substitute in
     //TODO: also see if the encoders can be swaped for the intergrated ones (so redundent other one???)
-    public static final int[] kFrontLeftTurningEncoderPorts = new int[] {0, 1};
-    public static final int[] kRearLeftTurningEncoderPorts = new int[] {2, 3};
-    public static final int[] kFrontRightTurningEncoderPorts = new int[] {4, 5};
-    public static final int[] kRearRightTurningEncoderPorts = new int[] {5, 6};
+    // public static final int[] kFrontLeftTurningEncoderPorts = new int[] {0, 1};
+    // public static final int[] kRearLeftTurningEncoderPorts = new int[] {2, 3};
+    // public static final int[] kFrontRightTurningEncoderPorts = new int[] {4, 5};
+    // public static final int[] kRearRightTurningEncoderPorts = new int[] {5, 6};
 
     public static final boolean kFrontLeftTurningEncoderReversed = false;
     public static final boolean kRearLeftTurningEncoderReversed = true;
     public static final boolean kFrontRightTurningEncoderReversed = false;
     public static final boolean kRearRightTurningEncoderReversed = true;
 
-    public static final int[] kFrontLeftDriveEncoderPorts = new int[] {7, 8};
-    public static final int[] kRearLeftDriveEncoderPorts = new int[] {9, 10};
-    public static final int[] kFrontRightDriveEncoderPorts = new int[] {11, 12};
-    public static final int[] kRearRightDriveEncoderPorts = new int[] {13, 14};
+    // public static final int[] kFrontLeftDriveEncoderPorts = new int[] {7, 8};
+    // public static final int[] kRearLeftDriveEncoderPorts = new int[] {9, 10};
+    // public static final int[] kFrontRightDriveEncoderPorts = new int[] {11, 12};
+    // public static final int[] kRearRightDriveEncoderPorts = new int[] {13, 14};
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = true;
