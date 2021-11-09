@@ -7,8 +7,8 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -18,10 +18,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PWMSparkMax;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
 /**
@@ -35,9 +36,31 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 public final class Constants {
   public static AHRS gyro = new AHRS(Port.kUSB);
 
-
+  public static final class OIConstants {
+    //Note Opperator inputs are now in the constants file
+    //TODO: add the xbox and switch configs (and maby ps5?)
+    public static final Joystick Driver = new Joystick(0);
+    
+    public static final JoystickButton DriBtn1 = new JoystickButton(Driver, 1);
+    public static final JoystickButton DriBtn2 = new JoystickButton(Driver, 2);
+    public static final JoystickButton DriBtn3 = new JoystickButton(Driver, 3);
+    public static final JoystickButton DriBtn4 = new JoystickButton(Driver, 4);
+    public static final JoystickButton DriBtn5 = new JoystickButton(Driver, 5);
+    public static final JoystickButton DriBtn6 = new JoystickButton(Driver, 6);
+    public static final JoystickButton DriBtn7 = new JoystickButton(Driver, 7);
+    public static final JoystickButton DriBtn8 = new JoystickButton(Driver, 8);
+    public static final JoystickButton DriBtn9 = new JoystickButton(Driver, 9);
+    public static final JoystickButton DriBtn10 = new JoystickButton(Driver, 10);
+    
+     
+     
+     //public Joystick BtnPanle = new Joystick(1);
+  }
 
   public static final class DriveConstants {
+    public static final CANSparkMax kFrontLeftDriveMotor = new CANSparkMax(1, MotorType.kBrushless);
+    public static final TalonSRX kRearLeftDriveMotor = new TalonSRX(2);
+
     //TODO: rename for canIDs actuly redo theis whole
     public static final int kFrontLeftDriveMotorPort = 0;
     public static final int kRearLeftDriveMotorPort = 2;
@@ -48,7 +71,8 @@ public final class Constants {
     public static final int kRearLeftTurningMotorPort = 3;
     public static final int kFrontRightTurningMotorPort = 5;
     public static final int kRearRightTurningMotorPort = 7;
-
+    //TODO: figure out the encoder stuff and find out if the ones on the mk2 modules can substitute in
+    //TODO: also see if the encoders can be swaped for the intergrated ones (so redundent other one???)
     public static final int[] kFrontLeftTurningEncoderPorts = new int[] {0, 1};
     public static final int[] kRearLeftTurningEncoderPorts = new int[] {2, 3};
     public static final int[] kFrontRightTurningEncoderPorts = new int[] {4, 5};
@@ -111,10 +135,6 @@ public final class Constants {
     public static final double kPModuleTurningController = 1;
 
     public static final double kPModuleDriveController = 1;
-  }
-
-  public static final class OIConstants {
-    public static final int kDriverControllerPort = 1;
   }
 
   public static final class AutoConstants {
